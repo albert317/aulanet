@@ -1,0 +1,4 @@
+function prob()
+{
+	alert("lalalal");
+}
