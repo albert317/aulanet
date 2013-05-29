@@ -15,6 +15,6 @@ class Professor extends Eloquent {
 
 	public function group()
 	{
-		return $this->has_many("group");
+		return $this->has_many("Group");
 	}
 }

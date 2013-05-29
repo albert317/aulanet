@@ -34,7 +34,8 @@
 
 Route::get('/', function()
 {
-	return View::make('home.index');
+	//return View::make('home.index');
+	return View::make('borrar');
 });
 
 /*
