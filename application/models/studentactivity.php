@@ -1,5 +1,5 @@
 <?php
-class Student_activity extends Eloquent {
+class Studentactivity extends Eloquent {
 	private static $table	= 'student_activity';
 	private static $key		= 'student_activity_id';
 
