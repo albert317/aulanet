@@ -1,8 +1,14 @@
-$(document).ready(function () {  
-    $('.dropdown-toggle').dropdown(); 
-    console.log("drop");
-}); 
-function cargar_tarea(){
-	$('#tareas').load("prueba");
-	console.log("prueba");
-}
+$(function(){
+   	$("#mostrar_horario").click(function(){
+       	$("#horario").css("display","block");
+       	$("#mostrar_horario").css("display","none");
+       	$("#ocultar_horario").css("display","block");
+   	});
+});
+$(function(){
+   	$("#ocultar_horario").click(function(){
+       	$("#horario").css("display","none");
+       	$("#mostrar_horario").css("display","block");
+       	$("#ocultar_horario").css("display","none");
+   	});
+});

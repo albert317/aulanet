@@ -7,8 +7,8 @@
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="js/script.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" scr="js/metodos.js"></script> 
 </head>
 <body>
 	<header>
@@ -26,34 +26,27 @@
 	<section>
 		<div class="menu">
 			<ul class="nav nav-pills">
-			  	<li><a href="#">Foro</a></li>
-			  	<li><a href="#">Agenda</a></li>
-			  	<li class="active"><a href="#" onClick="cargar_tarea();">Tareas</a></li>
-			  	<li><a href="#">Notas</a></li>
-			  	<li><a href="#">Asistencia</a></li>
+			  	<li class="active"><a href="javascript:cargar_foro();">Foro</a></li>
+			  	<li><a href="javascript:cargar_agenda();">Agenda</a></li>
+			  	<li><a href="javascript:cargar_tareas();">Tareas</a></li>
+			  	<li><a href="javascript:cargar_notas();">Notas</a></li>
+			  	<li><a href="javascript:cargar_asistencia();">Asistencia</a></li>
 			</ul>
 		</div>
 		<div id="foro">
-			
+			foro
 		</div>
 		<div id="agenda">
-			
+			agenda
 		</div>
-		<!--
-		<script>
-			function cargar(){
-				$('#tareas').load("prueba");
-			}
-		</script>
-		-->
 		<div id="tareas">
-			aqui saldra
+			tareas
 		</div>
 		<div id="notas">
-			
+			notas
 		</div>
 		<div id="asistencia">
-			
+			asistencia
 		</div>
 	</section>
 

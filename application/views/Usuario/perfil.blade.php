@@ -8,28 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/style.css">
 	<script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript">  
-	    $(document).ready(function () {  
-	        $('.dropdown-toggle').dropdown();  
-	    });  
-	</script> 
-	<script type="text/javascript">
-		$(function(){
-		   	$("#mostrar_horario").click(function(){
-		       	$("#horario").css("display","block");
-		       	$("#mostrar_horario").css("display","none");
-		       	$("#ocultar_horario").css("display","block");
-		   	});
-		});
-		$(function(){
-		   	$("#ocultar_horario").click(function(){
-		       	$("#horario").css("display","none");
-		       	$("#mostrar_horario").css("display","block");
-		       	$("#ocultar_horario").css("display","none");
-		   	});
-		});
-	</script>
-	
+	<script src="js/metodos.js"></script>
 </head>
 <body>
 	<header>
