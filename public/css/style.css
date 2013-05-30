@@ -154,7 +154,26 @@ h4
 }
 
 /*CURSO*/
+#foro
+{
 
+}
+#agenda
+{
+	display: none;
+}
+#tareas
+{
+	display: none;
+}
+#notas
+{
+	display: none;
+}
+#asistencia
+{
+	display: none;
+}
 
 
 
