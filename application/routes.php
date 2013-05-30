@@ -37,10 +37,30 @@ Route::get('/', function()
 	//return View::make('home.index');
 	return View::make('Curso.curso');
 });
-Route::get('prueba', function()
+Route::get('agenda', function()
 {
 	//return View::make('home.index');
-	return View::make('Curso.pagina');
+	return View::make('Curso.agenda');
+});
+Route::get('foro', function()
+{
+	//return View::make('home.index');
+	return View::make('Curso.foro');
+});
+Route::get('notas', function()
+{
+	//return View::make('home.index');
+	return View::make('Curso.notas');
+});
+Route::get('tareas', function()
+{
+	//return View::make('home.index');
+	return View::make('Curso.tareas');
+});
+Route::get('asistencia', function()
+{
+	//return View::make('home.index');
+	return View::make('Curso.asistencia');
 });
 /*
 |--------------------------------------------------------------------------
