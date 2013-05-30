@@ -1,0 +1,177 @@
+/*INICIALIZACION*/
+body{
+	margin: 0;
+	width: 100%;
+}
+* {margin:0px; padding:0px; border:0px;}
+@font-face{
+    font-family: "fuente1";
+    src: url(../font/fuente1.ttf) format("truetype");
+}
+@font-face{
+    font-family: "fuente2";
+    src: url(../font/fuente2.ttf) format("truetype");
+}
+@font-face{
+    font-family: "fuente3";
+    src: url(../font/fuente3.ttf) format("truetype");
+}
+h1
+{
+	color: white;
+	font-family: "fuente1";
+	font-size: 50px;
+	text-shadow: 2px 2px 2px black;
+	width: 79%;
+	display: inline-block;
+	vertical-align: top;
+}
+h3 
+{
+	font-family: "fuente3";
+	padding-bottom: 30px;
+	text-shadow: 2px 2px 2px gray;
+	font-size: 32px;
+	font-weight: bold;
+}
+
+/*ENCABEZADO*/
+header
+{
+	height: 40px;
+	background: #1E90FF;
+	margin-top: -10px;
+	padding: 25px 10%;
+}
+.user
+{
+	padding-top: 10px;
+	width: 20%;
+	display: inline-block;
+	color: white;
+}
+.user .dropdown 
+{
+	float: right;
+}
+.dropdown-toggle
+{
+	background: white;
+}
+
+
+/*CONTENIDO PRINCIPAL*/
+section
+{
+	width: 80%;
+	margin: 0 auto;
+	padding:30px 0; 
+}
+
+/*INDEX*/
+.login
+{
+	width: 45%;
+	padding: 50px 0 0 50px;
+	display: inline-block;
+}
+aside 
+{
+	text-align: center;
+	width: 45%;
+	padding: 50px 0 0 0;
+	display: inline-block;
+	vertical-align: top;
+}
+aside img
+{
+	border-radius: 10px;
+	box-shadow: 10px 10px 10px gray;
+	-webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+aside img:hover
+{
+	-webkit-transform: rotate(-7deg);
+    -moz-transform: rotate(-7deg);
+    -o-transform: rotate(-7deg);
+}
+
+/*PERFIL*/
+.datos-personales
+{
+	width: 60%;
+	font-family: "Helvetica";
+	float: left;
+}
+h4
+{
+	text-shadow: 1px 1px 1px gray;
+}
+.cursos
+{
+	width: 60%;
+}
+.curso
+{
+	height: 150px;
+	width: 30%;
+	border-radius: 8px;
+	border: 2px solid #F5F5F5;
+	background-color: #F5F5F5;
+	box-shadow: 2px 2px 2px black;
+	display: inline-block;
+	margin-bottom: 10px;
+	margin-right: 5px;
+	text-align: center;
+}
+.curso:hover
+{
+	border: 2px solid #CDC9C9;
+	background-color: #CDC9C9;
+}
+#horario
+{
+	display: none;
+}
+#ocultar_horario
+{
+	display: none;
+}
+.enlaces
+{
+	width: 30%;
+	float: right;
+}
+.links
+{
+	list-style: none;
+}
+.link
+{
+	height: 30px;
+}
+
+/*CURSO*/
+
+
+
+
+/*PIE DE PAGINA*/
+footer
+{
+	width: 100%;
+	height: 50px;
+	background: #F5F5F5;
+	padding: 10px 10%;
+}
+
+
+/*RESPONSIVE DESIGN*/
+@media screen and(max-width:320px){
+	body
+	{
+		width: 100%;
+	}
+}

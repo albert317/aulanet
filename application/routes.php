@@ -35,9 +35,13 @@
 Route::get('/', function()
 {
 	//return View::make('home.index');
-	return View::make('borrar');
+	return View::make('Curso.curso');
 });
-
+Route::get('prueba', function()
+{
+	//return View::make('home.index');
+	return View::make('Curso.pagina');
+});
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers
