@@ -1,6 +1,6 @@
 function cargar_foro(){
-	$('#foro').empty();
-	$('#foro').load("foro");
+	$('#contenido').empty();
+	$('#contenido').load("foro");
 	$('#foro').css('display','block');
 	$('#agenda').css('display','none');
 	$('#tareas').css('display','none');
@@ -8,7 +8,8 @@ function cargar_foro(){
 	$('#asistencia').css('display','none');
 }
 function cargar_agenda(){
-	$('#agenda').load("agenda");
+	$('#contenido').empty();
+	$('#contenido').load("agenda");
 	$('#foro').css('display','none');
 	$('#agenda').css('display','block');
 	$('#tareas').css('display','none');
@@ -16,7 +17,8 @@ function cargar_agenda(){
 	$('#asistencia').css('display','none');
 }
 function cargar_tareas(){
-	$('#tareas').load("tareas");
+	$('#contenido').empty();
+	$('#contenido').load("tareas");
 	$('#foro').css('display','none');
 	$('#agenda').css('display','none');
 	$('#tareas').css('display','block');
@@ -24,7 +26,8 @@ function cargar_tareas(){
 	$('#asistencia').css('display','none');
 }
 function cargar_notas(){
-	$('#notas').load("notas");
+	$('#contenido').empty();
+	$('#contenido').load("notas");
 	$('#foro').css('display','none');
 	$('#agenda').css('display','none');
 	$('#tareas').css('display','none');
@@ -32,7 +35,8 @@ function cargar_notas(){
 	$('#asistencia').css('display','none');
 }
 function cargar_asistencia(){
-	$('#asistencia').load("asistencia");
+	$('#contenido').empty();
+	$('#contenido').load("asistencia");
 	$('#foro').css('display','none');
 	$('#agenda').css('display','none');
 	$('#tareas').css('display','none');

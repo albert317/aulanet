@@ -24,7 +24,7 @@
 	</header>
 
 	<section>
-		<div class="foro">
+		<div id="contenido">
 			<ul class="nav nav-pills">
 			  	<li class="active"><a href="javascript:cargar_foro();">Foro</a></li>
 			  	<li><a href="javascript:cargar_agenda();">Agenda</a></li>
@@ -33,23 +33,6 @@
 			  	<li><a href="javascript:cargar_asistencia();">Asistencia</a></li>
 			</ul>
 		</div>
-		<div id="foro">
-			foro
-		</div>
-		<div id="agenda">
-			agenda
-		</div>
-		<div id="tareas">
-			tareas
-		</div>
-		<div id="notas">
-			notas
-		</div>
-		<div id="asistencia">
-			asistencia
-		</div>
-		</div>
-		
 	</section>
 
 	<footer>
