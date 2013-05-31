@@ -3,8 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>AulaNet</title>
-	<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="js/jquery-1.10.1.min.js"></script>
+	<script src="js/jquery-migrate-1.2.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/style.css">
 	<script type="text/javascript" src="js/bootstrap.js"></script>
