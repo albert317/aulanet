@@ -47,6 +47,18 @@ class Table {
 	public static $macros = array();
 
 	/**
+	 * Permite agregar una columna ENUM
+	 *
+	 * @param  string	$name
+	 * @param  array	$options
+	 * @return Fluent
+	 */
+	public function enum($name, $options)
+	{
+		return $this->column(__FUNCTION__, compact('name', 'options'));
+	}
+
+	/**
 	 * Registers a custom macro.
 	 *
 	 * @param  string   $name

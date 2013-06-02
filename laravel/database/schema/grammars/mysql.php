@@ -12,6 +12,18 @@ class MySQL extends Grammar {
 	 */
 	public $wrapper = '`%s`';
 
+	
+	/**
+	 * Para generar ENUM
+	 *
+	 * @param  Fluent   $column
+	 * @return string
+	 */
+	protected function type_enum(\Laravel\Fluent $column)
+	{
+		return 'ENUM(\''.implode("','",$column->options).'\')';
+	}
+	
 	/**
 	 * Generate the SQL statements for a table creation command.
 	 *
