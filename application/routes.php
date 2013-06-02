@@ -32,36 +32,54 @@
 |
 */
 
+
+
 Route::get('/', function()
 {
-	//return View::make('home.index');
-	return View::make('curso.curso');
+	//return View::make('course.curso');
+	if(!Auth::check())
+	{
+		return View::make('index');
+	}
+	else
+	{
+		return Redirect::to('cursos');
+	}
 });
+
+Route::get('cursos', array('before'=>'auth', 'do'=>function()
+{
+	Redirect::to('course');
+}));
+
 Route::get('agenda', function()
 {
 	//return View::make('home.index');
-	return View::make('curso.agenda');
+	return View::make('course.agenda');
 });
 Route::get('foro', function()
 {
 	//return View::make('home.index');
-	return View::make('curso.foro');
+	return View::make('course.foro');
 });
 Route::get('notas', function()
 {
 	//return View::make('home.index');
-	return View::make('curso.notas');
+	return View::make('course.notas');
 });
 Route::get('tareas', function()
 {
 	//return View::make('home.index');
-	return View::make('curso.tareas');
+	return View::make('course.tareas');
 });
 Route::get('asistencia', function()
 {
 	//return View::make('home.index');
-	return View::make('curso.asistencia');
+	return View::make('course.asistencia');
 });
+
+Route::controller('login');
+Route::controller('course');
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers
