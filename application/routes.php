@@ -35,32 +35,32 @@
 Route::get('/', function()
 {
 	//return View::make('home.index');
-	return View::make('Curso.curso');
+	return View::make('curso.curso');
 });
 Route::get('agenda', function()
 {
 	//return View::make('home.index');
-	return View::make('Curso.agenda');
+	return View::make('curso.agenda');
 });
 Route::get('foro', function()
 {
 	//return View::make('home.index');
-	return View::make('Curso.foro');
+	return View::make('curso.foro');
 });
 Route::get('notas', function()
 {
 	//return View::make('home.index');
-	return View::make('Curso.notas');
+	return View::make('curso.notas');
 });
 Route::get('tareas', function()
 {
 	//return View::make('home.index');
-	return View::make('Curso.tareas');
+	return View::make('curso.tareas');
 });
 Route::get('asistencia', function()
 {
 	//return View::make('home.index');
-	return View::make('Curso.asistencia');
+	return View::make('curso.asistencia');
 });
 /*
 |--------------------------------------------------------------------------
