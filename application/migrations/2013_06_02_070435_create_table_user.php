@@ -13,7 +13,7 @@ class Create_Table_User {
 			$table->engine = 'InnoDB';
 			$table->increments('user_id');
 			$table->string('username',10);
-			$table->string('password',45);
+			$table->string('password',64);
 			$table->enum('type' ,array('A','T','S'));
 			$table->timestamps();
 		});

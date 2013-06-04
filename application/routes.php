@@ -33,7 +33,8 @@
 */
 
 
-
+Route::controller('login');
+Route::controller('course');
 Route::get('/', function()
 {
 	//return View::make('course.curso');
@@ -43,12 +44,13 @@ Route::get('/', function()
 	}
 	else
 	{
-		return Redirect::to('cursos');
+		return View::make('course.tareas');
 	}
 });
 
 Route::get('cursos', array('before'=>'auth', 'do'=>function()
 {
+	echo "curso"; exit();
 	Redirect::to('course');
 }));
 
@@ -78,8 +80,7 @@ Route::get('asistencia', function()
 	return View::make('course.asistencia');
 });
 
-Route::controller('login');
-Route::controller('course');
+
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers

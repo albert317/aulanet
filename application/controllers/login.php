@@ -1,14 +1,14 @@
 <?php
 class Login_Controller extends Base_Controller {
 
-	public $restful = true;
+	public $restful = false;
 
 	public function action_index()
 	{
-		echo "login";
+		echo "asdsad";
 	}
 
-	public function post_login()
+	public function action_login()
 	{
 		$credentials = array(
 				'username'	=> Input::get('username'),
@@ -21,18 +21,27 @@ class Login_Controller extends Base_Controller {
 		$validation = Validator::make($credentials, $rules);
 		if($validation->fails())
 		{
+			echo "fallo"; exit();
 			return Redirect::to('/')
 					->with_errors($validation)
 					->with_input();
 		}
-		if(Auth.attempt($credentials))
+		if(Auth::attempt($credentials))
 		{
-			return Redirect('cursos');
+			echo "SI"; exit();
+			return Redirect::to('cursos');
 		}
 		else
 		{
-			return Redirect::to('/')
+			var_dump($credentials); exit();
+			return View::make('index')
 					->with('login_errors', true);
 		}
+	}
+
+	public function action_logout()
+	{
+		Auth::logout();
+		return View::make('index');
 	}
 }
