@@ -40,7 +40,7 @@ Route::get('/', function()
 	//return View::make('course.curso');
 	if(!Auth::check())
 	{
-		return View::make('index');
+		return View::make('course.tareas');
 	}
 	else
 	{
@@ -54,6 +54,11 @@ Route::get('cursos', array('before'=>'auth', 'do'=>function()
 	Redirect::to('course');
 }));
 
+Route::get('nuevatarea', function()
+{
+	//return View::make('home.index');
+	return View::make('course.nuevatarea');
+});
 Route::get('agenda', function()
 {
 	//return View::make('home.index');
