@@ -18,8 +18,11 @@ class Post extends Eloquent {
 		return $this->belongs_to('Professor');
 	}
 
-	public function answers()
+	public function answer()
 	{
-		return $this->has_many('Post', 'answer_to');
+		return $this->has_many('Post','answer_to');
 	}
+
+
+
 }

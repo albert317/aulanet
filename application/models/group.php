@@ -8,9 +8,29 @@ class Group extends Eloquent {
 		return $this->belongs_to('Course');
 	}
 
+	public function group_student()
+	{
+		return $this->has_many('group_student');
+	}
+
 	public function groupactivity()
 	{
 		return $this->has_many('Groupactivity');
+	}
+
+	public function post()
+	{
+		return $this->has_many('Post');
+	}
+
+	public function professor()
+	{
+		return $this->belongs_to('Professor');
+	}
+
+	public function score()
+	{
+		return $this->has_many('Score');
 	}
 
 	public function schedule()
@@ -23,28 +43,4 @@ class Group extends Eloquent {
 		return $this->has_many('Task');
 	}
 
-	public function student()
-	{
-		return $this->has_many_and_belongs_to('Student', 'group_student');
-	}
-
-	public function professor()
-	{
-		return $this->belongs_to('Professor');
-	}
-
-	public function question()
-	{
-		return $this->has_many('Question');
-	}
-
-	public function score()
-	{
-		return $this->has_many('Score');
-	}
-
-	public function post()
-	{
-		return $this->has_many('Post');
-	}
 }
