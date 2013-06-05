@@ -36,62 +36,66 @@
 				<li><a href="">Notas</a></li>
 				<li><a href="">Foro</a></li>
 			</ul>
-			<ul class="tareas">
-				<li class="tarea">
-					<a href=""><h4>Crear Nueva Tarea</h4></a>
-				</li>
-				<li class="tarea">
-					<a href=""><h4>Tarea 1</h4></a>
-					<div class="detalle">
-						Mauris mauris ante, blandit et, ultrices a, susceros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-					</div>
-					<div class="edicion">
-						<a href="#"><img src="img/edit.png" alt=""></a>
-						<a href="#"><img src="img/delete.png" alt=""></a>
-					</div>
-				</li>
-				<li class="tarea">
-					<a href=""><h4>Tarea 2</h4></a>
-					<div class="detalle">
-						Mauris mauris ante, blandit et, ultrices a, susceros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-					</div>
-					<div class="edicion">
-						<a href=""><img src="img/edit.png" alt=""></a>
-						<a href=""><img src="img/delete.png" alt=""></a>
-					</div>	
-				</li>
-				<li class="tarea">
-					<a href=""><h4>Tarea 3</h4></a>
-					<div class="detalle">
-						Mauris mauris ante, blandit et, ultrices a, susceros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-					</div>
-					<div class="edicion">
-						<a href=""><img src="img/edit.png" alt=""></a>
-						<a href=""><img src="img/delete.png" alt=""></a>
-					</div>
-				</li>
-				<li class="tarea">
-					<a href=""><h4>Tarea 4</h4></a>
-					<div class="detalle">
-						Mauris mauris ante, blandit et, ultrices a, susceros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-					</div>
-					<div class="edicion">
-						<a href=""><img src="img/edit.png" alt=""></a>
-						<a href=""><img src="img/delete.png" alt=""></a>
-					</div>
-				</li>
-				<li class="tarea">
-					<a href=""><h4>Tarea 5</h4></a>
-					<div class="detalle">
-						Mauris mauris ante, blandit et, ultrices a, susceros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-					</div>
-					<div class="edicion">
-						<a href=""><img src="img/edit.png" alt=""></a>
-						<a href=""><img src="img/delete.png" alt=""></a>
-					</div>
-				</li>
-			</ul>
-
+			<div id="tareas">
+				<ul>
+					<li class="tarea">
+						<a href="javascript:NuevaTarea();">
+							<h4>Crear Nueva Tarea</h4>
+							<img class="newtask"src="img/newtask.png" alt="">
+						</a>
+					</li>
+					<li class="tarea">
+						<a href="#"><h4>Tarea 1</h4></a>
+						<div class="detalle">
+							Mauris mauris ante, blandit et, ultrices a, susceros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+						</div>
+						<div class="edicion">
+							<a href="edit"><img src="img/edit.png" alt=""></a>
+							<a href="delete"><img src="img/delete.png" alt=""></a>
+						</div>
+					</li>
+					<li class="tarea">
+						<a href="#"><h4>Tarea 2</h4></a>
+						<div class="detalle">
+							Mauris mauris ante, blandit et, ultrices a, susceros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+						</div>
+						<div class="edicion">
+							<a href="edit"><img src="img/edit.png" alt=""></a>
+							<a href="delete"><img src="img/delete.png" alt=""></a>
+						</div>
+					</li>
+					<li class="tarea">
+						<a href="#"><h4>Tarea 3</h4></a>
+						<div class="detalle">
+							Mauris mauris ante, blandit et, ultrices a, susceros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+						</div>
+						<div class="edicion">
+							<a href="edit"><img src="img/edit.png" alt=""></a>
+							<a href="delete"><img src="img/delete.png" alt=""></a>
+						</div>
+					</li>
+					<li class="tarea">
+						<a href="#"><h4>Tarea 4</h4></a>
+						<div class="detalle">
+							Mauris mauris ante, blandit et, ultrices a, susceros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+						</div>
+						<div class="edicion">
+							<a href="edit"><img src="img/edit.png" alt=""></a>
+							<a href="delete"><img src="img/delete.png" alt=""></a>
+						</div>
+					</li>
+					<li class="tarea">
+						<a href="#"><h4>Tarea 5</h4></a>
+						<div class="detalle">
+							Mauris mauris ante, blandit et, ultrices a, susceros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+						</div>
+						<div class="edicion">
+							<a href="edit"><img src="img/edit.png" alt=""></a>
+							<a href="delete"><img src="img/delete.png" alt=""></a>
+						</div>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</section>
 
