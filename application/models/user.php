@@ -19,4 +19,6 @@ class User extends Eloquent {
 		return $this->belogs_to('Administrator');
 	}
 
+	
+
 }
