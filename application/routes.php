@@ -41,7 +41,7 @@ Route::any(array('/'), function(){
 	else
 	{
 		//echo "Vuelve a //"; var_export(Auth::user()); exit();
-		return View::make('index');
+		return View::make('home.index');
 	}
 });
 
@@ -51,10 +51,11 @@ Route::group(array('before' => 'auth'), function()
 	Route::any('cursos', 'course@index');
 });*/
 Route::any('cursos'				, 'course@index');
-Route::any('cursos/tasks', 		'course@tasks');
-Route::any('cursos/attendance',	'course@attendance');
-Route::any('cursos/grades', 	'course@grades');
-Route::any('cursos/forum', 		'course@forum');
+Route::any('cursos/tareas'		, 'course@tasks');
+Route::any('cursos/asistencia'	, 'course@attendance');
+Route::any('cursos/notas'		, 'course@grades');
+Route::any('cursos/foro'		, 'course@forum');
+Route::any('agenda'				, 'agenda@index');
 
 
 /*

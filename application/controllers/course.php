@@ -7,9 +7,7 @@ class Course_Controller extends Base_Controller {
 	*/
 	public function action_index()
 	{
-		//Muestra lista de cursos y datos
-		//Sin navegavilidad de tareas, foro ,etc
-		echo "CURSOS";
+		return View::make('user.profile');
 	}
 	
 	/**
@@ -17,7 +15,7 @@ class Course_Controller extends Base_Controller {
 	 */
 	public function action_tasks()
 	{
-		
+		return View::make('course.tasks');	
 	}
 
 	/**
@@ -25,7 +23,7 @@ class Course_Controller extends Base_Controller {
 	 */
 	public function action_attendance()
 	{
-		
+		return View::make('course.attendance');
 	}
 
 	/**
@@ -33,7 +31,7 @@ class Course_Controller extends Base_Controller {
 	 */
 	public function action_grades()
 	{
-		
+		return View::make('course.grades');
 	}
 
 	/**
@@ -41,6 +39,6 @@ class Course_Controller extends Base_Controller {
 	 */
 	public function action_forum()
 	{
-
+		return View::make('course.forum');
 	}
 }
