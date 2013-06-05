@@ -156,16 +156,23 @@ h4
 }
 
 /*CURSO*/
+.tareas
+{
+	margin-left: 0px;
+}
 .tarea
 {
+	display: inline-block;
 	list-style: none;
-	height: auto;
-	width: 70%;
+	height: 200px;
+	width: 21%;
 	margin-bottom: 5px;
 	border: 1px solid lightgray;
 	border-radius: 8px;
-	box-shadow: 3px 3px 3px gray;
-	padding: 5px;
+	box-shadow: 5px 5px 5px gray;
+	padding: 5px 10px;
+	vertical-align: top;
+	margin: 10px 5px;
 }
 .detalle
 {
