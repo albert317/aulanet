@@ -32,7 +32,32 @@
 |
 */
 
+Route::controller('login');
+Route::any(array('/'), function(){
+	if(Auth::check())
+	{
+		return Redirect::to('cursos');
+	}
+	else
+	{
+		//echo "Vuelve a //"; var_export(Auth::user()); exit();
+		return View::make('index');
+	}
+});
 
+/*
+Route::group(array('before' => 'auth'), function()
+{
+	Route::any('cursos', 'course@index');
+});*/
+Route::any('cursos'				, 'course@index');
+Route::any('cursos/tasks', 		'course@tasks');
+Route::any('cursos/attendance',	'course@attendance');
+Route::any('cursos/grades', 	'course@grades');
+Route::any('cursos/forum', 		'course@forum');
+
+
+/*
 Route::controller('login');
 Route::controller('course');
 Route::get('/', function()
@@ -84,7 +109,7 @@ Route::get('asistencia', function()
 	//return View::make('home.index');
 	return View::make('course.asistencia');
 });
-
+/*
 
 /*
 |--------------------------------------------------------------------------

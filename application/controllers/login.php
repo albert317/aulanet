@@ -1,7 +1,7 @@
 <?php
 class Login_Controller extends Base_Controller {
 
-	public $restful = false;
+	//public $restful = false;
 
 	public function action_index()
 	{
@@ -28,12 +28,16 @@ class Login_Controller extends Base_Controller {
 		}
 		if(Auth::attempt($credentials))
 		{
-			echo "SI"; exit();
+			echo "SI"; 
+			var_dump(Auth::user()); 
+			echo "<br>SESSION:<br>";
+			echo Session::get('attributes');
+			exit();			
 			return Redirect::to('cursos');
 		}
 		else
 		{
-			var_dump($credentials); exit();
+			echo "NO"; exit();
 			return View::make('index')
 					->with('login_errors', true);
 		}
@@ -42,6 +46,7 @@ class Login_Controller extends Base_Controller {
 	public function action_logout()
 	{
 		Auth::logout();
+		echo "SALIO"; exit();
 		return View::make('index');
 	}
 }
