@@ -13,13 +13,13 @@ class Team extends Eloquent {
 		return $this->has_many('Teamfile');
 	}
 
-	public function student_team()
+	public function student()
 	{
 		return $this->has_many_and_belongs_to('Student', 'student_team');
 	}
 
-	public function delegate()
+	public function teamactivity()
 	{
-		return $this->belongs_to('Student');
+		return $this->has_many('teamactivity');
 	}
 }

@@ -5,6 +5,6 @@ class Grade extends Eloquent {
 
 	public function group_student()
 	{
-		return $this->belongs_to('group_student');
+		return $this->belongs_to('group_student',"group_student_id");
 	}
 }

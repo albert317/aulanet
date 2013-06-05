@@ -27,12 +27,6 @@ class Student extends Eloquent {
 	{
 		return $this->has_many_and_belongs_to('Group', 'group_student');
 	}
-
-	public function answer()
-	{
-		return $this->has_many('Answer');
-	}
-
 	public function score()
 	{
 		return $this->has_many('Score');
