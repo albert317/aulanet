@@ -41,7 +41,7 @@
 					<li class="tarea">
 						<a href="javascript:NuevaTarea();">
 							<h4>Crear Nueva Tarea</h4>
-							<img class="newtask"src="img/newtask.png" alt="">
+							<img class="imgnewtask"src="img/newtask.png" alt="">
 						</a>
 					</li>
 					<li class="tarea">
@@ -95,6 +95,69 @@
 						</div>
 					</li>
 				</ul>
+			</div>
+			<div id="newtask">
+				<form class="form-horizontal" action='' method="POST">
+					<fieldset>
+						<div id="legend">
+							<legend class="">Nueva Tarea</legend>
+						</div>
+						<div class="control-group">
+							<!-- Username -->
+							<label class="control-label"  for="enunciado">Enunciado</label>
+							<div class="controls">
+								<input type="text" id="enunciado" name="enunciado" placeholder="" class="input-xlarge">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<!-- E-mail -->
+							<label class="control-label" for="descripcion">Descripción</label>
+							<div class="controls">
+								<textarea rows="3" class="input-xlarge"></textarea>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<!-- Password-->
+							<label class="control-label" for="fecha">Fecha de presentación</label>
+							<div class="controls">
+								<input type="date" id="fecha" name="fecha" placeholder="" class="input-xlarge">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<!-- Password -->
+							<label class="control-label"  for="password_confirm">Tipo de tarea</label>
+							<div class="controls">
+								<label class="radio">
+								  	<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+								  	Individual
+								</label>
+								<label class="radio">
+								  	<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+								  	Grupal
+								</label>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<!-- Password-->
+							<label class="control-label" for="fecha">Archivo</label>
+							<div class="controls">
+								<input type="file" id="file" name="file" placeholder="" class="input-xlarge">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<!-- Button -->
+							<div class="controls">
+								<button onclick="CancelarCrearTarea();" class="btn btn-inverse">Cancelar</button>
+								<button class="btn btn-info">Crear</button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
 			</div>
 		</div>
 	</section>
