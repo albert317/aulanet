@@ -7,6 +7,10 @@ class Course_Controller extends Base_Controller {
 	*/
 	public function action_index()
 	{
+		//$current_user = Auth::user()->student();
+		//$current_user = Student::find(Auth::user()->user_id);
+		//var_dump($current_user);
+
 		return View::make('user.profile');
 	}
 	

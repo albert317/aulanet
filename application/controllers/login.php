@@ -5,7 +5,7 @@ class Login_Controller extends Base_Controller {
 
 	public function action_index()
 	{
-		echo "asdsad";
+		return Redirect::to('/');
 	}
 
 	public function action_login()
@@ -21,7 +21,6 @@ class Login_Controller extends Base_Controller {
 		$validation = Validator::make($credentials, $rules);
 		if($validation->fails())
 		{
-			echo "fallo"; exit();
 			return Redirect::to('/')
 					->with_errors($validation)
 					->with_input();
@@ -32,13 +31,13 @@ class Login_Controller extends Base_Controller {
 			var_dump(Auth::user()); 
 			echo "<br>SESSION:<br>";
 			echo Session::get('attributes');
-			exit();			
+					
 			return Redirect::to('cursos');
 		}
 		else
 		{
 			echo "NO"; exit();
-			return View::make('index')
+			return View::make('home.index')
 					->with('login_errors', true);
 		}
 	}
@@ -46,7 +45,7 @@ class Login_Controller extends Base_Controller {
 	public function action_logout()
 	{
 		Auth::logout();
-		echo "SALIO"; exit();
-		return View::make('index');
+		//echo URL::to('js'); exit();
+		return View::make('home.index');
 	}
 }
