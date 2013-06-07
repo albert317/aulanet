@@ -10,6 +10,8 @@ class Login_Controller extends Base_Controller {
 
 	public function action_login()
 	{
+
+
 		$credentials = array(
 				'username'	=> Input::get('username'),
 				'password'	=> Input::get('password')
@@ -46,6 +48,6 @@ class Login_Controller extends Base_Controller {
 	{
 		Auth::logout();
 		//echo URL::to('js'); exit();
-		return View::make('home.index');
+		return Redirect::to('/');
 	}
 }

@@ -1,12 +1,12 @@
 @layout('layout.master')
 @section('content')
 	<aside>
-		<img src="img/fisi.jpg" width="500">
+		<img src={{URL::to('img/fisi.jpg')}} width="500">
 	</aside>
 	<div class="login">
 		<h3>Bienvenidos al sistema...</h3>
 		
-	    {{ Form::open('login','POST', array('class'=>'form-horizontal')) }}
+	    {{ Form::open('login/login','POST', array('class'=>'form-horizontal')) }}
 	        <!-- check for login errors flash var -->
 	        @if (Session::has('login_errors'))
 	            {{ Alert::error("Username or password incorrect.") }}
