@@ -48,12 +48,12 @@ Route::any(array('/'), function(){
 
 Route::group(array('before' => 'auth'), function()
 {
-	Route::any('cursos'				, 'course@index');
-	Route::any('cursos/tareas'		, 'course@tasks');
-	Route::any('cursos/asistencia'	, 'course@attendance');
-	Route::any('cursos/notas'		, 'course@grades');
-	Route::any('cursos/foro'		, 'course@forum');
-	Route::any('agenda'				, 'agenda@index');
+	Route::any('cursos'					, 'course@index');
+	Route::any('cursos/(:num)/tareas'	, 'course@tasks');
+	Route::any('cursos/asistencia'		, 'course@attendance');
+	Route::any('cursos/notas'			, 'course@grades');
+	Route::any('cursos/foro'			, 'course@forum');
+	Route::any('agenda'					, 'agenda@index');
 });
 /*
 Route::any('cursos'				, 'course@index');

@@ -1,16 +1,16 @@
 <?php
 class Group extends Eloquent {
-	private static $table	= 'group';
-	private static $key		= 'group_id';
+	public static $table	= 'group';
+	public static $key		= 'group_id';
 
 	public function course()
 	{
 		return $this->belongs_to('Course');
 	}
 
-	public function group_student()
+	public function student()
 	{
-		return $this->has_many('group_student');
+		return $this->has_many_and_belongs_to('Student', 'group_student');
 	}
 
 	public function groupactivity()

@@ -17,7 +17,8 @@ class Create_Table_Grade {
 			$table->decimal('value',6,4)->nullable();
 			$table->decimal('weight',6,4)->nullable();
 			$table->timestamps();
-			$table->foreign('group_student_id')->references('group_student_id')->on('group_student');
+			//$table->foreign('group_student_id')->references('group_student_id')->on('group_student');
+			$table->foreign('group_student_id')->references('id')->on('group_student');
 			
 		});
 		//
