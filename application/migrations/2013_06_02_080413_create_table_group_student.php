@@ -11,7 +11,8 @@ class Create_Table_Group_Student {
 	{
 		Schema::create('group_student', function($table){
 			$table->engine = 'InnoDB';
-			$table->increments('group_student_id');
+			//$table->increments('group_student_id');
+			$table->increments('id');
 			$table->integer('group_id')->unsigned();
 			$table->integer('student_id')->unsigned();
 			$table->timestamps();
