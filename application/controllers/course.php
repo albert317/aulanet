@@ -32,7 +32,6 @@ class Course_Controller extends Base_Controller {
 	 */
 	public function action_tasks($course_id)
 	{
-		echo $course_id; 
 		return View::make('course.tasks');	
 	}
 
