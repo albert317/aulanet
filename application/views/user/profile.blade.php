@@ -2,7 +2,7 @@
 @section('logout')
 	<ul class="user nav nav-pills">
         <li class="dropdown">
-        	<a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#"><i class="icon-user"></i>User<b class="caret"></b></a>
+        	<a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#"><i class="icon-user"></i>{{$current_user->names}}<b class="caret"></b></a>
         	<ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
           		<li role="presentation"><a role="menuitem" tabindex="-1" href="login/logout">Salir</a></li>
         	</ul>
@@ -14,7 +14,7 @@
 		<h4>Datos Personales</h4>
 		<dl class="dl-horizontal">
 			<dt>Alumno(a) :</dt>
-			<dd>José Perez Chacón</dd>
+			<dd>{{$current_user->names}} {{$current_user->last_name1}} {{$current_user->last_name2}}</dd>
 			<dt>Facultad :</dt>
 			<dd>Ingeniería de Sistemas e Informática</dd>
 			<dt>Escuela :</dt>
@@ -45,135 +45,27 @@
 			<caption><h3>Horario</h3></caption>
 		  	<thead>
 			    <tr>
-			      <th>Lunes</th>
-			      <th>Martes</th>
-			      <th>Miercoles</th>
-			      <th>Jueves</th>
-			      <th>Viernes</th>
-			      <th>Sábado</th>
+			    	<th>Hora</th>
+			      	<th>Lunes</th>
+			      	<th>Martes</th>
+			      	<th>Miercoles</th>
+			      	<th>Jueves</th>
+			      	<th>Viernes</th>
+			      	<th>Sábado</th>
 			    </tr>
 		  	</thead>
 		  	<tbody>
-			    <tr>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    </tr>
-			    <tr>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    </tr>
-			    <tr>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    </tr>
-			    <tr>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    </tr>
-			    <tr>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    </tr>
-			    <tr>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    </tr>
-			    <tr>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    </tr>
-			    <tr>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    </tr>
-			    <tr>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    </tr>
-			    <tr>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    </tr>
-			    <tr>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    </tr>
-			    <tr>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    </tr>
-			    <tr>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    </tr>
-			    <tr>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    </tr>
-			    <tr>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    	<th></th>
-			    </tr>
+			  		@for($i = 0; $i<14; $i++)
+			  			<tr>
+					  		@for($j=0;$j<7;$j++)
+						  		@if($j==0)
+									<th>{{$i+8}}:00 - {{$i+9}}:00</th>
+						  		@else
+									<th></th>
+						  		@endif
+					  		@endfor
+				  		</tr>
+			  		@endfor
 		  	</tbody>
 		</table>
 	</div>

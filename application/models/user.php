@@ -16,7 +16,7 @@ class User extends Eloquent {
 
 	public function administrator()
 	{
-		return $this->belogs_to('Administrator');
+		return $this->belongs_to('Administrator');
 	}
 
 	
