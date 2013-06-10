@@ -20,12 +20,14 @@
 		</ul>
 		<div id="tareas">
 			<ul>
-				<li class="tarea">
-					<a href="javascript:NuevaTarea();">
-						<h4>Crear Nueva Tarea</h4>
-						<img class="imgnewtask"src={{URL::to('img/newtask.png')}} alt="">
-					</a>
-				</li>
+				
+					<li class="tarea">
+						<a href="javascript:NuevaTarea();">
+							<h4>Crear Nueva Tarea</h4>
+							<img class="imgnewtask"src={{URL::to('img/newtask.png')}} alt="">
+						</a>
+					</li>
+				
 				@for($i=0; $i<6; $i++)
 					<li class="tarea">
 						<a href="#"><h4>Tarea {{$i+1}}</h4></a>
@@ -48,7 +50,6 @@
 						<legend class="">Nueva Tarea</legend>
 					</div>
 					<div class="control-group">
-						<!-- Username -->
 						<label class="control-label"  for="enunciado">Enunciado</label>
 						<div class="controls">
 							{{ Form::text('enunciado','', array('class'=>'input-xlarge')) }}
@@ -56,7 +57,6 @@
 					</div>
 
 					<div class="control-group">
-						<!-- E-mail -->
 						<label class="control-label" for="descripcion">Descripción</label>
 						<div class="controls">
 							{{ Form::textarea('descripcion','', array('class'=>'input-xlarge','rows'=>'3')) }}
@@ -64,7 +64,6 @@
 					</div>
 
 					<div class="control-group">
-						<!-- Password-->
 						<label class="control-label" for="fecha">Fecha de presentación</label>
 						<div class="controls">
 							{{ Form::date('fecha','', array('class'=>'input-xlarge')) }}
@@ -72,7 +71,6 @@
 					</div>
 
 					<div class="control-group">
-						<!-- Password -->
 						<label class="control-label"  for="password_confirm">Tipo de tarea</label>
 						<div class="controls">
 							<label class="radio">
@@ -87,7 +85,6 @@
 					</div>
 
 					<div class="control-group">
-						<!-- Password-->
 						<label class="control-label" for="fecha">Archivo</label>
 						<div class="controls">
 							{{ Form::file('file', array('class'=>'input-xlarge')) }}
@@ -95,7 +92,6 @@
 					</div>
 
 					<div class="control-group">
-						<!-- Button -->
 						<div class="controls">
 							<button onclick="CancelarCrearTarea();" class="btn btn-inverse">Cancelar</button>
 							{{ Form::submit('Crear', array('class' => 'btn btn-info')) }}

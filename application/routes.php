@@ -45,6 +45,11 @@ Route::any(array('/'), function(){
 	}
 });
 
+Route::get('nuevatarea', function()
+{
+	//return View::make('home.index');
+	return View::make('course.newtask');
+});
 
 Route::group(array('before' => 'auth'), function()
 {
