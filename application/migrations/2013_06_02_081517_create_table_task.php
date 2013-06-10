@@ -9,9 +9,9 @@ class Create_Table_Task {
 	 */
 	public function up()
 	{
-		Schema::create('task', function($table){
+		Schema::create('assignment', function($table){
 			$table->engine = 'InnoDB';
-			$table->increments('task_id');
+			$table->increments('assignment_id');
 			$table->integer('group_id')->unsigned();
 			$table->date('end_date')->nullable();
 			$table->date('star_date')->nullable();

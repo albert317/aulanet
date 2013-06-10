@@ -21,18 +21,33 @@ class Course_Controller extends Base_Controller {
 			case 'A':
 				$current_user = $current_user->administrator()->first();
 				break;
+		}		
+		//echo Auth::user()->names;exit();
+		$groups = $current_user->group()->get();
+		$groupcourses = array();
+		foreach ($groups as $g) {
+			$groupcourses[] = 	array(
+									'name'		=> $g->course()->first()->name,
+									'group_id'	=> $g->group_id
+								);
 		}
-		//var_export($current_user->group()->first());
+		$data = array(
+					'current_user' 	=> $current_user,
+					'groupcourses'	=> $groupcourses
+				);
 
-		return View::make('user.profile')->with('current_user', $current_user);
+		return View::make('user.profile', $data);
 	}
 	
 	/**
 	 * Muestra el listado de tareas pertenecientes al curso
 	 */
-	public function action_tasks($course_id)
+	public function action_tasks($group_id)
 	{
-		echo $course_id; 
+		echo $group_id;
+		//$tasks = Task::where('group_id', '=', $group_id)->get();
+		$tasks = Group::find($group_id)->first()->assignment();
+		var_dump($tasks);
 		return View::make('course.tasks');	
 	}
 

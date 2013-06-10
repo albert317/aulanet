@@ -2,7 +2,7 @@
 @section('logout')
 	<ul class="user nav nav-pills">
         <li class="dropdown">
-        	<a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#"><i class="icon-user"></i>{{$current_user->names}}<b class="caret"></b></a>
+        	<a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#"><i class="icon-user"></i>{{Auth::user()->names}}<b class="caret"></b></a>
         	<ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
           		<li role="presentation"><a role="menuitem" tabindex="-1" href="login/logout">Salir</a></li>
         	</ul>
@@ -14,7 +14,7 @@
 		<h4>Datos Personales</h4>
 		<dl class="dl-horizontal">
 			<dt>Alumno(a) :</dt>
-			<dd>{{$current_user->names}} {{$current_user->last_name1}} {{$current_user->last_name2}}</dd>
+			<dd>{{ Auth::user()->names }} {{Auth::user()->last_name1}} {{Auth::user()->last_name2}}</dd>
 			<dt>Facultad :</dt>
 			<dd>Ingeniería de Sistemas e Informática</dd>
 			<dt>Escuela :</dt>
@@ -34,9 +34,11 @@
 	</div>
 	<div class="cursos">
 		<h4>Cursos Matriculados</h4>
-		@for ($i = 0; $i<6; $i++)
-			<a href="curso.html"><article class="curso">curso {{$i + 1}}</article></a>
-		@endfor
+		@forelse ($groupcourses as $c)
+			<a href={{ URL::base().'/cursos/'.$c['group_id'].'/tareas' }}><article class="curso">{{ $c['name'	] }}</article></a>
+		@empty
+			<h4>No existen cursos disponibles</h4>
+		@endforelse
 	</div>
 	<button class="btn btn-info" id="mostrar_horario">Mostrar Horario</button>
 	<button class="btn btn-info" id="ocultar_horario">Ocultar Horario</button>
