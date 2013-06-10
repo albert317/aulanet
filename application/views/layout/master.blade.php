@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href={{URL::to('css/style.css')}}>
 	<script type="text/javascript" src={{URL::to('js/bootstrap.js')}}></script>
 	<script src={{URL::to('js/metodos.js')}}></script>
+	<script src={{URL::to('js/script.js')}}></script>
 </head>
 <body>
 	
