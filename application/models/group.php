@@ -38,9 +38,9 @@ class Group extends Eloquent {
 		return $this->has_many('Schedule');
 	}
 
-	public function task()
+	public function assignment()
 	{
-		return $this->has_many('Task');
+		return $this->has_many('Assignment', 'group_id');
 	}
 
 }

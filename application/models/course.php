@@ -1,10 +1,10 @@
 <?php
 class Course extends Eloquent {
-	private static $table	= 'course';
-	private static $key		= 'course_id';
+	public static $table	= 'course';
+	public static $key		= 'course_id';
 
 	public function group()
 	{
-		return $this->has_many('Group');
+		return $this->has_many('Group', 'course_id');
 	}
 }

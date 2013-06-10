@@ -12,10 +12,10 @@ class Create_Table_Student_Team {
 		Schema::create('student_team', function($table){
 			$table->engine = 'InnoDB';
 			$table->integer('student_id')->unsigned();
-			$table->integer('task_id')->unsigned();
+			$table->integer('team_id')->unsigned();
 			$table->timestamps();
-			$table->primary(array('student_id','task_id'));
-			$table->foreign('task_id')->references('task_id')->on('task');
+			$table->primary(array('student_id','team_id'));
+			$table->foreign('team_id')->references('team_id')->on('team');
 			$table->foreign('student_id')->references('student_id')->on('student');
 			
 		});

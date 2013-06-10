@@ -3,9 +3,9 @@ class Team extends Eloquent {
 	private static $table	= 'team';
 	private static $key		= 'team_id';
 
-	public function task()
+	public function assignment()
 	{
-		return $this->belongs_to('Task');
+		return $this->belongs_to('Assignment');
 	}
 
 	public function teamfile()

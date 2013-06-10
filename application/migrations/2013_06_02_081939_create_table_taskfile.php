@@ -11,13 +11,13 @@ class Create_Table_Taskfile {
 	{
 		Schema::create('taskfile', function($table){
 			$table->engine = 'InnoDB';
-			$table->increments('taskfile_id');
+			$table->increments('assignment_id');
 			$table->integer('task_id')->unsigned();
 			$table->string('url',200);
 			$table->string('title',45)->nullable();
 			$table->string('description',200)->nullable();
 			$table->timestamps();
-			$table->foreign('task_id')->references('task_id')->on('task');
+			$table->foreign('assignment_id')->references('assignment_id')->on('assignment');
 			
 		});
 		//

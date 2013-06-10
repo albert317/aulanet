@@ -10,21 +10,13 @@ class Add_Professor {
 	public function up()
 	{		
 		DB::table('professor')->insert(array(
-			'user_id'=>'2',
-			'names' => 'GILBERTO ANIBAL',
-			'last_name1'=>'SALINAS',
-			'last_name2'=>'AZAÑA',
-			'email'=>'gsalinasa@unmsm.edu.pe',			
+			'user_id'=>'2',			
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));		
 
 		DB::table('professor')->insert(array(
-			'user_id'=>'3',
-			'names' => 'ELIAS FELIX',
-			'last_name1'=>'ARMAS',
-			'last_name2'=>'GARCIA',
-			'email'=>' 	earmasg@unmsm.edu.pe',			
+			'user_id'=>'3',			
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
