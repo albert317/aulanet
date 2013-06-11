@@ -4,7 +4,7 @@
         <li class="dropdown">
         	<a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#"><i class="icon-user"></i>{{Auth::user()->names}}<b class="caret"></b></a>
         	<ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-          		<li role="presentation"><a role="menuitem" tabindex="-1" href="login/logout">Salir</a></li>
+          		<li role="presentation"><a role="menuitem" tabindex="-1" href={{URL::to("login/logout")}}>Salir</a></li>
         	</ul>
       	</li>
     </ul>
@@ -20,6 +20,14 @@
 			<dt>Escuela :</dt>
 			<dd>EAP Ingeniería de Software</dd>
 		</dl>
+		<div class="cursos">
+			<h4>Cursos Matriculados</h4>
+			@forelse ($groupcourses as $c)
+				<a href={{ URL::base().'/cursos/'.$c['group_id'].'/tareas' }}><article class="curso">{{ $c['name'	] }}</article></a>
+			@empty
+				<h4>No existen cursos disponibles</h4>
+			@endforelse
+		</div>
 	</div>
 	<div class="enlaces">
 		<h4>Enlaces de interés</h4>
@@ -32,14 +40,7 @@
 			<li class="link"><a href="#"><i class="icon-tag"></i> Unidad de Matricula</a></li>
 		</ul>
 	</div>
-	<div class="cursos">
-		<h4>Cursos Matriculados</h4>
-		@forelse ($groupcourses as $c)
-			<a href={{ URL::base().'/cursos/'.$c['group_id'].'/tareas' }}><article class="curso">{{ $c['name'	] }}</article></a>
-		@empty
-			<h4>No existen cursos disponibles</h4>
-		@endforelse
-	</div>
+	
 	<button class="btn btn-info" id="mostrar_horario">Mostrar Horario</button>
 	<button class="btn btn-info" id="ocultar_horario">Ocultar Horario</button>
 	<div id="horario">

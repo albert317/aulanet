@@ -22,6 +22,18 @@ class Add_Course {
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
+		DB::table('course')->insert(array(
+			'name'=>'Calidad de Software',
+			'eap' => 'SW',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
+		DB::table('course')->insert(array(
+			'name'=>'Taller de Construcción de Software',
+			'eap' => 'SW',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
 		//
 	}
 
@@ -34,6 +46,8 @@ class Add_Course {
 	{
 		DB::table('course')->where('course_id', '=', 1)->delete();
 		DB::table('course')->where('course_id', '=', 2)->delete();
+		DB::table('course')->where('course_id', '=', 3)->delete();
+		DB::table('course')->where('course_id', '=', 4)->delete();
 		DB::query('ALTER TABLE course AUTO_INCREMENT = 1');
 
 		//

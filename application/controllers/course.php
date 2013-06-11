@@ -44,13 +44,12 @@ class Course_Controller extends Base_Controller {
 	 */
 	public function action_tasks($group_id)
 	{
-<<<<<<< HEAD
-		echo $group_id;
+
+		//echo $group_id;
 		//$tasks = Task::where('group_id', '=', $group_id)->get();
 		$tasks = Group::find($group_id)->first()->assignment();
 		var_dump($tasks);
-=======
->>>>>>> 214a6a217389ef6b82e87f1eb57cc99d6c605fe5
+
 		return View::make('course.tasks');	
 	}
 

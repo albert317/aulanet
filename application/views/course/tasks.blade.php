@@ -2,9 +2,9 @@
 @section('logout')
 	<ul class="user nav nav-pills">
         <li class="dropdown">
-        	<a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#"><i class="icon-user"></i>User<b class="caret"></b></a>
+        	<a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#"><i class="icon-user"></i>{{Auth::user()->names}}<b class="caret"></b></a>
         	<ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-          		<li role="presentation"><a role="menuitem" tabindex="-1" href="login/logout">Salir</a></li>
+          		<li role="presentation"><a role="menuitem" tabindex="-1" href={{URL::to("login/logout")}}>Salir</a></li>
         	</ul>
       	</li>
     </ul>
@@ -49,12 +49,12 @@
 			    <h4>Editar Tarea</h4>
 			</div>
 			<div class="modal-body">	
-				{{ Form::open('','POST', array('class'=>'form-horizontal')) }}
+				{{ Form::open_for_files('','POST', array('class'=>'form-horizontal')) }}
 				<fieldset>
 					<div class="control-group">
 						<label class="control-label"  for="enunciado">Enunciado</label>
 						<div class="controls">
-							{{ Form::text('enunciado','', array('class'=>'input-xlarge')) }}
+							{{ Form::text('enunciado','', array('class'=>'input-xlarge','style'=>'height:30px')) }}
 						</div>
 					</div>
 					<div class="control-group">
@@ -66,7 +66,7 @@
 					<div class="control-group">
 						<label class="control-label" for="fecha">Fecha de presentación</label>
 						<div class="controls">
-							{{ Form::date('fecha','', array('class'=>'input-xlarge')) }}
+							{{ Form::date('fecha','', array('class'=>'input-xlarge','style'=>'height:30px')) }}
 						</div>
 					</div>
 					<div class="control-group">
@@ -107,7 +107,7 @@
 				<div class="control-group">
 					<label class="control-label"  for="enunciado">Enunciado</label>
 					<div class="controls">
-						{{ Form::text('enunciado','', array('class'=>'input-xlarge')) }}
+						{{ Form::text('enunciado','', array('class'=>'input-xlarge','style'=>'height:30px')) }}
 					</div>
 				</div>
 				<div class="control-group">
@@ -119,7 +119,7 @@
 				<div class="control-group">
 					<label class="control-label" for="fecha">Fecha de presentación</label>
 					<div class="controls">
-						{{ Form::date('fecha','', array('class'=>'input-xlarge')) }}
+						{{ Form::date('fecha','', array('class'=>'input-xlarge','style'=>'height:30px')) }}
 					</div>
 				</div>
 				<div class="control-group">
@@ -143,7 +143,7 @@
 				</div>
 				<div class="control-group">
 					<div class="controls">
-						<button onclick="CancelarCrearTarea();" class="btn btn-inverse">Cancelar</button>
+						<a href="javascript:CancelarCrearTarea();" class="btn btn-inverse">Cancelar</a>
 						{{ Form::submit('Crear', array('class' => 'btn btn-info')) }}
 					</div>
 				</div>

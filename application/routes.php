@@ -45,10 +45,10 @@ Route::any(array('/'), function(){
 	}
 });
 
-Route::get('nuevatarea', function()
+Route::get('creargrupo', function()
 {
 	//return View::make('home.index');
-	return View::make('course.newtask');
+	return View::make('course.creategroup');
 });
 
 Route::group(array('before' => 'auth'), function()
