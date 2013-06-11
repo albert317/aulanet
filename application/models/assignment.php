@@ -5,7 +5,7 @@ class Assignment extends Eloquent {
 
 	public function assignment_file()
 	{
-		return $this->has_many('Assigmentfile', 'assignment_id');
+		return $this->has_many('Assignmentfile', 'assignment_id');
 	}
 
 	public function group()

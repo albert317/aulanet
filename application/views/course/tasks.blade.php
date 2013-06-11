@@ -20,25 +20,31 @@
 		</ul>
 		<div id="tareas">
 			<ul>
-				<li class="tarea">
-					<a href="javascript:NuevaTarea();">
-						<h4>Crear Nueva Tarea</h4>
-						<img class="imgnewtask"src={{URL::to('img/newtask.png')}} alt="">
-					</a>
-				</li>
-				@for($i=0; $i<6; $i++)
-				<li class="tarea">
-					<a href="#"><h4>Tarea {{$i+1}}</h4></a>
-					<div class="detalle">
-						Mauris mauris ante, blandit et, ultrices a, susceros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-					</div>
-					<div class="edicion">
-						<span>Fecha: 15/02/2013</span>
-						<a href="#Editar" data-toggle="modal"><img src={{URL::to('img/edit.png')}} alt=""></a>
-						<a href="#Eliminar" data-toggle="modal"><img src={{URL::to('img/delete.png')}} alt=""></a>
-					</div>
-				</li>
-				@endfor
+				@if(Auth::user()->type == 'T')
+					<li class="tarea">
+						<a href="javascript:NuevaTarea();">
+							<h4>Crear Nueva Tarea</h4>
+							<img class="imgnewtask"src={{URL::to('img/newtask.png')}} alt="">
+						</a>
+					</li>
+				@endif
+				@forelse($assignments as $a)
+					<li class="tarea">
+						<a href="#"><h4>{{ $a->name }}</h4></a>
+						<div class="detalle">
+							{{ $a->description }}
+						</div>
+						<div class="edicion">
+							<span>{{ $a->end_date }}</span>
+							@if(Auth::user()->type == 'T')
+								<a href="#Editar" data-toggle="modal"><img src={{URL::to('img/edit.png')}} alt=""></a>
+								<a href="#Eliminar" data-toggle="modal"><img src={{URL::to('img/delete.png')}} alt=""></a>
+							@endif
+						</div>
+					</li>
+				@empty
+					<h4>No hay tareas por ahora =)</h4>
+				@endforelse
 			</ul>
 		</div>
 		
