@@ -26,6 +26,22 @@ class Add_Group {
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
+		DB::table('group')->insert(array(
+			'professor_id'=>'2',
+			'course_id' => '3',
+			'name'=>'Grupo 1',
+			'type'=>'T',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
+		DB::table('group')->insert(array(
+			'professor_id'=>'2',
+			'course_id' => '4',
+			'name'=>'Grupo 1',
+			'type'=>'T',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
 		//
 	}
 
@@ -38,6 +54,8 @@ class Add_Group {
 	{
 		DB::table('group')->where('group_id', '=', 1)->delete();
 		DB::table('group')->where('group_id', '=', 2)->delete();
+		DB::table('group')->where('group_id', '=', 3)->delete();
+		DB::table('group')->where('group_id', '=', 4)->delete();
 		DB::query('ALTER TABLE group AUTO_INCREMENT = 1');
 
 		//

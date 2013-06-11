@@ -22,6 +22,18 @@ class Add_Group_Student {
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
+		DB::table('group_student')->insert(array(
+			'group_id'=>'3',
+			'student_id' => '4',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
+		DB::table('group_student')->insert(array(
+			'group_id'=>'4',
+			'student_id' => '4',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
 		//
 	}
 
@@ -34,6 +46,8 @@ class Add_Group_Student {
 	{
 		DB::table('group_student')->where('group_student_id', '=', 1)->delete();
 		DB::table('group_student')->where('group_student_id', '=', 2)->delete();
+		DB::table('group_student')->where('group_student_id', '=', 3)->delete();
+		DB::table('group_student')->where('group_student_id', '=', 4)->delete();
 		DB::query('ALTER TABLE group_student AUTO_INCREMENT = 1');
 
 		//

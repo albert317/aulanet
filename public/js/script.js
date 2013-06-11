@@ -2,8 +2,6 @@ function NuevaTarea()
 {
 	$("#tareas").css("display","none");
 	$("#newtask").css("display","block");
-	var cadena="";
-	console.log("hola");
 }
 function CancelarCrearTarea()
 {
