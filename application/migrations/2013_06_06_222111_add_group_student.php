@@ -44,12 +44,12 @@ class Add_Group_Student {
 	 */
 	public function down()
 	{
-		DB::table('group_student')->where('group_student_id', '=', 1)->delete();
-		DB::table('group_student')->where('group_student_id', '=', 2)->delete();
-		DB::table('group_student')->where('group_student_id', '=', 3)->delete();
-		DB::table('group_student')->where('group_student_id', '=', 4)->delete();
+		DB::table('group_student')->where('id', '=', 1)->delete();
+		DB::table('group_student')->where('id', '=', 2)->delete();
+		DB::table('group_student')->where('id', '=', 3)->delete();
+		DB::table('group_student')->where('id', '=', 4)->delete();
 		DB::query('ALTER TABLE group_student AUTO_INCREMENT = 1');
-
+		
 		//
 	}
 
