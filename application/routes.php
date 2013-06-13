@@ -65,7 +65,11 @@ Route::get('notas', function()
 	//return View::make('home.index');
 	return View::make('course.grades');
 });
-
+Route::get('subirtarea', function()
+{
+	//return View::make('home.index');
+	return View::make('course.subirtarea');
+});
 Route::group(array('before' => 'auth'), function()
 {
 	Route::any('cursos'					, 'course@index');
