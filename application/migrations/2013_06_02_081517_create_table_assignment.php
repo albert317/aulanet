@@ -1,6 +1,6 @@
 <?php
 
-class Create_Table_Task {
+class Create_Table_Assignment {
 
 	/**
 	 * Make changes to the database.
@@ -32,7 +32,7 @@ class Create_Table_Task {
 	 */
 	public function down()
 	{
-		Schema::drop('task');
+		Schema::drop('assignment');
 		//
 	}
 

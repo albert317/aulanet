@@ -1,6 +1,6 @@
 <?php
 
-class Create_Table_Taskfile {
+class Create_Table_Assignmentfile {
 
 	/**
 	 * Make changes to the database.
@@ -9,10 +9,10 @@ class Create_Table_Taskfile {
 	 */
 	public function up()
 	{
-		Schema::create('taskfile', function($table){
+		Schema::create('assignmentfile', function($table){
 			$table->engine = 'InnoDB';
-			$table->increments('assignment_id');
-			$table->integer('task_id')->unsigned();
+			$table->increments('assignmentfile_id');
+			$table->integer('assignment_id')->unsigned();
 			$table->string('url',200);
 			$table->string('title',45)->nullable();
 			$table->string('description',200)->nullable();
@@ -30,7 +30,7 @@ class Create_Table_Taskfile {
 	 */
 	public function down()
 	{
-		Schema::drop('taskfile');
+		Schema::drop('assignmentfile');
 		//
 	}
 
