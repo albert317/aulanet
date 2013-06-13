@@ -56,7 +56,10 @@ class Add_Group {
 		DB::table('group')->where('group_id', '=', 2)->delete();
 		DB::table('group')->where('group_id', '=', 3)->delete();
 		DB::table('group')->where('group_id', '=', 4)->delete();
-		DB::query('ALTER TABLE group AUTO_INCREMENT = 1');
+		//DB::query('ALTER TABLE group DROP group_id');
+		//DB::query('ALTER TABLE group AUTO_INCREMENT = 1');
+		//DB::query('ALTER TABLE group ADD group_id int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST');
+
 
 		//
 	}

@@ -38,6 +38,9 @@ class Add_Assignment {
 	 */
 	public function down()
 	{
+		DB::table('assignment')->where('assignment_id', '=', 1)->delete();
+		DB::table('assignment')->where('assignment_id', '=', 2)->delete();
+		DB::query('ALTER TABLE assignment AUTO_INCREMENT = 1');
 		//
 	}
 

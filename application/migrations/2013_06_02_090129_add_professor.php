@@ -30,8 +30,8 @@ class Add_Professor {
 	 */
 	public function down()
 	{
+		DB::table('professor')->where('professor_id', '=', 1)->delete();
 		DB::table('professor')->where('professor_id', '=', 2)->delete();
-		DB::table('professor')->where('professor_id', '=', 3)->delete();
 		DB::query('ALTER TABLE professor AUTO_INCREMENT = 1');
 
 		//
