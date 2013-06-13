@@ -6,12 +6,13 @@
 	<meta description=""/>
 	<script src={{URL::to('js/jquery-1.10.1.min.js')}}></script>
 	<script src={{URL::to('js/jquery-migrate-1.2.1.min.js')}}></script>
-	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script src={{URL::to('js/jquery-ui-1.10.3.custom.js')}}></script>
 	<link rel="stylesheet" type="text/css" href={{URL::to('css/bootstrap.css')}}>
 	<link rel="stylesheet" href={{URL::to('css/style.css')}}>
 	<script type="text/javascript" src={{URL::to('js/bootstrap.js')}}></script>
 	<script src={{URL::to('js/metodos.js')}}></script>
 	<script src={{URL::to('js/script.js')}}></script>
+	<script src={{URL::to('js/tablas.js')}}></script>
 </head>
 <body>
 	

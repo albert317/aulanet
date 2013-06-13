@@ -11,7 +11,7 @@ class User extends Eloquent {
 
 	public function professor()
 	{
-		return $this->belongs_to('Professor');
+		return $this->has_one('Professor','user_id');
 	}
 
 	public function administrator()

@@ -5,7 +5,7 @@ class Professor extends Eloquent {
 
 	public function user()
 	{
-		return $this->has_one('User');
+		return $this->belongs_to('User');
 	}
 
 	public function post()
@@ -15,6 +15,6 @@ class Professor extends Eloquent {
 
 	public function group()
 	{
-		return $this->has_many("Group");
+		return $this->has_many("Group","professor_id");
 	}
 }

@@ -35,6 +35,10 @@ h3
 	font-size: 32px;
 	font-weight: bold;
 }
+li
+{
+	list-style: none;
+}
 
 /*ENCABEZADO*/
 header
@@ -212,12 +216,47 @@ h4
 {
 	width: 70%;
 	display: inline-block;
+	vertical-align: top;
+	color: black;
+}
+.grupo
+{
+	width: 30%;
+	height: 150px;
+	border: 1px solid lightgray;
+	border-radius: 8px;
+	display: inline-block;
+	vertical-align: top;
+	margin: 10px 10px 0px 0;
+	padding: 5px 0 0 5px;
+	box-shadow: 4px 4px 4px gray;
+}
+.linea
+{
+	width: 100%;
+	border-top:1px solid lightgray; 
 }
 .alumnos
 {
-	width: 25%;
+	width: 27%;
 	display: inline-block;
 	padding: 10px;
+	vertical-align: top;
+}
+.alumnos li,.grupo li{
+	margin-left: -25px;
+}
+.alumnos li
+{
+	margin-bottom: 5px;
+	font-size: 15px;
+	cursor: move;
+	overflow: hidden;
+	border-bottom: 1px solid lightgray;
+}
+.alumnos li:hover{
+	background-color: #00BFFF;
+	font-weight: bold;
 }
 
 

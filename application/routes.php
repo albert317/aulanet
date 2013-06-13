@@ -50,6 +50,21 @@ Route::get('creargrupo', function()
 	//return View::make('home.index');
 	return View::make('course.creategroup');
 });
+Route::get('agenda', function()
+{
+	//return View::make('home.index');
+	return View::make('course.agenda');
+});
+Route::get('asistencia', function()
+{
+	//return View::make('home.index');
+	return View::make('course.attendance');
+});
+Route::get('notas', function()
+{
+	//return View::make('home.index');
+	return View::make('course.grades');
+});
 
 Route::group(array('before' => 'auth'), function()
 {
