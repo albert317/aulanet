@@ -28,9 +28,19 @@
 					</a>
 				</li>
 			@endif
+			<?php 
+			if(count($assignments)==0){
+				$assignments=null;
+				$a=new Assignment;
+			}
+			//var_export($assignments);
+			//exit();
+			?>
+
 			@forelse($assignments as $a)
+			
 				<li class="tarea">
-					<a href="#"><h4>{{ $a->name }}</h4></a>
+					<a href={{ URL::base().'/cursos/'.$a->group_id.'/tareas/'.$a->assignment_id }}><h4>{{ $a->name }}</h4></a>
 					<div class="detalle">
 						{{ $a->description }}
 					</div>
@@ -42,6 +52,7 @@
 						@endif
 					</div>
 				</li>
+
 			@empty
 				<h4>No hay tareas por ahora =)</h4>
 			@endforelse
@@ -91,7 +102,6 @@
 			{{ Form::close() }}
 		</div>
 	</div>
-
 	<!-- Modal Eliminar-->
 	<div id="Eliminar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-body">

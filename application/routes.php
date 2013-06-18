@@ -78,6 +78,10 @@ Route::group(array('before' => 'auth'), function()
 	Route::any('cursos/notas'			, 'course@grades');
 	Route::any('cursos/foro'			, 'course@forum');
 	Route::any('agenda'					, 'agenda@index');
+	Route::any('cursos/(:num)/tareas/(:num)', function($aux,$aux2)
+	{
+		return View::make('course.subirtarea');
+	});
 });
 /*
 Route::any('cursos'				, 'course@index');
