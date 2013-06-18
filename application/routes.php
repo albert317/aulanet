@@ -70,6 +70,11 @@ Route::get('subirtarea', function()
 	//return View::make('home.index');
 	return View::make('course.subirtarea');
 });
+Route::get('administrador', function()
+{
+	//return View::make('home.index');
+	return View::make('administrator.profile');
+});
 Route::group(array('before' => 'auth'), function()
 {
 	Route::any('cursos'					, 'course@index');
