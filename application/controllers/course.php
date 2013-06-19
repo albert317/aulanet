@@ -48,8 +48,11 @@ class Course_Controller extends Base_Controller {
 		//$assignments = Group::find($group_id)->first()->assignment()->get();
 		$current_user = Auth::user();
 		$group = DB::query("SELECT * FROM `group` g, student s,group_student gs   WHERE g.group_id=".$group_id." and s.student_id=".$current_user->student()->first()->student_id." and s.student_id=gs.student_id and g.group_id=gs.group_id");
+		//var_export($group);
+		//exit();
 		if(count($group)==0){
-			//return action_index();
+			
+			return Redirect::to('/');
 		}
 		
 		$assignments = DB::query("SELECT * FROM `group` g, assignment a   WHERE g.group_id=".$group_id." and a.group_id=g.group_id");
