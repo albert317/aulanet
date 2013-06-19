@@ -20,7 +20,7 @@
 	</ul>
 	<h4>Subir tarea</h4>
 	<br>
-	{{ Form::open_for_files('','POST', array('class'=>'form-horizontal')) }}
+	{{ Form::open_for_files('cursos/'.$assignments->group_id.'/tareas/'.$assignments->assignment_id.'/upload','POST', array('class'=>'form-horizontal')) }}
 		<fieldset>
 			<div class="control-group">
 				<label class="control-label" for="descripcion">Descripción</label>

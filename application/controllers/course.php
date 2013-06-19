@@ -5,6 +5,22 @@ class Course_Controller extends Base_Controller {
 	* Muestra el listado de cursos disponibles
 	* (No muestra la barra de navegacion)
 	*/
+
+	private function validate_group($group_id)
+	{
+		$current_user = Auth::user();
+		$group = DB::query("SELECT * FROM `group` g, student s,group_student gs   WHERE g.group_id=".$group_id." and s.student_id=".$current_user->student()->first()->student_id." and s.student_id=gs.student_id and g.group_id=gs.group_id");
+		//var_export($group);
+		//exit();
+		if(count($group)==0){
+			
+			return Redirect::to('/');
+		}
+		else{
+			return null;
+		}
+	}
+
 	public function action_index()
 	{
 		//$current_user = User::where('user_id', '=', Auth::user()->user_id)->first()->student()->first();//Student::where('user_id', '=', Auth::user()->user_id)->first()->user()->first();//::user()->student();
@@ -46,15 +62,10 @@ class Course_Controller extends Base_Controller {
 	{
 		//$tasks = Task::where('group_id', '=', $group_id)->get();
 		//$assignments = Group::find($group_id)->first()->assignment()->get();
-		$current_user = Auth::user();
-		$group = DB::query("SELECT * FROM `group` g, student s,group_student gs   WHERE g.group_id=".$group_id." and s.student_id=".$current_user->student()->first()->student_id." and s.student_id=gs.student_id and g.group_id=gs.group_id");
-		//var_export($group);
-		//exit();
-		if(count($group)==0){
-			
-			return Redirect::to('/');
+		$val=$this->validate_group($group_id);
+		if($val!=null){
+			return $val;
 		}
-		
 		$assignments = DB::query("SELECT * FROM `group` g, assignment a   WHERE g.group_id=".$group_id." and a.group_id=g.group_id");
 		$data		 = array(
 							'assignments'	=> $assignments
@@ -85,5 +96,52 @@ class Course_Controller extends Base_Controller {
 	public function action_forum()
 	{
 		return View::make('course.forum');
+	}
+
+	public function action_upload($group_id,$assignment_id)
+	{
+		$val=$this->validate_group($group_id);
+		if($val!=null){
+			return $val;
+		}
+		$this->validate_group($group_id);
+		$student_id=Auth::user()->student()->first()->student_id;
+		/*$teamid=
+		DB::table('team')
+			->join('assignment','team.assignment_id', '=','assignment.assignment_id')
+			->join('student_team','team.team_id', '=', 'student_team.team_id')
+			->where('student_team.student_id','=',Auth::user()->student()->first()->student_id)->first()	;
+		*/
+		$teamid=DB::query('SELECT * FROM team t,assignment a,student_team st
+			WHERE t.team_id=st.team_id AND t.assignment_id=a.assignment_id AND st.student_id='.$student_id);
+		$assignments = Assignment::find($assignment_id)->first();
+		$assignmentfile=new Assignmentfile;
+		$assignmentfile->description=Input::get('descripcion');
+		$assignmentfile->name=Input::file('file.name');
+		$assignmentfile->url=URL::base().Input::file('file.name');
+		$assignmentfile->team_id=$teamid;
+		$assignmentfile->save();
+		$filename = Input::file('file.name');
+		Input::upload('file', 'public/uploads', $filename);
+		$data = array(
+							'assignments'	=> $assignments
+						);
+		return View::make('course.subirtarea',$data);
+		
+	}
+
+	public function action_taskdetail($group_id,$assignments_id)
+	{
+
+		$val=$this->validate_group($group_id);
+		if($val!=null){
+			return $val;
+		}
+		$assignments = Assignment::find($assignments_id)->where('group_id','=',$group_id)->first();
+
+		$data		 = array(
+							'assignments'	=> $assignments
+						);
+		return View::make('course.subirtarea', $data);
 	}
 }

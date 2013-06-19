@@ -77,17 +77,17 @@ Route::get('administrador', function()
 });
 Route::group(array('before' => 'auth'), function()
 {
-	Route::any('cursos'					, 'course@index');
-	Route::any('cursos/(:num)/tareas'	, 'course@tasks');
-	Route::any('cursos/asistencia'		, 'course@attendance');
-	Route::any('cursos/notas'			, 'course@grades');
-	Route::any('cursos/foro'			, 'course@forum');
-	Route::any('agenda'					, 'agenda@index');
-	Route::any('cursos/(:num)/tareas/(:num)', function($aux,$aux2)
-	{
-		return View::make('course.subirtarea');
-	});
+	Route::any('cursos'								, 'course@index');
+	Route::any('cursos/(:num)/tareas'				, 'course@tasks');
+	Route::any('cursos/asistencia'					, 'course@attendance');
+	Route::any('cursos/notas'						, 'course@grades');
+	Route::any('cursos/foro'						, 'course@forum');
+	Route::any('agenda'								, 'agenda@index');
+	Route::any('cursos/(:num)/tareas/(:num)'		, 'course@taskdetail');
+	Route::any('cursos/(:num)/tareas/(:num)/upload'	, 'course@upload');
 });
+
+
 /*
 Route::any('cursos'				, 'course@index');
 Route::any('cursos/tareas'		, 'course@tasks');
