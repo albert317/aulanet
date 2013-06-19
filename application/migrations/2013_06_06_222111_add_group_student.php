@@ -10,26 +10,26 @@ class Add_Group_Student {
 	public function up()
 	{
 		DB::table('group_student')->insert(array(
-			'group_id'=>'1',
+			'classgroup_id'=>'1',
 			'student_id' => '2',
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
 
 		DB::table('group_student')->insert(array(
-			'group_id'=>'2',
+			'classgroup_id'=>'2',
 			'student_id' => '2',
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
 		DB::table('group_student')->insert(array(
-			'group_id'=>'3',
+			'classgroup_id'=>'3',
 			'student_id' => '4',
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
 		DB::table('group_student')->insert(array(
-			'group_id'=>'4',
+			'classgroup_id'=>'4',
 			'student_id' => '4',
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')

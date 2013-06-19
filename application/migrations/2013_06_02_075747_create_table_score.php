@@ -13,10 +13,10 @@ class Create_Table_Score {
 			$table->engine = 'InnoDB';
 			$table->increments('score_id');
 			$table->integer('student_id')->unsigned();
-			$table->integer('group_id')->unsigned();
+			$table->integer('classgroup_id')->unsigned();
 			$table->integer('value')->nullable();
 			$table->timestamps();
-			$table->foreign('group_id')->references('group_id')->on('group');
+			$table->foreign('classgroup_id')->references('classgroup_id')->on('classgroup');
 			$table->foreign('student_id')->references('student_id')->on('student');
 		});
 		//

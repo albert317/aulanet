@@ -12,14 +12,14 @@ class Create_Table_Assignment {
 		Schema::create('assignment', function($table){
 			$table->engine = 'InnoDB';
 			$table->increments('assignment_id');
-			$table->integer('group_id')->unsigned();
+			$table->integer('classgroup_id')->unsigned();
 			$table->date('end_date')->nullable();
 			$table->date('start_date')->nullable();
 			$table->string('name',45)->nullable();
 			$table->text('description')->nullable();
 			$table->enum('type',array('G','S'))->nullable();
 			$table->timestamps();
-			$table->foreign('group_id')->references('group_id')->on('group');
+			$table->foreign('classgroup_id')->references('classgroup_id')->on('classgroup');
 			
 		});
 		//

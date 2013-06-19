@@ -10,7 +10,7 @@ class Add_Assignment {
 	public function up()
 	{
 		DB::table('assignment')->insert(array(
-			'group_id'=>'1',
+			'classgroup_id'=>'1',
 			'end_date' => '2013-08-23',
 			'start_date'=>'2013-07-13',
 			'name'=>'La primera tarea Individual',
@@ -20,7 +20,7 @@ class Add_Assignment {
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
 		DB::table('assignment')->insert(array(
-			'group_id'=>'2',
+			'classgroup_id'=>'2',
 			'end_date' => '2013-09-13',
 			'start_date'=>'2013-08-11',
 			'name'=>'La primera tarea grupal',

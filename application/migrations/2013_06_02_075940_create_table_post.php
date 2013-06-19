@@ -12,7 +12,7 @@ class Create_Table_Post {
 		Schema::create('post', function($table){
 			$table->engine = 'InnoDB';
 			$table->increments('post_id');
-			$table->integer('group_id')->unsigned();
+			$table->integer('classgroup_id')->unsigned();
 			$table->integer('student_id')->unsigned()->nullable();
 			$table->integer('professor_id')->unsigned()->nullable();
 			$table->integer('answer_to')->unsigned()->nullable();
@@ -21,7 +21,7 @@ class Create_Table_Post {
 			$table->enum('type',array('POST','ENLACE','PREGUNTA'))->nullable();
 			$table->integer('checked')->nullable();
 			$table->timestamps();
-			$table->foreign('group_id')->references('group_id')->on('group');
+			$table->foreign('classgroup_id')->references('classgroup_id')->on('classgroup');
 			$table->foreign('student_id')->references('student_id')->on('student');
 			$table->foreign('professor_id')->references('professor_id')->on('professor');
 			$table->foreign('answer_to')->references('post_id')->on('post');

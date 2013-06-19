@@ -8,9 +8,9 @@ class Assignment extends Eloquent {
 		return $this->has_many('Assignmentfile', 'assignment_id');
 	}
 
-	public function group()
+	public function classgroup()
 	{
-		return $this->belongs_to('Group');
+		return $this->belongs_to('Classgroup');
 	}
 
 	public function team()
