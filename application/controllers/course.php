@@ -118,14 +118,14 @@ class Course_Controller extends Base_Controller {
 		*/
 
 		//$teamid=DB::query('SELECT * FROM team t,assignment a,student_team st	WHERE t.team_id=st.team_id AND t.assignment_id=a.assignment_id AND st.student_id='.$student_id);
-		$teamid=Student::find($student_id)->team()->get();//->assigment()->first()->assignment_id;
+		$teamid=Student::find($student_id)->team()->where('assignment_id','=',$assignment_id)->first()->team_id;//->assignment()->first()->assignment_id;
 		
 		
 		$assignments = Assignment::find($assignment_id)->first();
 		$assignmentfile=new Teamfile;
 		$assignmentfile->description=Input::get('descripcion');
 		$assignmentfile->title=Input::file('file.name');
-		$assignmentfile->url=URL::base().Input::file('file.name');
+		$assignmentfile->url=URL::base().'/uploads/'.Input::file('file.name');
 		$assignmentfile->team_id=$teamid;
 		$assignmentfile->save();
 		$filename = Input::file('file.name');
