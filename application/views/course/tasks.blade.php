@@ -40,7 +40,7 @@
 			@forelse($assignments as $a)
 			
 				<li class="tarea">
-					<a href={{ URL::base().'/cursos/'.$a->group_id.'/tareas/'.$a->assignment_id }}><h4>{{ $a->name }}</h4></a>
+					<a href={{ URL::base().'/cursos/'.$a->classgroup_id.'/tareas/'.$a->assignment_id }}><h4>{{ $a->name }}</h4></a>
 					<div class="detalle">
 						{{ $a->description }}
 					</div>

@@ -1,7 +1,7 @@
 <?php
 class Post extends Eloquent {
-	private static $table	= 'post';
-	private static $key		= 'post_id';
+	public static $table	= 'post';
+	public static $key		= 'post_id';
 
 	public function classgroup()
 	{

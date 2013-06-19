@@ -9,7 +9,9 @@ class Course_Controller extends Base_Controller {
 	private function validate_group($group_id)
 	{
 		$current_user = Auth::user();
-		$group = DB::query("SELECT * FROM `group` g, student s,group_student gs   WHERE g.group_id=".$group_id." and s.student_id=".$current_user->student()->first()->student_id." and s.student_id=gs.student_id and g.group_id=gs.group_id");
+		//$group = DB::query("SELECT * FROM `group` g, student s,group_student gs   WHERE g.group_id=".$group_id." and s.student_id=".$current_user->student()->first()->student_id." and s.student_id=gs.student_id and g.group_id=gs.group_id");
+		$group=Groupstudent::where('classgroup_id','=',$group_id)
+							->where('student_id','=',$current_user->student_id);
 		//var_export($group);
 		//exit();
 		if(count($group)==0){
@@ -39,12 +41,12 @@ class Course_Controller extends Base_Controller {
 				break;
 		}		
 		//echo Auth::user()->names;exit();
-		$groups = $current_user->group()->get();
+		$groups = $current_user->classgroup()->get();
 		$groupcourses = array();
 		foreach ($groups as $g) {
 			$groupcourses[] = 	array(
 									'name'		=> $g->course()->first()->name,
-									'group_id'	=> $g->group_id
+									'group_id'	=> $g->classgroup_id
 								);
 		}
 		$data = array(
@@ -66,8 +68,10 @@ class Course_Controller extends Base_Controller {
 		if($val!=null){
 			return $val;
 		}
-		$assignments = DB::query("SELECT * FROM `group` g, assignment a   WHERE g.group_id=".$group_id." and a.group_id=g.group_id");
+		//$assignments = DB::query("SELECT * FROM `clasg` g, assignment a   WHERE g.group_id=".$group_id." and a.group_id=g.group_id");
+		$assignments = Classgroup::find($group_id)->first()->assignment()->get();
 		$data		 = array(
+
 							'assignments'	=> $assignments
 						);
 		//var_dump($data);
@@ -112,12 +116,15 @@ class Course_Controller extends Base_Controller {
 			->join('student_team','team.team_id', '=', 'student_team.team_id')
 			->where('student_team.student_id','=',Auth::user()->student()->first()->student_id)->first()	;
 		*/
-		$teamid=DB::query('SELECT * FROM team t,assignment a,student_team st
-			WHERE t.team_id=st.team_id AND t.assignment_id=a.assignment_id AND st.student_id='.$student_id);
+
+		//$teamid=DB::query('SELECT * FROM team t,assignment a,student_team st	WHERE t.team_id=st.team_id AND t.assignment_id=a.assignment_id AND st.student_id='.$student_id);
+		$teamid=Student::find($student_id)->team()->get();//->assigment()->first()->assignment_id;
+		
+		
 		$assignments = Assignment::find($assignment_id)->first();
-		$assignmentfile=new Assignmentfile;
+		$assignmentfile=new Teamfile;
 		$assignmentfile->description=Input::get('descripcion');
-		$assignmentfile->name=Input::file('file.name');
+		$assignmentfile->title=Input::file('file.name');
 		$assignmentfile->url=URL::base().Input::file('file.name');
 		$assignmentfile->team_id=$teamid;
 		$assignmentfile->save();
@@ -137,7 +144,7 @@ class Course_Controller extends Base_Controller {
 		if($val!=null){
 			return $val;
 		}
-		$assignments = Assignment::find($assignments_id)->where('group_id','=',$group_id)->first();
+		$assignments = Assignment::find($assignments_id)->where('classgroup_id','=',$group_id)->first();
 
 		$data		 = array(
 							'assignments'	=> $assignments

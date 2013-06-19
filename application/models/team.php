@@ -1,7 +1,7 @@
 <?php
 class Team extends Eloquent {
-	private static $table	= 'team';
-	private static $key		= 'team_id';
+	public static $table	= 'team';
+	public static $key		= 'team_id';
 
 	public function assignment()
 	{

@@ -1,7 +1,7 @@
 <?php
 class Score extends Eloquent {
-	private static $table	= 'score';
-	private static $key		= 'score_id';
+	public static $table	= 'score';
+	public static $key		= 'score_id';
 
 	public function classgroup()
 	{

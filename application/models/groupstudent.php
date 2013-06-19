@@ -3,9 +3,9 @@ class Groupstudent extends Eloquent {
 	public static $table	= 'student';
 	public static $key		= 'student_id';
 
-	public function user()
+	public function student()
 	{
-		return $this->belongs_to('User');
+		return $this->belongs_to('Student');
 	}
 
 	public function studentactivity()

@@ -1,7 +1,7 @@
 <?php
 class Attendance extends Eloquent {
-	private static $table	= 'attendance';
-	private static $key		= 'attendance_id';
+	public static $table	= 'attendance';
+	public static $key		= 'attendance_id';
 
 	public function group_student()
 	{

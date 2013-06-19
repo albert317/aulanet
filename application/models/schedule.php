@@ -1,7 +1,7 @@
 <?php
 class Shedule extends Eloquent {
-	private static $table	= 'shedule';
-	private static $key		= 'shedule_id';
+	public static $table	= 'shedule';
+	public static $key		= 'shedule_id';
 
 	public function classgroup()
 	{
