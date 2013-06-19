@@ -13,8 +13,8 @@ class Professor extends Eloquent {
 		return $this->has_many('Post');
 	}
 
-	public function group()
+	public function classgroup()
 	{
-		return $this->has_many("Group","professor_id");
+		return $this->has_many("Classgroup","professor_id");
 	}
 }

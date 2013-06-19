@@ -23,9 +23,9 @@ class Groupstudent extends Eloquent {
 		return $this->has_many_and_belongs_to('Team', 'student_team');
 	}
 
-	public function group()
+	public function classgroup()
 	{
-		return $this->has_many_and_belongs_to('Group', 'group_student');
+		return $this->has_many_and_belongs_to('Classgroup', 'group_student');
 	}
 	public function score()
 	{

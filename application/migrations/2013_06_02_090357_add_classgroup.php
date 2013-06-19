@@ -1,6 +1,6 @@
 <?php
 
-class Add_Group {
+class Add_Classgroup {
 
 	/**
 	 * Make changes to the database.
@@ -9,7 +9,7 @@ class Add_Group {
 	 */
 	public function up()
 	{
-		DB::table('group')->insert(array(
+		DB::table('classgroup')->insert(array(
 			'professor_id'=>'1',
 			'course_id' => '1',
 			'name'=>'Grupo 1',
@@ -18,7 +18,7 @@ class Add_Group {
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
 
-		DB::table('group')->insert(array(
+		DB::table('classgroup')->insert(array(
 			'professor_id'=>'2',
 			'course_id' => '2',
 			'name'=>'Grupo 2',
@@ -26,7 +26,7 @@ class Add_Group {
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
-		DB::table('group')->insert(array(
+		DB::table('classgroup')->insert(array(
 			'professor_id'=>'2',
 			'course_id' => '3',
 			'name'=>'Grupo 1',
@@ -34,7 +34,7 @@ class Add_Group {
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
-		DB::table('group')->insert(array(
+		DB::table('classgroup')->insert(array(
 			'professor_id'=>'2',
 			'course_id' => '4',
 			'name'=>'Grupo 1',

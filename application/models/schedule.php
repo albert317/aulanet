@@ -3,8 +3,8 @@ class Shedule extends Eloquent {
 	private static $table	= 'shedule';
 	private static $key		= 'shedule_id';
 
-	public function group()
+	public function classgroup()
 	{
-		return $this->belongs_to('Group');
+		return $this->belongs_to('Classgroup');
 	}
 }

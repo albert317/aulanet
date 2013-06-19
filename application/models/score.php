@@ -3,9 +3,9 @@ class Score extends Eloquent {
 	private static $table	= 'score';
 	private static $key		= 'score_id';
 
-	public function group()
+	public function classgroup()
 	{
-		return $this->belongs_to('Group');
+		return $this->belongs_to('Classgroup');
 	}
 
 	public function student()

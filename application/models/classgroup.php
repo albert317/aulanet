@@ -1,7 +1,7 @@
 <?php
-class Group extends Eloquent {
-	public static $table	= 'group';
-	public static $key		= 'group_id';
+class Classgroup extends Eloquent {
+	public static $table	= 'classgroup';
+	public static $key		= 'classgroup_id';
 
 	public function course()
 	{
@@ -40,7 +40,7 @@ class Group extends Eloquent {
 
 	public function assignment()
 	{
-		return $this->has_many('Assignment', 'group_id');
+		return $this->has_many('Assignment', 'classgroup_id');
 	}
 
 }

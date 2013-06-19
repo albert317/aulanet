@@ -1,6 +1,6 @@
 <?php
 
-class Create_Table_Group {
+class Create_Table_Classgroup {
 
 	/**
 	 * Make changes to the database.
@@ -9,9 +9,9 @@ class Create_Table_Group {
 	 */
 	public function up()
 	{
-		Schema::create('group', function($table){
+		Schema::create('classgroup', function($table){
 			$table->engine = 'InnoDB';
-			$table->increments('group_id');
+			$table->increments('classgroup_id');
 			$table->integer('course_id')->unsigned();
 			$table->integer('professor_id')->unsigned();
 			$table->string('name',50);

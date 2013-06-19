@@ -3,8 +3,8 @@ class Course extends Eloquent {
 	public static $table	= 'course';
 	public static $key		= 'course_id';
 
-	public function group()
+	public function classgroup()
 	{
-		return $this->has_many('Group', 'course_id');
+		return $this->has_many('Classgroup', 'course_id');
 	}
 }

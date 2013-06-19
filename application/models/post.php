@@ -3,9 +3,9 @@ class Post extends Eloquent {
 	private static $table	= 'post';
 	private static $key		= 'post_id';
 
-	public function group()
+	public function classgroup()
 	{
-		return $this->belongs_to('Group');
+		return $this->belongs_to('Classgroup');
 	}
 
 	public function student()
