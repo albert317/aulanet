@@ -7,10 +7,7 @@
 		<h3>Bienvenidos al sistema...</h3>
 		
 	    {{ Form::open('login/login','POST', array('class'=>'form-horizontal')) }}
-	        <!-- check for login errors flash var -->
-	        @if (Session::has('login_errors'))
-	            {{ Alert::error("Username or password incorrect.") }}
-	        @endif
+	        
 	        <!-- username field -->
 	        <div class="control-group">
 				<label class="control-label" for="inputEmail">Código</label>
@@ -33,6 +30,12 @@
 					{{ Form::submit('Login', array('class' => 'btn')) }}
 				</div>
 			</div>
+			<!-- check for login errors flash var -->
+	        @if (Session::has('login_errors'))
+	            <div class="alert alert-block">
+				  	La combinación de usuario y contraseña es incorrecto!!!
+				</div>
+	        @endif
 	    {{ Form::close() }}
 	</div>
 @endsection

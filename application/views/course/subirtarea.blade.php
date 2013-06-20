@@ -21,10 +21,12 @@
 	@if($teamfile!=null)
 		<h4>Archivos Subidos</h4>
 		<dl class="dl-horizontal">
-		@foreach($teamfile as $file)
+		@forelse($teamfile as $file)
 			<dt>Archivo:</dt> 
 			<dd>{{$file->title}}</dd>
-	 	@endforeach
+		@empty
+			<h5>Vacio</h5>
+	 	@endforelse
  	</dl>
  	@else
 	<h4>Subir tarea</h4>

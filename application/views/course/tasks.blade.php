@@ -18,7 +18,7 @@
 		<li><a href={{ URL::base().'/cursos/notas'}}>Notas</a></li>
 		<li><a href={{ URL::base().'/cursos/foro'}}>Foro</a></li>
 	</ul>
-	<h4>{{$nombre}}</h4>
+	<h4>{{''}}</h4>
 	<div id="tareas">
 		<ul>
 			@if(Auth::user()->type == 'T')
@@ -29,14 +29,7 @@
 					</a>
 				</li>
 			@endif
-			<?php 
-			if(count($assignments)==0){
-				$assignments=null;
-				$a=new Assignment;
-			}
-			//var_export($assignments);
-			//exit();
-			?>
+			
 
 			@forelse($assignments as $a)
 				<li class="tarea">
@@ -74,13 +67,13 @@
 				<div class="control-group">
 					<label class="control-label"  for="enunciado">Enunciado</label>
 					<div class="controls">
-						{{ Form::text('enunciado', $a->name, array('class'=>'input-xlarge')) }}
+						{{ Form::text('enunciado', '', array('class'=>'input-xlarge')) }}
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="descripcion">Descripción</label>
 					<div class="controls">
-						{{ Form::textarea('descripcion',$a->description, array('class'=>'input-xlarge','rows'=>'3')) }}
+						{{ Form::textarea('descripcion','', array('class'=>'input-xlarge','rows'=>'3')) }}
 					</div>
 				</div>
 				<div class="control-group">
@@ -118,7 +111,7 @@
 
 	<!-- Nueva tarea-->
 	<div id="newtask">
-		{{ Form::open_for_files('','POST', array('class'=>'form-horizontal')) }}
+		{{ Form::open_for_files('cursos/'.$assignments[0]->classgroup_id.'/tareas/creartarea','POST', array('class'=>'form-horizontal')) }}
 		<fieldset>
 			<div id="legend">
 				<legend class="">Nueva Tarea</legend>

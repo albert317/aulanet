@@ -81,6 +81,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::any('cursos/(:num)/tareas/(:num)'		, 'course@taskdetail');
 	Route::any('cursos/(:num)/tareas/(:num)/upload'	, 'course@upload');
 	Route::any('administrador'						, 'administrador@index');
+	Route::any('cursos/(:num)/tareas/creartarea'				, 'course@newtask');
 });
 
 
