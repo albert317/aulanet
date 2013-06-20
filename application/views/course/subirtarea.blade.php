@@ -12,12 +12,21 @@
 @section('content')
 <div id="contenido">
 	<ul class="nav nav-pills">
-		<li class="active"><a href="">Tareas</a></li>
-		<li><a href="">Agenda</a></li>
-		<li><a href="">Asistencia</a></li>
-		<li><a href="">Notas</a></li>
-		<li><a href="">Foro</a></li>
+		<li class="active"><a href={{ URL::base().'/cursos/1/tareas' }}>Tareas</a></li>
+		<li><a href={{ URL::base().'/agenda'}}>Agenda</a></li>
+		<li><a href={{ URL::base().'/cursos/asistencia'}}>Asistencia</a></li>
+		<li><a href={{ URL::base().'/cursos/notas'}}>Notas</a></li>
+		<li><a href={{ URL::base().'/cursos/foro'}}>Foro</a></li>
 	</ul>
+	@if($teamfile!=null)
+		<h4>Archivos Subidos</h4>
+		<dl class="dl-horizontal">
+		@foreach($teamfile as $file)
+			<dt>Archivo:</dt> 
+			<dd>{{$file->title}}</dd>
+	 	@endforeach
+ 	</dl>
+ 	@else
 	<h4>Subir tarea</h4>
 	<br>
 	{{ Form::open_for_files('cursos/'.$assignments->classgroup_id.'/tareas/'.$assignments->assignment_id.'/upload','POST', array('class'=>'form-horizontal')) }}
@@ -42,5 +51,6 @@
 			</div>
 		</fieldset>
 	{{ Form::close() }}
+	@endif
 </div>
 @endsection

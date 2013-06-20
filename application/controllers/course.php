@@ -70,9 +70,11 @@ class Course_Controller extends Base_Controller {
 		}
 		//$assignments = DB::query("SELECT * FROM `clasg` g, assignment a   WHERE g.group_id=".$group_id." and a.group_id=g.group_id");
 		$assignments = Classgroup::find($group_id)->first()->assignment()->get();
+		$nombre = Classgroup::find($group_id)->course()->first()->name;
 		$data		 = array(
 
-							'assignments'	=> $assignments
+							'assignments'	=> $assignments,
+							'nombre' => $nombre
 						);
 		//var_dump($data);
 		return View::make('course.tasks', $data);	
@@ -130,10 +132,11 @@ class Course_Controller extends Base_Controller {
 		$assignmentfile->save();
 		$filename = Input::file('file.name');
 		Input::upload('file', 'public/uploads', $filename);
+		$assignments_option = Classgroup::find($group_id)->first()->assignment()->get();
 		$data = array(
-							'assignments'	=> $assignments
+							'assignments'	=> $assignments_option
 						);
-		return View::make('course.subirtarea',$data);
+		return View::make('course.tasks',$data);
 		
 	}
 
@@ -145,10 +148,28 @@ class Course_Controller extends Base_Controller {
 			return $val;
 		}
 		$assignments = Assignment::find($assignments_id)->where('classgroup_id','=',$group_id)->first();
-
+		
+		
+		$teamfile = DB::query("SELECT * FROM teamfile as tf,team as t where t.assignment_id = 1 and tf.team_id = t.team_id");
+		//DB::table("teamfile")->get()->where('team_id','=',1)->first();
+		
 		$data		 = array(
 							'assignments'	=> $assignments
 						);
-		return View::make('course.subirtarea', $data);
+		return View::make('course.subirtarea', $data)->with("teamfile",$teamfile); ;
+	}
+
+	public function action_creatarea()
+	{
+		/*$enunciado 	= Input::get("enunciado"); 
+		$descripcion= Input::get("descripcion"); 
+		$fecha		= Input::get("fecha"); 
+		$tipo 	 	= Input::get("tipo"); 
+		$file 		= Input::get("file");*/
+		//return Redirect::to('cursos');
+		echo "llego";
+
+
+		//return View::make('course.creategroup');
 	}
 }

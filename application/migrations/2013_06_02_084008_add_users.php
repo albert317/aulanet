@@ -13,6 +13,8 @@ class Add_Users {
 			'username'=>'admin',
 			'password' => Hash::make('1234'),
 			'type'=>'A',
+			'names' => 'Direccion',
+			'last_name1'=>'Academica',
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));

@@ -12,15 +12,17 @@
 @section('content')
 <div id="contenido">
 	<ul class="nav nav-pills">
-		<li><a href="">Tareas</a></li>
-		<li><a href="">Agenda</a></li>
-		<li class="active"><a href="">Asistencia</a></li>
-		<li><a href="">Notas</a></li>
-		<li><a href="">Foro</a></li>
+		<li><a href={{ URL::base().'/cursos/1/tareas' }}>Tareas</a></li>
+		<li><a href={{ URL::base().'/agenda'}}>Agenda</a></li>
+		<li class="active"><a href={{ URL::base().'/cursos/asistencia'}}>Asistencia</a></li>
+		<li><a href={{ URL::base().'/cursos/notas'}}>Notas</a></li>
+		<li><a href={{ URL::base().'/cursos/foro'}}>Foro</a></li>
 	</ul>
 	<div class="asistencia">
 		<h4>Lista de Asistencia</h4>	
+		@if(Auth::user()->type=='T')
 		<a class="btn" style="float:right;"onclick="agregarcolumna();" id="btnAgregarColumna">Agregar asistencia</a>
+		@endif
 		<br><br>
 		<table id="tblTabla" class="table table-bordered">
 			<thead>
@@ -29,18 +31,24 @@
 				</tr>
 			</thead>
 			<tbody>
+				@if(Auth::user()->type=='T')
 				<tr><td>Montes Anccasi Albert Juan</td></tr>
 				<tr><td>Muñoz Sagarvinaga Leonidas</td></tr>
 				<tr><td>Natividad Alejos Luis Felipe</td></tr>
 				<tr><td>Odicio Vilchez Joan Axel</td></tr>
 				<tr><td>Rojas Ayala Myleni Beatriz</td></tr>
 				<tr><td>Tanaka Terukina Ricardo</td></tr>
-				<tr><td>Tarrillo Celada Cesar Alfredo</td></tr>
+				<tr><td>Tarrillo Celada Cesar Augusto</td></tr>
 				<tr><td>Velasquez Hinostroza Katherine Luisa</td></tr>
+				@else
+				<tr><td>{{Auth::user()->last_name1}} {{Auth::user()->last_name2}} {{ Auth::user()->names }}</td></tr>
+				@endif
 			</tbody>
 		</table>
 		<br>
+		@if(Auth::user()->type=='T')
 		<a href="" class="btn btn-info">Guardar Cambios</a>
+		@endif
 	</div>
 </div>
 @endsection

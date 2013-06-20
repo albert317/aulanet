@@ -29,6 +29,26 @@ class Add_Assignment {
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
+		DB::table('assignment')->insert(array(
+			'classgroup_id'=>'3',
+			'end_date' => '2013-08-23',
+			'start_date'=>'2013-07-13',
+			'name'=>'tarea semanal de calidad',
+			'description'=>'deben presentar las ppt de las paginas web',
+			'type'=>'S',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
+		DB::table('assignment')->insert(array(
+			'classgroup_id'=>'4',
+			'end_date' => '2013-09-13',
+			'start_date'=>'2013-08-11',
+			'name'=>'tarea mensual del calidad',
+			'description'=>'Esta tarea la deberan presentar cada fin de mes',
+			'type'=>'G',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
 	}
 
 	/**

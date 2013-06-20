@@ -12,12 +12,13 @@
 @section('content')
 <div id="contenido">
 	<ul class="nav nav-pills">
-		<li class="active"><a href="">Tareas</a></li>
-		<li><a href="">Agenda</a></li>
-		<li><a href="">Asistencia</a></li>
-		<li><a href="">Notas</a></li>
-		<li><a href="">Foro</a></li>
+		<li class="active"><a href={{ URL::base().'/cursos/1/tareas' }}>Tareas</a></li>
+		<li><a href={{ URL::base().'/agenda'}}>Agenda</a></li>
+		<li><a href={{ URL::base().'/cursos/asistencia'}}>Asistencia</a></li>
+		<li><a href={{ URL::base().'/cursos/notas'}}>Notas</a></li>
+		<li><a href={{ URL::base().'/cursos/foro'}}>Foro</a></li>
 	</ul>
+	<h4>{{$nombre}}</h4>
 	<div id="tareas">
 		<ul>
 			@if(Auth::user()->type == 'T')
@@ -38,9 +39,12 @@
 			?>
 
 			@forelse($assignments as $a)
-			
 				<li class="tarea">
+					@if(Auth::user()->type == 'T')
+					<a href="#"><h4>{{ $a->name }}</h4></a>
+					@else
 					<a href={{ URL::base().'/cursos/'.$a->classgroup_id.'/tareas/'.$a->assignment_id }}><h4>{{ $a->name }}</h4></a>
+					@endif
 					<div class="detalle">
 						{{ $a->description }}
 					</div>
@@ -52,7 +56,6 @@
 						@endif
 					</div>
 				</li>
-
 			@empty
 				<h4>No hay tareas por ahora =)</h4>
 			@endforelse

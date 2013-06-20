@@ -12,14 +12,6 @@
 @section('content')
 <div id="contenido">
 	<div class="opciones_administrador">
-		<!--<ul class="nav">
-		  <li class="active">
-		    <a href="#">Home</a>
-		  </li>
-		  <li><a href="#">Link</a></li>
-		  <li><a href="#">Link</a></li>
-		</ul>-->
-		
 		<a href="#RegistrarUsuario" data-toggle="modal"><img src={{URL::to('img/registrar_usuario.png')}} class="img-polaroid"></a>
 		<a href="#RegistrarCurso" data-toggle="modal"> <img src={{URL::to('img/registrar_curso.png')}} class="img-polaroid"></a>
 		<a href="#AsignarCurso" data-toggle="modal"><img src={{URL::to('img/asignar_curso.jpg')}} class="img-polaroid"></a>

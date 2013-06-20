@@ -10,8 +10,6 @@ class Login_Controller extends Base_Controller {
 
 	public function action_login()
 	{
-
-
 		$credentials = array(
 				'username'	=> Input::get('username'),
 				'password'	=> Input::get('password')
@@ -33,8 +31,13 @@ class Login_Controller extends Base_Controller {
 			var_dump(Auth::user()); 
 			echo "<br>SESSION:<br>";
 			echo Session::get('attributes');
-					
-			return Redirect::to('cursos');
+			$current_user = Auth::user();
+			if($current_user->type=='A'){
+				return Redirect::to('administrador');
+			}
+			else{				
+				return Redirect::to('cursos');
+			}
 		}
 		else
 		{

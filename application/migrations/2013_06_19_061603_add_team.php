@@ -12,7 +12,7 @@ class Add_Team {
 		DB::table('team')->insert(array(
 			'team_id'=>'1',
 			'assignment_id'=>'1',
-			'name'=>'Promo 2030',
+			'name'=>'Calidad de Software',
 			'description'=>'Los inmortales',
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
@@ -20,7 +20,23 @@ class Add_Team {
 		DB::table('team')->insert(array(
 			'team_id'=>'2',
 			'assignment_id'=>'2',
-			'name'=>'Taller 2016-I',
+			'name'=>'Taller 2013-I',
+			'description'=>'',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
+		DB::table('team')->insert(array(
+			'team_id'=>'3',
+			'assignment_id'=>'3',
+			'name'=>'Calidad de Software',
+			'description'=>'Los inmortales',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
+		DB::table('team')->insert(array(
+			'team_id'=>'4',
+			'assignment_id'=>'4',
+			'name'=>'Taller 2013-I',
 			'description'=>'',
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
