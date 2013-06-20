@@ -12,11 +12,12 @@
 @section('content')
 <div id="contenido">
 	<ul class="nav nav-pills">
-		<li><a href={{ URL::base().'/cursos/1/tareas' }}>Tareas</a></li>
+		<li><a href={{ URL::base().'/cursos/'.$group_id.'/tareas' }}>Tareas</a></li>
 		<li><a href={{ URL::base().'/agenda'}}>Agenda</a></li>
-		<li><a href={{ URL::base().'/cursos/asistencia'}}>Asistencia</a></li>
-		<li class="active"><a href={{ URL::base().'/cursos/notas'}}>Notas</a></li>
-		<li><a href={{ URL::base().'/cursos/foro'}}>Foro</a></li>
+		<li><a href={{ URL::base().'/cursos/'.$group_id.'/asistencia'}}>Asistencia</a></li>
+		<li class="active"><a href={{ URL::base().'/cursos/'.$group_id.'/notas'}}>Notas</a></li>
+		<li><a href={{ URL::base().'/cursos/'.$group_id.'/foro'}}>Foro</a></li>
+		<li><a href={{ URL::base().'/cursos/'.$group_id.'/silabus'}}>Silabus</a></li>
 	</ul>
 	<div class="notas">
 		<h4>Notas del Curso</h4>

@@ -77,7 +77,8 @@ class Course_Controller extends Base_Controller {
 		$data		 = array(
 
 							'assignments'	=> $assignments,
-							'nombre' => $nombre
+							'nombre' => $nombre,
+							'group_id'=> $group_id
 						);
 		//var_dump($data);
 		return View::make('course.tasks', $data);	
@@ -137,7 +138,9 @@ class Course_Controller extends Base_Controller {
 		Input::upload('file', 'public/uploads', $filename);
 		$assignments_option = Classgroup::find($group_id)->first()->assignment()->get();
 		$data = array(
-							'assignments'	=> $assignments_option
+							'assignments'	=> $assignments_option,
+							'group_id'=>$group_id,
+							'assignment_id'=>$assignment_id
 						);
 		return View::make('course.tasks',$data);
 		
@@ -161,7 +164,9 @@ class Course_Controller extends Base_Controller {
 		$teamfile=Teamfile::where('team_id','=',$teamid)->get();
 		$data		 = array(
 							'assignments'	=> $assignments,
-							'teamfile'=>$teamfile
+							'teamfile'=>$teamfile,
+							'group_id'=>$group_id,
+							'assignment_id'=>$assignment_id
 						);
 		
 		return View::make('course.subirtarea', $data);
@@ -195,7 +200,8 @@ class Course_Controller extends Base_Controller {
 		Input::upload('file', 'public/uploads', $filename);
 		$assignments_option = Classgroup::find($group_id)->first()->assignment()->get();
 		$data = array(
-							'assignments'	=> $assignments_option
+							'assignments'	=> $assignments_option,
+							'group_id'=>$group_id
 						);
 		/*$enunciado 	= Input::get("enunciado"); 
 		$descripcion= Input::get("descripcion"); 
