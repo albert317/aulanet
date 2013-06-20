@@ -124,7 +124,7 @@ class Course_Controller extends Base_Controller {
 
 		//$teamid=DB::query('SELECT * FROM team t,assignment a,student_team st	WHERE t.team_id=st.team_id AND t.assignment_id=a.assignment_id AND st.student_id='.$student_id);
 		$teamid=Student::find($student_id)->team()->where('assignment_id','=',$assignment_id)->first()->team_id;//->assignment()->first()->assignment_id;
-		
+			
 		
 		$assignments = Assignment::find($assignment_id)->first();
 		$assignmentfile=new Teamfile;
@@ -159,20 +159,20 @@ class Course_Controller extends Base_Controller {
 		$teamid=Student::find($student_id)->team()->where('assignment_id','=',$assignments_id)->first()->team_id;//->assignment()->first()->assignment_id;
 		
 		$teamfile=Teamfile::where('team_id','=',$teamid)->get();
+		$assignments = Assignment::where('assignment_id','=',$assignments_id)->first();	
 		$data		 = array(
 							'assignments'	=> $assignments,
 							'teamfile'=>$teamfile
 						);
-		
 		return View::make('course.subirtarea', $data);
 		
 	}
 
 	public function action_newtask($group_id)
 	{
-		$this->validate_group($group_id);
-		$student_id=Auth::user()->student()->first()->student_id;
-		
+		//$this->validate_group($group_id);
+		//$student_id=Auth::user()->student()->first()->student_id;
+
 		/*$teamid=
 		DB::table('team')
 			->join('assignment','team.assignment_id', '=','assignment.assignment_id')
@@ -181,30 +181,52 @@ class Course_Controller extends Base_Controller {
 		*/
 
 		//$teamid=DB::query('SELECT * FROM team t,assignment a,student_team st	WHERE t.team_id=st.team_id AND t.assignment_id=a.assignment_id AND st.student_id='.$student_id);
-		$teamid=Student::find($student_id)->team()->where('assignment_id','=',$assignment_id)->first()->team_id;//->assignment()->first()->assignment_id;
-		
-		
-		$assignments = Assignment::find($assignment_id)->first();
-		$assignmentfile=new Teamfile;
-		$assignmentfile->description=Input::get('descripcion');
-		$assignmentfile->title=Input::file('file.name');
-		$assignmentfile->url=URL::base().'/uploads/'.Input::file('file.name');
-		$assignmentfile->team_id=$teamid;
+		//$teamid=Student::find($student_id)->team()->where('assignment_id','=',$assignment_id)->first()->team_id;//->assignment()->first()->assignment_id;
+		//$professor=Auth::user()->professor()->first();
+		date_default_timezone_set('UTC');
+		$assignment=new Assignment;
+		$assignment->classgroup_id=$group_id;
+		$assignment->name=Input::get("enunciado");
+		$assignment->description=Input::get("descripcion");
+		$assignment->end_date=Input::get("fecha");
+		if(Input::get("tipo")=='individual'){
+			$assignment->type='S';
+		}else{
+			$assignment->type='G';
+		}
+		$assignment->start_date=date("Y-m-d");
+		$assignment->save();
+		$assignment_id=$assignment->get_key();
+		$assignmentfile=new Assignmentfile;
+		$assignmentfile->assignment_id=$assignment_id;
+		$assignmentfile->url=URL::base().'/uploads/assignmentfile/'.$assignment_id.'/'.Input::file('file.name');
 		$assignmentfile->save();
+
 		$filename = Input::file('file.name');
-		Input::upload('file', 'public/uploads', $filename);
-		$assignments_option = Classgroup::find($group_id)->first()->assignment()->get();
-		$data = array(
-							'assignments'	=> $assignments_option
-						);
+		Input::upload('file', 'public/uploads/assignmentfile/'.$assignment_id.'/', $filename);
+
+
+		$students=Groupstudent::where('classgroup_id','=',$group_id)->get();
+		foreach($students as $s){
+			$team=new Team;
+			$team->assignment_id=$assignment_id;
+			$team_id=$team->save();
+			$team->student()->attach($s->student_id);
+		}
+		//$assignments_option = Classgroup::find($group_id)->first()->assignment()->get();
+		//$data = array(
+		//					'assignments'	=> $assignments_option
+		//				);
 		/*$enunciado 	= Input::get("enunciado"); 
 		$descripcion= Input::get("descripcion"); 
 		$fecha		= Input::get("fecha"); 
 		$tipo 	 	= Input::get("tipo"); 
 		$file 		= Input::get("file");*/
 		//return Redirect::to('cursos');
-		echo "llego";
-		exit();
+		if($assignment->type)
+		{
+			return Redirect::to('cursos/'.$group_id.'/tareas');
+		}
 
 		//return View::make('course.creategroup');
 	}
