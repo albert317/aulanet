@@ -19,7 +19,7 @@
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/foro'}}>Foro</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/silabus'}}>Silabus</a></li>
 	</ul>
-	<h4>{{''}}</h4>
+	<h4>{{ $nombre }}</h4>
 	<div id="tareas">
 		<ul>
 			@if(Auth::user()->type == 'T')

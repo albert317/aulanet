@@ -19,6 +19,7 @@
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/foro'}}>Foro</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/silabus'}}>Silabus</a></li>
 	</ul>
+	<h4>{{ $nombre }}</h4>
 	<div class="asistencia">
 		<h4>Lista de Asistencia</h4>	
 		@if(Auth::user()->type=='T')
