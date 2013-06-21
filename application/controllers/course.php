@@ -86,10 +86,10 @@ class Course_Controller extends Base_Controller {
 	/**
 	 * Muestra la asistencia relativa al curso
 	 */
-	public function action_attendance()
+	/*public function action_attendance()
 	{
 		return View::make('course.attendance');
-	}
+	}*/
 
 	/**
 	 * Muestra las notas relativas al curso
@@ -208,4 +208,128 @@ class Course_Controller extends Base_Controller {
 
 		//return View::make('course.creategroup');
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public function action_attendance($group_id)
+	{
+		//$students =	Classgroup::find($group_id)->student()->get();
+		//$students = Student::;
+		$students = Classgroup::students($group_id);
+		var_dump($students);
+	}
+
+
+
+
+
+
+
 }
