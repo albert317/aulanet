@@ -1,7 +1,7 @@
 <?php
 class Groupstudent extends Eloquent {
-	public static $table	= 'student';
-	public static $key		= 'student_id';
+	public static $table	= 'group_student';
+	public static $key		= 'group_student_id';
 
 	public function student()
 	{
