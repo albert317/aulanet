@@ -206,13 +206,7 @@ class Course_Controller extends Base_Controller {
 		Input::upload('file', 'public/uploads/assignmentfile/'.$assignment_id.'/', $filename);
 
 
-		$students=Groupstudent::where('classgroup_id','=',$group_id)->get();
-		foreach($students as $s){
-			$team=new Team;
-			$team->assignment_id=$assignment_id;
-			$team_id=$team->save();
-			$team->student()->attach($s->student_id);
-		}
+		
 		//$assignments_option = Classgroup::find($group_id)->first()->assignment()->get();
 		//$data = array(
 		//					'assignments'	=> $assignments_option
@@ -223,11 +217,37 @@ class Course_Controller extends Base_Controller {
 		$tipo 	 	= Input::get("tipo"); 
 		$file 		= Input::get("file");*/
 		//return Redirect::to('cursos');
-		if($assignment->type)
+		if($assignment->type=="S")
 		{
+			$students=Groupstudent::where('classgroup_id','=',$group_id)->get();
+			foreach($students as $s)
+			{
+				$team=new Team;
+				$team->assignment_id=$assignment_id;
+				$team_id=$team->save();
+				$team->student()->attach($s->student_id);
+			}
 			return Redirect::to('cursos/'.$group_id.'/tareas');
+		}
+		else{
+			return Redirect::to('cursos/'.$group_id.'/tareas/creartarea/'.$assignment_id);
 		}
 
 		//return View::make('course.creategroup');
 	}
+
+	public function action_newgroup($group_id,$assignment_id)
+	{
+		$users=DB::query('SELECT * from user u,student s,group_student st 
+			where u.user_id=s.user_id and s.student_id=st.student_id and st.classgroup_id='.$group_id);
+	
+		$data=array(
+							'users'	=> $users,
+							'$assignment_id'=>$assignment_id
+						);
+
+
+		return View::make('course.creategroup',$data);
+	}
+
 }

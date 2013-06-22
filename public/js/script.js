@@ -22,6 +22,31 @@ function NuevaAsistencia()
 	$("#tabla tbody").appendTo("<td></td>");
 }
 */
+
+var grupo_alumnos=new Array();
+for (j = 0; j < 2; j++){ 
+    grupo_alumnos[j]=new Array(); 
+}
+var cant=1;
+function guardargrupos()
+{
+    var ind=1,pos=0;
+    for(var ij=0;ij<(i-1);ij++)
+    {
+        var grupo="#trash"+ind+ ">ul>li";
+        $(grupo).each(function(indice, elemento) {
+            grupo_alumnos[pos][0]=$(elemento).attr("id");
+            grupo_alumnos[pos][1]=ij+1;
+            pos++;
+        });
+        ind++;
+    }
+
+    $.post("cursos/'.$assignments[0]->classgroup_id.'/tareas/creartarea/14",{grupos:grupo_alumnos},function(respuesta){
+        alert(respuesta); //Mostramos un alert del resultado devuelto por el php
+    });
+}
+
 var i=1;//numero de grupo
 function NuevoGrupo()
 {
@@ -71,8 +96,8 @@ function DroppDrag(id) {
     	$item.fadeOut(function() {
     		var $list = $( "ul", $id ).length ?
     		$( "ul", $id ) :
-    		$( "<ul class='gallery ui-helper-reset'/>" ).appendTo( $id );
-
+    		$( "<ul id='grupo"+cant+"' class='gallery ui-helper-reset'/>" ).appendTo( $id );
+            cant++;
     		$item.find( "a.ui-icon-trash" ).remove();
     		$item.append( recycle_icon ).appendTo( $list ).fadeIn(function() {
     			$item
