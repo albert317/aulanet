@@ -16,12 +16,12 @@
 		<li><a href={{ URL::base().'/agenda'}}>Agenda</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/asistencia'}}>Asistencia</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/notas'}}>Notas</a></li>
-		<li class="active"><a href={{ URL::base().'/cursos/'.$group_id.'/foro'}}>Foro</a></li>
-		<li><a href={{ URL::base().'/cursos/'.$group_id.'/silabus'}}>Silabus</a></li>
+		<li><a href={{ URL::base().'/cursos/'.$group_id.'/foro'}}>Foro</a></li>
+		<li class="active"><a href={{ URL::base().'/cursos/'.$group_id.'/silabus'}}>Silabus</a></li>
 	</ul>
 	<h4>{{ $nombre }}</h4>
-	<div class="agenda">
-		
-	</div>
+	<a href={{$urlSilabus}}>Descargar syllabus</a>
 </div>
+
 @endsection
+

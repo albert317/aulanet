@@ -48,17 +48,21 @@ Route::any(array('/'), function(){
 
 Route::group(array('before' => 'auth'), function()
 {
-	Route::any('cursos'									, 'course@index');
-	Route::any('cursos/(:num)/tareas'					, 'course@tasks');
-	Route::any('cursos/asistencia'						, 'course@attendance');
-	Route::any('cursos/notas'							, 'course@grades');
-	Route::any('cursos/foro'							, 'course@forum');
-	Route::any('agenda'									, 'agenda@index');
-	Route::any('cursos/(:num)/tareas/(:num)'			, 'course@taskdetail');
-	Route::any('cursos/(:num)/tareas/(:num)/upload'		, 'course@upload');
-	Route::any('administrador'							, 'administrador@index');
-	Route::any('cursos/(:num)/tareas/creartarea'		, 'course@newtask');
+
+	Route::any('cursos'								, 'course@index');
+	Route::any('cursos/(:num)/tareas'				, 'course@tasks');
+
+	Route::any('cursos/(:num)/asistencia'					, 'course@attendance');
+	Route::any('cursos/(:num)/notas'						, 'course@grades');
+	Route::any('cursos/(:num)/foro'						, 'course@forum');
+	Route::any('agenda'								, 'agenda@index');
+	Route::any('cursos/(:num)/tareas/(:num)'		, 'course@taskdetail');
+	Route::any('cursos/(:num)/tareas/(:num)/upload'	, 'course@upload');
+	Route::any('administrador'						, 'administrador@index');
+	Route::any('cursos/(:num)/tareas/creartarea'				, 'course@newtask');
 	Route::any('cursos/(:num)/tareas/creartarea/(:num)'	, 'course@newgroup');
+	Route::any('cursos/(:num)/silabus'				, 'course@viewsilabus');
+
 });
 
 

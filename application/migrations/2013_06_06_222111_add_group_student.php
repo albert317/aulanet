@@ -17,6 +17,27 @@ class Add_Group_Student {
 		));
 
 		DB::table('group_student')->insert(array(
+			'classgroup_id'=>'1',
+			'student_id' => '3',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
+
+		DB::table('group_student')->insert(array(
+			'classgroup_id'=>'1',
+			'student_id' => '4',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
+
+		DB::table('group_student')->insert(array(
+			'classgroup_id'=>'1',
+			'student_id' => '5',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
+
+		DB::table('group_student')->insert(array(
 			'classgroup_id'=>'2',
 			'student_id' => '2',
 			'created_at'=>date('Y-m-d H:m:s'),

@@ -77,34 +77,61 @@ class Course_Controller extends Base_Controller {
 		$data		 = array(
 
 							'assignments'	=> $assignments,
-							'nombre' => $nombre
+							'nombre' => $nombre,
+							'group_id'=> $group_id
 						);
 		//var_dump($data);
 		return View::make('course.tasks', $data);	
 	}
 
-	/**
-	 * Muestra la asistencia relativa al curso
-	 */
-	public function action_attendance()
-	{
-		return View::make('course.attendance');
-	}
+
 
 	/**
 	 * Muestra las notas relativas al curso
 	 */
-	public function action_grades()
+	public function action_grades($group_id)
 	{
-		return View::make('course.grades');
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		$nombre=Classgroup::find($group_id)->course()->first()->name;
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		$data= array(
+						'group_id'=> $group_id,
+						'nombre'=>$nombre
+					);
+		return View::make('course.grades',$data);
 	}
 
 	/**
 	 * Muestra el foro del curso
 	 */
-	public function action_forum()
+	public function action_forum($group_id)
 	{
-		return View::make('course.forum');
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		$nombre=Classgroup::find($group_id)->course()->first()->name;
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		$data= array(
+						'group_id'=> $group_id,
+						'nombre'=>$nombre
+					);
+		return View::make('course.forum',$data);
 	}
 
 	public function action_upload($group_id,$assignment_id)
@@ -136,13 +163,32 @@ class Course_Controller extends Base_Controller {
 		$filename = Input::file('file.name');
 		Input::upload('file', 'public/uploads', $filename);
 		$assignments_option = Classgroup::find($group_id)->first()->assignment()->get();
+		$nombre=Classgroup::find($group_id)->course()->first()->name;
 		$data = array(
-							'assignments'	=> $assignments_option
+							'assignments'	=> $assignments_option,
+							'group_id'=>$group_id,
+							'assignment_id'=>$assignment_id,
+							'nombre'=>$nombre
 						);
 		return View::make('course.tasks',$data);
 		
 	}
-
+	public function action_viewsilabus($group_id)
+	{
+		$urlSilabus=URL::base().'/uploads/course/'.$group_id.'/syllabus.docx';
+		$nombre=Classgroup::find($group_id)->course()->first()->name;
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		$data= array(
+						'group_id'=> $group_id,
+						'nombre'=>$nombre,
+						'urlSilabus'=>$urlSilabus
+					);
+		return View::make('course.versilabus',$data);
+	}
 	public function action_taskdetail($group_id,$assignments_id)
 	{
 
@@ -160,9 +206,13 @@ class Course_Controller extends Base_Controller {
 		
 		$teamfile=Teamfile::where('team_id','=',$teamid)->get();
 		$assignments = Assignment::where('assignment_id','=',$assignments_id)->first();	
+		$nombre=Classgroup::find($group_id)->course()->first()->name;
 		$data		 = array(
 							'assignments'	=> $assignments,
-							'teamfile'=>$teamfile
+							'teamfile'=>$teamfile,
+							'group_id'=>$group_id,
+							'assignment_id'=>$assignment_id,
+							'nombre'=>$nombre
 						);
 		return View::make('course.subirtarea', $data);
 		
@@ -203,6 +253,7 @@ class Course_Controller extends Base_Controller {
 		$assignmentfile->save();
 
 		$filename = Input::file('file.name');
+
 		Input::upload('file', 'public/uploads/assignmentfile/'.$assignment_id.'/', $filename);
 
 
@@ -250,4 +301,135 @@ class Course_Controller extends Base_Controller {
 		return View::make('course.creategroup',$data);
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public function action_attendance($group_id)
+	{
+		//$students =	Classgroup::find($group_id)->student()->get();
+		//$students = Student::;
+		$students = Classgroup::students($group_id);
+		var_dump($students);		$nombre=Classgroup::find($group_id)->course()->first()->name;
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		$data= array(
+						'group_id'=> $group_id,
+						'nombre'=>$nombre
+					);
+		return View::make('course.attendance',$data);
+	}
+
+
+
+
+
+
+
+>>>>>>> bcae7fd51796404ad49037a27712497118934c68
 }
