@@ -211,7 +211,7 @@ class Course_Controller extends Base_Controller {
 							'assignments'	=> $assignments,
 							'teamfile'=>$teamfile,
 							'group_id'=>$group_id,
-							'assignment_id'=>$assignment_id,
+							'assignment_id'=>$assignments_id,
 							'nombre'=>$nombre
 						);
 		return View::make('course.subirtarea', $data);
@@ -430,6 +430,4 @@ class Course_Controller extends Base_Controller {
 
 
 
-
->>>>>>> bcae7fd51796404ad49037a27712497118934c68
 }
