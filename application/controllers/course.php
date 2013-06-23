@@ -166,6 +166,14 @@ class Course_Controller extends Base_Controller {
 	}
 	public function action_taskdetail($group_id,$assignments_id)
 	{
+		if(Auth::user()->type=='T'){
+			$all=DB::query('SELECT * from user u,student s,student_team st,team t, assignment a
+			where u.user_id=s.user_id and s.student_id=st.student_id and t.team_id=st.team_id and a.assignment_id=t.assignment_id and a.assignment_id='.$assignments_id);
+			echo "<pre>";
+			print_r($all);
+			echo "</pre>";
+			exit();
+		}
 
 		$val=$this->validate_group($group_id);
 		if($val!=null){
@@ -284,8 +292,8 @@ class Course_Controller extends Base_Controller {
 
 		$max=0;
 		for($i=0;$i<count($var);$i++){
-			if($max<$var[1]){
-				$max=$var[1];
+			if($max<$var[$i][1]){
+				$max=$var[$i][1];
 			}
 		}
 
@@ -297,14 +305,12 @@ class Course_Controller extends Base_Controller {
 			$arr[$i]=$team_id;
 		}
 
-		foreach($students as $s)
+		foreach($var as $v)
 		{
-			$team=new Team;
-			$team->assignment_id=$assignment_id;
-			$team_id=$team->save();
-			$team->student()->attach($s->student_id);
+			
+			$team=Team::find($v[1])->first();
+			$team->student()->attach($v[0]);
 		}
-		
 		
 
 	}
