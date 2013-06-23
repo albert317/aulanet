@@ -33,7 +33,36 @@
 				</tr>
 			</thead>
 			<tbody>
-				
+
+					<?php 
+						//var_dump($students);
+						//exit();
+					?>
+
+				@if(Auth::user()->type=='T')
+				 	@forelse($students as $s)
+					 	<tr><td>{{$s['student']->last_name1}} {{$s['student']->last_name2}} {{$s['student']->names }}</td>
+						 	@for($j=0;$j<count($grades_name);$j++)
+						 	<td>{{$s['grades'][$j]->value}}</td>
+						 	@endfor
+					 	</tr>
+					 	@empty
+					 @endforelse
+
+			 	@else
+				 	@forelse($students as $s)
+				 		@if(Auth::user()->user_id==$s['student']->user_id)
+					 	<tr><td>{{$s['student']->last_name1}} {{$s['student']->last_name2}} {{$s['student']->names }}</td>
+						 	@for($j=0;$j<count($grades_name);$j++)
+						 	<td>{{$s['grades'][$j]->value}}</td>
+						 	@endfor
+					 	</tr>
+					 	@endif
+				 	@empty
+				 @endforelse>
+					 	
+			 	@endif
+
 			</tbody>
 		</table>
 		<br>
@@ -43,3 +72,5 @@
 	</div>
 </div>
 @endsection
+
+	

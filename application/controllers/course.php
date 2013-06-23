@@ -85,31 +85,6 @@ class Course_Controller extends Base_Controller {
 	}
 
 
-
-	/**
-	 * Muestra las notas relativas al curso
-	 */
-	public function action_grades($group_id)
-	{
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		$nombre=Classgroup::find($group_id)->course()->first()->name;
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		$data= array(
-						'group_id'=> $group_id,
-						'nombre'=>$nombre
-					);
-		return View::make('course.grades',$data);
-	}
-
 	/**
 	 * Muestra el foro del curso
 	 */
@@ -310,12 +285,80 @@ class Course_Controller extends Base_Controller {
 	}
 
 
+	public function action_grades($group_id)
+	{
+		$nombre=Classgroup::find($group_id)->course()->first()->name;
+		$students=DB::query('SELECT * from user u,student s,group_student st
+			where u.user_id=s.user_id and s.student_id=st.student_id and st.classgroup_id='.$group_id);
+		$grades=DB::query('SELECT st.id,g.field,g.value from user u,student s,group_student st,grade g
+			where u.user_id=s.user_id and s.student_id=st.student_id and g.group_student_id=st.id and st.classgroup_id='.$group_id);
+		
+		$grades_name=array();
+		$i=0;
+		foreach ($grades as $g) {
+			$value=false;
+			foreach ($grades_name as $gm) {
+				if($g->field==$gm){
+					$value=true;
+				}
+			}
+			if($value==false){
+				$grades_name[$i]=$g->field;
+				$i++;
+			}
+		}
+
+		$students_array= array();
+		$i=0;
+		foreach($students as $s)
+		{
+			$j=0;
+			$arr= array();
+			$arr['student']=$s;
+			$grades_array= array();
+			foreach($grades as $g)
+			{
+				if($s->id==$g->id)
+				{
+					for ($k=0;$k<count($grades_name);$k++) {
+						if($grades_name[$k]==$g->field){
+							$grades_array[$k]=$g;
+							$j++;
+						}
+					}
+				}
+			}
+
+			$arr['grades']=$grades_array;
+			$students_array[$i]=$arr;
+			$i++;
+		}
+		
+
+		$data= array(
+						'group_id'=> $group_id,
+						'nombre'=>$nombre,
+						'students'=>$students_array,
+						'grades_name'=>$grades_name
+					);
+		return View::make('course.grades',$data);
+	}
+
+	public function action_updategrades($group_id)
+	{
+		$nombre=Classgroup::find($group_id)->course()->first()->name;
+		$students=DB::query('SELECT * from user u,student s,group_student st 
+			where u.user_id=s.user_id and s.student_id=st.student_id and st.classgroup_id='.$group_id);
 
 
 
-
-
-
+		$data= array(
+						'group_id'=> $group_id,
+						'nombre'=>$nombre,
+						'students'=>$students
+					);
+		return View::make('course.grades',$data);
+	}
 
 
 
@@ -417,20 +460,62 @@ class Course_Controller extends Base_Controller {
 
 	public function action_attendance($group_id)
 	{
-		//$students =	Classgroup::find($group_id)->student()->get();
-		//$students = Student::;
-		$students = Classgroup::students($group_id);
-		var_dump($students);		$nombre=Classgroup::find($group_id)->course()->first()->name;
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
+		$nombre=Classgroup::find($group_id)->course()->first()->name;
+		$students=DB::query('SELECT * from user u,student s,group_student st
+			where u.user_id=s.user_id and s.student_id=st.student_id and st.classgroup_id='.$group_id);
+		$attendances=DB::query('SELECT st.id,a.date,a.type from user u,student s,group_student st,attendance a
+			where u.user_id=s.user_id and s.student_id=st.student_id and a.group_student_id=st.id and st.classgroup_id='.$group_id);
+		
+		$attendances_dates=array();
+		$i=0;
+		foreach ($attendances as $a) {
+			$value=false;
+			foreach ($attendances_dates as $ad) {
+				if($a->date==$ad){
+					$value=true;
+				}
+			}
+			if($value==false){
+				$attendances_dates[$i]=$a->date;
+				$i++;
+			}
+		}
+
+		$students_array= array();
+		$i=0;
+		foreach($students as $s)
+		{
+			$j=0;
+			$arr= array();
+			$arr['student']=$s;
+			$attendance_array= array();
+			foreach($attendances as $a)
+			{
+				if($s->id==$a->id)
+				{
+					for ($k=0;$k<count($attendances_dates);$k++) {
+						if($attendances_dates[$k]==$a->date){
+							$attendance_array[$k]=$a;
+							$j++;
+						}
+					}
+				}
+			}
+
+			$arr['attendances']=$attendance_array;
+			$students_array[$i]=$arr;
+			$i++;
+		}
+		
+
 		$data= array(
 						'group_id'=> $group_id,
-						'nombre'=>$nombre
+						'nombre'=>$nombre,
+						'students'=>$students_array,
+						'attendances_dates'=>$attendances_dates
 					);
 		return View::make('course.attendance',$data);
+		
 	}
 
 
