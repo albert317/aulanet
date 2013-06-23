@@ -288,28 +288,25 @@ class Course_Controller extends Base_Controller {
 	{
 		
 		$students=Groupstudent::where('classgroup_id','=',$group_id)->get();
-		DB::query("INSERT INTO `prueba`(`tex`) VALUES (`".var_dump($students)."`)");
-		$var=$_POST['grupo_alumnos'];
-		DB::query("INSERT INTO `prueba`(`tex`) VALUES (`".var_dump($var)."`)");
+		$var=$_POST['alumnos'];
 		$max=0;
 		for($i=0;$i<count($var);$i++){
 			if($max<$var[$i][1]){
 				$max=$var[$i][1];
 			}
 		}
-		$arr=array();
 		for($i=0;$i<$max;$i++){
 			$team=new Team;
 			$team->assignment_id=$assignment_id;
-			$team_id=$team->save();
-			$arr[$i]=$team_id;
+			$team->save();
+			for($k=0;$k<count($var);$k++){
+				if($i+1==$var[$k][1]){
+
+					$team->student()->attach($var[$k][0]);
+				}
+			}
 		}
 
-		for($i=0;$i<count($var);$i++){
-			
-			$team=Team::where('team_id','=',$var[$i][1])->first();
-			$team->student()->attach($var[$i][0]);
-		}
 		
 
 	}
