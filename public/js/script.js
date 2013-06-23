@@ -58,7 +58,7 @@ function guardargrupos()
     console.log("ruta"+ruta);
     $.ajax({ 
         type: "POST", 
-        data: grupo_alumnos, 
+        data: {grupo_alumnos:grupo_alumnos}, 
         url: href, 
         success: function(data) { 
             //alert("la tarea se asigno a los grupos")
