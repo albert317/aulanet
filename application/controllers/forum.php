@@ -13,9 +13,6 @@ class Forum_Controller extends Base_Controller {
 		$data			=	array(
 								'topics' => $topics
 							);								
-		//dd($topics);
-		//dd(Student::find('2')->first());
-		//dd(Student::where('student_id','=','5')->first());
 		return View::make('forum.forum', $data);
 	}
 
@@ -24,7 +21,6 @@ class Forum_Controller extends Base_Controller {
 		$u = Classgroup::find(1)->first();//ELiminar esto cuando las
 		Session::put('current_group', $u);//sesiones esten bien implementadas
 		$current_group	=	Session::get('current_group');
-		//$topic 			= 	Post::find($post_id)->first();
 		$topic 			= 	Post::where('post_id', '=', $post_id)->first();
 		$answers		=	Post::where('answer_to', '=', $topic->post_id)->get();
 		$data			= 	array(
@@ -51,8 +47,6 @@ class Forum_Controller extends Base_Controller {
 		}
 
 		$newpost		= new Post();
-		Session::put('current_user', Auth::user());
-		$current_user	= Session::get('current_user');
 		if(Auth::user()->type == 'S')
 		{
 			$newpost->student_id 	= Auth::user()->student()->first()->student_id;
@@ -63,6 +57,7 @@ class Forum_Controller extends Base_Controller {
 			$newpost->professor_id 	= Auth::user()->professor()->first()->professor_id;
 			$newpost->student_id	= null;
 		}
+		$newpost->answer_to			= null;
 		$newpost->title 			= Input::get('title');
 		$newpost->text 				= Input::get('text');
 		$newpost->classgroup_id		= Session::get('current_group')->classgroup_id;
@@ -70,6 +65,44 @@ class Forum_Controller extends Base_Controller {
 		$newpost->checked 			= Input::get('checked');
 		$newpost->save();
 		return Redirect::to('forum');
+	}
+
+	public function post_newanswer()
+	{
+
+		$input	=	Input::all();
+		$rules	=	array(
+						'title' => 'required',
+						'text' => 'required',
+						'topic_id' => 'required'
+					);
+		$validation	=	Validator::make($input, $rules);
+		if($validation->fails())
+		{
+			return Redirect::to('forum/topic/'.Input::get('topic_id'))
+						->with_errors($validation)
+						->with_input();
+		}
+		$newpost		= new Post();
+
+		if(Auth::user()->type == 'S')
+		{
+			$newpost->student_id 	= Auth::user()->student()->first()->student_id;
+			$newpost->professor_id	= null;
+		}
+		else
+		{
+			$newpost->professor_id 	= Auth::user()->professor()->first()->professor_id;
+			$newpost->student_id	= null;
+		}
+		$newpost->answer_to			= Input::get('topic_id');
+		$newpost->title 			= Input::get('title');
+		$newpost->text 				= Input::get('text');
+		$newpost->classgroup_id		= Session::get('current_group')->classgroup_id;
+		$newpost->type 				= 'POST';
+		$newpost->checked 			= CHECKED_NOT;
+		$newpost->save();
+		return Redirect::to('forum/topic/'.$newpost->answer_to);
 	}
 
 }

@@ -1,4 +1,21 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Constantes 
+|--------------------------------------------------------------------------
+|
+| Constantes que seran utilizadas a lo largo de la aplicación
+|
+*/
+
+#USER
+define('PROFESSOR', 'T');
+define('STUDENT', 'S');
+define('ADMINISTRATOR', 'A');
+
+#POST
+define('CHECKED_NOT', '0');
+
 
 /*
 |--------------------------------------------------------------------------

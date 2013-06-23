@@ -23,7 +23,14 @@
 	@else
 		<br>{{ $a->professor()->first()->user()->first()->names }}
 	@endif
+	<hr>
 @empty
 	<h4>No hay respuestas</h4>
 @endforelse
 
+Nueva respuesta:
+{{ Form::open('forum/newanswer', 'POST') }}
+	Titulo:{{ Form::text('title') }}
+	Contenido:{{ Form::text('text') }}
+	{{ Form::button('Responder', array('type'=>'submit', 'name'=>'topic_id', 'value'=>$topic->post_id)) }}
+{{ Form::close() }}
