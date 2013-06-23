@@ -276,12 +276,37 @@ class Course_Controller extends Base_Controller {
 		return View::make('course.creategroup',$data);
 	}
 
-	public function action_creategroup()
+	public function action_creategroup($group_id,$assignment_id)
 	{
+		
+		$students=Groupstudent::where('classgroup_id','=',$group_id)->get();
+		$var=$_POST('grupo_alumnos');
+
+		$max=0;
+		for($i=0;$i<count($var);$i++){
+			if($max<$var[1]){
+				$max=$var[1];
+			}
+		}
+
+		$arr=array();
+		for($i=0;$i<$max;$i++){
+			$team=new Team;
+			$team->assignment_id=$assignment_id;
+			$team_id=$team->save();
+			$arr[$i]=$team_id;
+		}
+
+		foreach($students as $s)
+		{
+			$team=new Team;
+			$team->assignment_id=$assignment_id;
+			$team_id=$team->save();
+			$team->student()->attach($s->student_id);
+		}
 		
 		
 
-		return Redirect::to("/");
 	}
 
 
@@ -359,103 +384,6 @@ class Course_Controller extends Base_Controller {
 					);
 		return View::make('course.grades',$data);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	public function action_attendance($group_id)
