@@ -12,12 +12,13 @@ function agregarcolumna(){
 		
 		//agregamos una columna con el titulo (en thead)
 		$('<th>').html(
-			'<a href="" class="clsEliminar">Eliminar</a>'
+			'<a href="" class="clsEliminar">Eliminar</a><form action="notas/actualizar" method="post">'
+
 		).appendTo($objTabla.find('thead tr'));
 		
 		//adjuntamos los td's de la columna al body de la tabla
 		$('<td>').html(
-			'<input type="text" style="width:15px;height:10px;">'
+			"<input type='text' style='width:15px;height:10px;'>"
 		).appendTo($objTabla.find('tbody tr'));
 		
 		//cambiamos el atributo colspan del pie de la tabla y su contenido

@@ -301,6 +301,14 @@ class Course_Controller extends Base_Controller {
 		return View::make('course.creategroup',$data);
 	}
 
+	public function action_creategroup()
+	{
+		
+		
+
+		return Redirect::to("/");
+	}
+
 
 
 

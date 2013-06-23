@@ -62,6 +62,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::any('cursos/(:num)/tareas/creartarea'				, 'course@newtask');
 	Route::any('cursos/(:num)/tareas/creartarea/(:num)'	, 'course@newgroup');
 	Route::any('cursos/(:num)/silabus'				, 'course@viewsilabus');
+	Route::any('cursos/(:num)/tareas/creartarea/(:num)/creargrupo'	 , 'course@creategroup');
 
 });
 

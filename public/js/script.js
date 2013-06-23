@@ -41,10 +41,38 @@ function guardargrupos()
         });
         ind++;
     }
-
-    $.post("cursos/'.$assignments[0]->classgroup_id.'/tareas/creartarea/14",{grupos:grupo_alumnos},function(respuesta){
-        alert(respuesta); //Mostramos un alert del resultado devuelto por el php
+    var href = $(location).attr('href')+"/creargrupo";
+    var contador=0,url=$(location).attr('href'),ruta;
+    for(var ji=0;ji<url.length;ji++)
+    {
+        if(url.charAt(ji)=='/')
+        {
+            contador++;
+        }
+        if(contador==6)
+        {
+            ruta=url.substring(0,ji);
+            contador=7;
+        }
+    }
+    console.log("ruta"+ruta);
+    $.ajax({ 
+        type: "POST", 
+        data: grupo_alumnos, 
+        url: href, 
+        success: function(data) { 
+            //alert("la tarea se asigno a los grupos")
+            $(location).attr('href',ruta);
+        },
+        error: function(e){ 
+        alert("Error en el servidor, por favor, intentalo de nuevo mas tarde");
+        }
     });
+
+
+/*
+    var dato="jose";
+    $.post(href,dato);*/
 }
 
 var i=1;//numero de grupo

@@ -33,18 +33,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				@if(Auth::user()->type=='T')
-				<tr><td>Montes Anccasi Albert Juan</td></tr>
-				<tr><td>Muñoz Sagarvinaga Leonidas</td></tr>
-				<tr><td>Natividad Alejos Luis Felipe</td></tr>
-				<tr><td>Odicio Vilchez Joan Axel</td></tr>
-				<tr><td>Rojas Ayala Myleni Beatriz</td></tr>
-				<tr><td>Tanaka Terukina Ricardo</td></tr>
-				<tr><td>Tarrillo Celada Cesar Augusto</td></tr>
-				<tr><td>Velasquez Hinostroza Katherine Luisa</td></tr>
-				@else
-				<tr><td>{{Auth::user()->last_name1}} {{Auth::user()->last_name2}} {{ Auth::user()->names }}</td></tr>
-				@endif
+				
 			</tbody>
 		</table>
 		<br>
