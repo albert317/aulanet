@@ -288,7 +288,7 @@ class Course_Controller extends Base_Controller {
 	{
 		
 		$students=Groupstudent::where('classgroup_id','=',$group_id)->get();
-		$var=$_POST('grupo_alumnos');
+		$var=$_POST['alumnos'];
 
 		$max=0;
 		for($i=0;$i<count($var);$i++){
