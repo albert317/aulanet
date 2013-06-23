@@ -166,6 +166,14 @@ class Course_Controller extends Base_Controller {
 	}
 	public function action_taskdetail($group_id,$assignments_id)
 	{
+		if(Auth::user()->type=='T'){
+			$all=DB::query('SELECT * from user u,student s,student_team st,team t, assignment a
+			where u.user_id=s.user_id and s.student_id=st.student_id and t.team_id=st.team_id and a.assignment_id=t.assignment_id and a.assignment_id='.$assignments_id);
+			echo "<pre>";
+			print_r($all);
+			echo "</pre>";
+			exit();
+		}
 
 		$val=$this->validate_group($group_id);
 		if($val!=null){
@@ -276,12 +284,35 @@ class Course_Controller extends Base_Controller {
 		return View::make('course.creategroup',$data);
 	}
 
-	public function action_creategroup()
+	public function action_creategroup($group_id,$assignment_id)
 	{
 		
+		$students=Groupstudent::where('classgroup_id','=',$group_id)->get();
+		$var=$_POST('grupo_alumnos');
+
+		$max=0;
+		for($i=0;$i<count($var);$i++){
+			if($max<$var[$i][1]){
+				$max=$var[$i][1];
+			}
+		}
+
+		$arr=array();
+		for($i=0;$i<$max;$i++){
+			$team=new Team;
+			$team->assignment_id=$assignment_id;
+			$team_id=$team->save();
+			$arr[$i]=$team_id;
+		}
+
+		foreach($var as $v)
+		{
+			
+			$team=Team::find($v[1])->first();
+			$team->student()->attach($v[0]);
+		}
 		
 
-		return Redirect::to("/");
 	}
 
 
@@ -359,103 +390,6 @@ class Course_Controller extends Base_Controller {
 					);
 		return View::make('course.grades',$data);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	public function action_attendance($group_id)
