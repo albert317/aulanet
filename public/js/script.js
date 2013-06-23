@@ -24,9 +24,6 @@ function NuevaAsistencia()
 */
 
 var grupo_alumnos=new Array();
-for (j = 0; j < 2; j++){ 
-    grupo_alumnos[j]=new Array(); 
-}
 var cant=1;
 function guardargrupos()
 {
@@ -34,13 +31,18 @@ function guardargrupos()
     for(var ij=0;ij<(i-1);ij++)
     {
         var grupo="#trash"+ind+ ">ul>li";
+        console.log("grupo "+ind);
         $(grupo).each(function(indice, elemento) {
-            grupo_alumnos[indice][0]=$(elemento).attr("id");
-            grupo_alumnos[indice][1]=ij+1;
+            grupo_alumnos[pos]=new Array();
+            grupo_alumnos[pos][0]=$(elemento).attr("id");
+            grupo_alumnos[pos][1]=ij+1;
             pos++;
         });
+        indice=0;
         ind++;
     }
+
+
     var href = $(location).attr('href')+"/creargrupo";
     var contador=0,url=$(location).attr('href'),ruta;
     for(var ji=0;ji<url.length;ji++)
@@ -58,7 +60,7 @@ function guardargrupos()
     console.log("ruta"+ruta);
     $.ajax({ 
         type: "POST", 
-        data: {grupo_alumnos:grupo_alumnos}, 
+        data: {alumnos:grupo_alumnos}, 
         url: href, 
         success: function(data) { 
             //alert("la tarea se asigno a los grupos")
