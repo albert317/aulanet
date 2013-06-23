@@ -35,8 +35,8 @@ function guardargrupos()
     {
         var grupo="#trash"+ind+ ">ul>li";
         $(grupo).each(function(indice, elemento) {
-            grupo_alumnos[pos][0]=$(elemento).attr("id");
-            grupo_alumnos[pos][1]=ij+1;
+            grupo_alumnos[indice][0]=$(elemento).attr("id");
+            grupo_alumnos[indice][1]=ij+1;
             pos++;
         });
         ind++;

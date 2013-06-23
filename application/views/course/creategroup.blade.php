@@ -32,7 +32,7 @@
             @foreach($users as $u)
                 <li class="ui-widget-content ui-corner-tr" id={{$u->student_id}}><img src={{URL::to('img/friend.png')}} alt="">{{$u->names}} {{$u->last_name1}} {{$u->last_name2}}</li>
             @endforeach
-            <li class="ui-widget-content ui-corner-tr" id="4"><img src={{URL::to('img/friend.png')}} alt="">luis</li>
+            
         </ul>
     </div>
     <a href="javascript:guardargrupos();" class="btn btn-info">Guardar</a>
