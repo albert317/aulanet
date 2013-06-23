@@ -19,7 +19,7 @@
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/foro'}}>Foro</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/silabus'}}>Silabus</a></li>
 	</ul>
-	<h4>{{ $course }}</h4>
+	<h4>{{ $nombre }}</h4>
 	<div class="asistencia">
 		<h4>Lista de Asistencia</h4>	
 		@if(Auth::user()->type=='T')
@@ -33,19 +33,35 @@
 				</tr>
 			</thead>
 			<tbody>
-				@if(Auth::user()->type == 'T')
-					@forelse($students as $st)
-						<tr><td>
-							{{ $st->last_name1 }}
-							{{ $st->last_name2 }}
-							{{ $st->names }}
-						</td></tr>
-					@empty
-						<h4>No presenta alumnos</h4>
-					@endforelse
-				@else
-					<tr><td>{{Auth::user()->last_name1}} {{Auth::user()->last_name2}} {{ Auth::user()->names }}</td></tr>
-				@endif
+				<tr><td>Apellidos y nombres</td>
+				@forelse($attendances_dates as $ad)
+					<td>{{ $ad}}</td>
+				@empty
+				@endforelse
+					 	</tr>
+				@if(Auth::user()->type=='T')
+				 	@forelse($students as $s)
+					 	<tr><td>{{$s['student']->last_name1}} {{$s['student']->last_name2}} {{$s['student']->names }}</td>
+						 	@for($j=0;$j<count($attendances_dates);$j++)
+						 	<td>{{$s['attendances'][$j]->type}}</td>
+						 	@endfor
+					 	</tr>
+					 	@empty
+					 @endforelse
+
+			 	@else
+				 	@forelse($students as $s)
+				 		@if(Auth::user()->user_id==$s['student']->user_id)
+					 	<tr><td>{{$s['student']->last_name1}} {{$s['student']->last_name2}} {{$s['student']->names }}</td>
+						 	@for($j=0;$j<count($attendances_dates);$j++)
+						 	<td>{{$s['attendances'][$j]->type}}</td>
+						 	@endfor
+					 	</tr>
+					 	@endif
+				 	@empty
+				 @endforelse>
+					 	
+			 	@endif
 			</tbody>
 		</table>
 		<br>

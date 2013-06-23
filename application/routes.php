@@ -33,6 +33,7 @@
 */
 
 Route::controller('login');
+Route::controller('forum');
 Route::any(array('/'), function(){
 	if(Auth::check())
 	{
@@ -45,45 +46,27 @@ Route::any(array('/'), function(){
 	}
 });
 
-Route::get('creargrupo', function()
-{
-	//return View::make('home.index');
-	return View::make('course.creategroup');
-});
-Route::get('agenda', function()
-{
-	//return View::make('home.index');
-	return View::make('course.agenda');
-});
-Route::get('asistencia', function()
-{
-	//return View::make('home.index');
-	return View::make('course.attendance');
-});
-Route::get('notas', function()
-{
-	//return View::make('home.index');
-	return View::make('course.grades');
-});
-Route::get('subirtarea', function()
-{
-	//return View::make('home.index');
-	return View::make('course.subirtarea');
-});
+
 Route::group(array('before' => 'auth'), function()
 {
-	Route::any('cursos'								, 'course@index');
-	Route::any('cursos/(:num)/tareas'				, 'course@tasks');
+
+	Route::any('cursos'										, 'course@index');
+	Route::any('cursos/(:num)/tareas'						, 'course@tasks');
 
 	Route::any('cursos/(:num)/asistencia'					, 'course@attendance');
 	Route::any('cursos/(:num)/notas'						, 'course@grades');
-	Route::any('cursos/(:num)/foro'						, 'course@forum');
-	Route::any('agenda'								, 'agenda@index');
-	Route::any('cursos/(:num)/tareas/(:num)'		, 'course@taskdetail');
-	Route::any('cursos/(:num)/tareas/(:num)/upload'	, 'course@upload');
-	Route::any('administrador'						, 'administrador@index');
-	Route::any('cursos/(:num)/tareas/creartarea'				, 'course@newtask');
-	Route::any('cursos/(:num)/silabus'				, 'course@viewsilabus');
+
+	Route::any('cursos/(:num)/tareas/creartarea/(:num)/creargrupo'	 , 'course@creategroup');
+	Route::any('cursos/(:num)/foro'							, 'course@forum');
+	Route::any('agenda'										, 'agenda@index');
+	Route::any('cursos/(:num)/tareas/(:num)'				, 'course@taskdetail');
+	Route::any('cursos/(:num)/tareas/(:num)/upload'			, 'course@upload');
+	Route::any('administrador'								, 'administrador@index');
+	Route::any('cursos/(:num)/tareas/creartarea'			, 'course@newtask');
+	Route::any('cursos/(:num)/tareas/creartarea/(:num)'		, 'course@newgroup');
+	Route::any('cursos/(:num)/silabus'						, 'course@viewsilabus');
+	Route::any('cursos/(:num)/notas/actualizar'				, 'course@updategrades');
+
 });
 
 

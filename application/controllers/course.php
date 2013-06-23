@@ -85,31 +85,6 @@ class Course_Controller extends Base_Controller {
 	}
 
 
-
-	/**
-	 * Muestra las notas relativas al curso
-	 */
-	public function action_grades($group_id)
-	{
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		$nombre=Classgroup::find($group_id)->course()->first()->name;
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		$data= array(
-						'group_id'=> $group_id,
-						'nombre'=>$nombre
-					);
-		return View::make('course.grades',$data);
-	}
-
 	/**
 	 * Muestra el foro del curso
 	 */
@@ -191,6 +166,14 @@ class Course_Controller extends Base_Controller {
 	}
 	public function action_taskdetail($group_id,$assignments_id)
 	{
+		if(Auth::user()->type=='T'){
+			$all=DB::query('SELECT * from user u,student s,student_team st,team t, assignment a
+			where u.user_id=s.user_id and s.student_id=st.student_id and t.team_id=st.team_id and a.assignment_id=t.assignment_id and a.assignment_id='.$assignments_id);
+			echo "<pre>";
+			print_r($all);
+			echo "</pre>";
+			exit();
+		}
 
 		$val=$this->validate_group($group_id);
 		if($val!=null){
@@ -211,7 +194,7 @@ class Course_Controller extends Base_Controller {
 							'assignments'	=> $assignments,
 							'teamfile'=>$teamfile,
 							'group_id'=>$group_id,
-							'assignment_id'=>$assignment_id,
+							'assignment_id'=>$assignments_id,
 							'nombre'=>$nombre
 						);
 		return View::make('course.subirtarea', $data);
@@ -257,13 +240,7 @@ class Course_Controller extends Base_Controller {
 		Input::upload('file', 'public/uploads/assignmentfile/'.$assignment_id.'/', $filename);
 
 
-		$students=Groupstudent::where('classgroup_id','=',$group_id)->get();
-		foreach($students as $s){
-			$team=new Team;
-			$team->assignment_id=$assignment_id;
-			$team_id=$team->save();
-			$team->student()->attach($s->student_id);
-		}
+		
 		//$assignments_option = Classgroup::find($group_id)->first()->assignment()->get();
 		//$data = array(
 		//					'assignments'	=> $assignments_option
@@ -274,139 +251,202 @@ class Course_Controller extends Base_Controller {
 		$tipo 	 	= Input::get("tipo"); 
 		$file 		= Input::get("file");*/
 		//return Redirect::to('cursos');
-		if($assignment->type)
+		if($assignment->type=="S")
 		{
+			$students=Groupstudent::where('classgroup_id','=',$group_id)->get();
+			foreach($students as $s)
+			{
+				$team=new Team;
+				$team->assignment_id=$assignment_id;
+				$team_id=$team->save();
+				$team->student()->attach($s->student_id);
+			}
 			return Redirect::to('cursos/'.$group_id.'/tareas');
+		}
+		else{
+			return Redirect::to('cursos/'.$group_id.'/tareas/creartarea/'.$assignment_id);
 		}
 
 		//return View::make('course.creategroup');
 	}
 
+	public function action_newgroup($group_id,$assignment_id)
+	{
+		$users=DB::query('SELECT * from user u,student s,group_student st 
+			where u.user_id=s.user_id and s.student_id=st.student_id and st.classgroup_id='.$group_id);
+	
+		$data=array(
+							'users'	=> $users,
+							'$assignment_id'=>$assignment_id
+						);
+
+
+		return View::make('course.creategroup',$data);
+	}
+
+	public function action_creategroup($group_id,$assignment_id)
+	{
+		
+		$students=Groupstudent::where('classgroup_id','=',$group_id)->get();
+		$var=$_POST['alumnos'];
+		$max=0;
+		for($i=0;$i<count($var);$i++){
+			if($max<$var[$i][1]){
+				$max=$var[$i][1];
+			}
+		}
+		for($i=0;$i<$max;$i++){
+			$team=new Team;
+			$team->assignment_id=$assignment_id;
+			$team->save();
+			for($k=0;$k<count($var);$k++){
+				if($i+1==$var[$k][1]){
+
+					$team->student()->attach($var[$k][0]);
+				}
+			}
+		}
+
+		
+
+	}
+
+
+	public function action_grades($group_id)
+	{
+		$nombre=Classgroup::find($group_id)->course()->first()->name;
+		$students=DB::query('SELECT * from user u,student s,group_student st
+			where u.user_id=s.user_id and s.student_id=st.student_id and st.classgroup_id='.$group_id);
+		$grades=DB::query('SELECT st.id,g.field,g.value from user u,student s,group_student st,grade g
+			where u.user_id=s.user_id and s.student_id=st.student_id and g.group_student_id=st.id and st.classgroup_id='.$group_id);
+		
+		$grades_name=array();
+		$i=0;
+		foreach ($grades as $g) {
+			$value=false;
+			foreach ($grades_name as $gm) {
+				if($g->field==$gm){
+					$value=true;
+				}
+			}
+			if($value==false){
+				$grades_name[$i]=$g->field;
+				$i++;
+			}
+		}
+
+		$students_array= array();
+		$i=0;
+		foreach($students as $s)
+		{
+			$j=0;
+			$arr= array();
+			$arr['student']=$s;
+			$grades_array= array();
+			foreach($grades as $g)
+			{
+				if($s->id==$g->id)
+				{
+					for ($k=0;$k<count($grades_name);$k++) {
+						if($grades_name[$k]==$g->field){
+							$grades_array[$k]=$g;
+							$j++;
+						}
+					}
+				}
+			}
+
+			$arr['grades']=$grades_array;
+			$students_array[$i]=$arr;
+			$i++;
+		}
+		
+
+		$data= array(
+						'group_id'=> $group_id,
+						'nombre'=>$nombre,
+						'students'=>$students_array,
+						'grades_name'=>$grades_name
+					);
+		return View::make('course.grades',$data);
+	}
+
+	public function action_updategrades($group_id)
+	{
+		$nombre=Classgroup::find($group_id)->course()->first()->name;
+		$students=DB::query('SELECT * from user u,student s,group_student st 
+			where u.user_id=s.user_id and s.student_id=st.student_id and st.classgroup_id='.$group_id);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		$data= array(
+						'group_id'=> $group_id,
+						'nombre'=>$nombre,
+						'students'=>$students
+					);
+		return View::make('course.grades',$data);
+	}
 
 
 	public function action_attendance($group_id)
 	{
-		//$students =	Classgroup::find($group_id)->student()->get();
-		//$students = Student::;
-		$classgroup		= Classgroup::find($group_id)->first();
-		//$group 			= 
-		//$course 		= $classgroup->name;
-		$students 	= Classgroup::students($group_id);
-		$data 		= array(
-						'students' 	=> $students,
-						'group'		=> $classgroup->name,
-						'group_id'	=> $classgroup->classgroup_id,	
-						'course'	=> $classgroup->course()->first()->name
+		$nombre=Classgroup::find($group_id)->course()->first()->name;
+		$students=DB::query('SELECT * from user u,student s,group_student st
+			where u.user_id=s.user_id and s.student_id=st.student_id and st.classgroup_id='.$group_id);
+		$attendances=DB::query('SELECT st.id,a.date,a.type from user u,student s,group_student st,attendance a
+			where u.user_id=s.user_id and s.student_id=st.student_id and a.group_student_id=st.id and st.classgroup_id='.$group_id);
+		
+		$attendances_dates=array();
+		$i=0;
+		foreach ($attendances as $a) {
+			$value=false;
+			foreach ($attendances_dates as $ad) {
+				if($a->date==$ad){
+					$value=true;
+				}
+			}
+			if($value==false){
+				$attendances_dates[$i]=$a->date;
+				$i++;
+			}
+		}
+
+		$students_array= array();
+		$i=0;
+		foreach($students as $s)
+		{
+			$j=0;
+			$arr= array();
+			$arr['student']=$s;
+			$attendance_array= array();
+			foreach($attendances as $a)
+			{
+				if($s->id==$a->id)
+				{
+					for ($k=0;$k<count($attendances_dates);$k++) {
+						if($attendances_dates[$k]==$a->date){
+							$attendance_array[$k]=$a;
+							$j++;
+						}
+					}
+				}
+			}
+
+			$arr['attendances']=$attendance_array;
+			$students_array[$i]=$arr;
+			$i++;
+		}
+		
+
+		$data= array(
+						'group_id'=> $group_id,
+						'nombre'=>$nombre,
+						'students'=>$students_array,
+						'attendances_dates'=>$attendances_dates
 					);
 		return View::make('course.attendance',$data);
+		
 	}
-
 
 
 

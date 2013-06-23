@@ -34,6 +34,6 @@ class Student extends Eloquent {
 
 	public function post()
 	{
-		return $this->has_many('Post');
+		return $this->has_many('Post', 'student_id');
 	}
 }

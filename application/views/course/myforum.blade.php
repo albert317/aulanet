@@ -1,0 +1,1 @@
+myforum.blade.php

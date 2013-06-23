@@ -26,19 +26,15 @@
 
     <div class="alumnos">
         <h4>Alumnos</h4>
+
         <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
-            <!--@for($i=0;$i<10;$i++)
-            <li class="ui-widget-content ui-corner-tr">Alumno {{$i+1}} </li>
-            @endfor-->
-            <li class="ui-widget-content ui-corner-tr"><img src={{URL::to('img/friend.png')}} alt=""> Montes Anccasi Albert Juan</li>
-            <li class="ui-widget-content ui-corner-tr"><img src={{URL::to('img/friend.png')}} alt=""> Muñoz Sagarvinaga Leonidas</li>
-            <li class="ui-widget-content ui-corner-tr"><img src={{URL::to('img/friend.png')}} alt=""> Natividad Alejos Luis Felipe</li>
-            <li class="ui-widget-content ui-corner-tr"><img src={{URL::to('img/friend.png')}} alt=""> Odicio Vilchez Joan Axel</li>
-            <li class="ui-widget-content ui-corner-tr"><img src={{URL::to('img/friend.png')}} alt=""> Rojas Ayala Myleni Beatriz</li>
-            <li class="ui-widget-content ui-corner-tr"><img src={{URL::to('img/friend.png')}} alt=""> Tanaka Terukina Ricardo</li>
-            <li class="ui-widget-content ui-corner-tr"><img src={{URL::to('img/friend.png')}} alt=""> Tarrillo Celada Cesar Alfredo</li>
-            <li class="ui-widget-content ui-corner-tr"><img src={{URL::to('img/friend.png')}} alt=""> Velásquez Hinostroza Katherine Luisa</li>
+            
+            @foreach($users as $u)
+                <li class="ui-widget-content ui-corner-tr" id={{$u->student_id}}><img src={{URL::to('img/friend.png')}} alt="">{{$u->names}} {{$u->last_name1}} {{$u->last_name2}}</li>
+            @endforeach
+            
         </ul>
     </div>
+    <a href="javascript:guardargrupos();" class="btn btn-info">Guardar</a>
 </div>
 @endsection

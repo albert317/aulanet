@@ -10,7 +10,7 @@ class Professor extends Eloquent {
 
 	public function post()
 	{
-		return $this->has_many('Post');
+		return $this->has_many('Post', 'professor_id');
 	}
 
 	public function classgroup()
