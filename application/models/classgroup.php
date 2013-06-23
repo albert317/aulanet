@@ -50,9 +50,10 @@ class Classgroup extends Eloquent {
 									WHERE	group_student.classgroup_id = $group_id
 									AND		group_student.student_id = student.student_id
 									AND		user.user_id = student.user_id
-									ORDER BY user.last_name1, user.last_name2 "
+									ORDER BY user.last_name1, user.last_name2"
 								);
 		return $students;
+
 	}
 
 }

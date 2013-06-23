@@ -394,16 +394,15 @@ class Course_Controller extends Base_Controller {
 	{
 		//$students =	Classgroup::find($group_id)->student()->get();
 		//$students = Student::;
-		$students = Classgroup::students($group_id);
-		var_dump($students);		$nombre=Classgroup::find($group_id)->course()->first()->name;
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		/*REFACTORIZARLO MAS ADELANTE*//*REFACTORIZARLO MAS ADELANTE*/
-		$data= array(
-						'group_id'=> $group_id,
-						'nombre'=>$nombre
+		$classgroup		= Classgroup::find($group_id)->first();
+		//$group 			= 
+		//$course 		= $classgroup->name;
+		$students 	= Classgroup::students($group_id);
+		$data 		= array(
+						'students' 	=> $students,
+						'group'		=> $classgroup->name,
+						'group_id'	=> $classgroup->classgroup_id,	
+						'course'	=> $classgroup->course()->first()->name
 					);
 		return View::make('course.attendance',$data);
 	}

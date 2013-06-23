@@ -19,7 +19,7 @@
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/foro'}}>Foro</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/silabus'}}>Silabus</a></li>
 	</ul>
-	<h4>{{ $nombre }}</h4>
+	<h4>{{ $course }}</h4>
 	<div class="asistencia">
 		<h4>Lista de Asistencia</h4>	
 		@if(Auth::user()->type=='T')
@@ -34,16 +34,16 @@
 			</thead>
 			<tbody>
 				@if(Auth::user()->type == 'T')
-					
-					<tr><td>Montes Anccasi Albert Juan</td></tr>
-					<tr><td>Muñoz Sagarvinaga Leonidas</td></tr>
-					<tr><td>Natividad Alejos Luis Felipe</td></tr>
-					<tr><td>Odicio Vilchez Joan Axel</td></tr>
-					<tr><td>Rojas Ayala Myleni Beatriz</td></tr>
-					<tr><td>Tanaka Terukina Ricardo</td></tr>
-					<tr><td>Tarrillo Celada Cesar Augusto</td></tr>
-					<tr><td>Velasquez Hinostroza Katherine Luisa</td></tr>
-					@else
+					@forelse($students as $st)
+						<tr><td>
+							{{ $st->last_name1 }}
+							{{ $st->last_name2 }}
+							{{ $st->names }}
+						</td></tr>
+					@empty
+						<h4>No presenta alumnos</h4>
+					@endforelse
+				@else
 					<tr><td>{{Auth::user()->last_name1}} {{Auth::user()->last_name2}} {{ Auth::user()->names }}</td></tr>
 				@endif
 			</tbody>
