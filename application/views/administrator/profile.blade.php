@@ -32,7 +32,7 @@
 				  	</ul>
 				  	<div class="tab-content">
 				    	<div class="tab-pane active" id="tab1">
-				    		{{ Form::open_for_files('','POST', array('class'=>'form-horizontal')) }}
+				    		{{ Form::open_for_files('administrador/registrarAlumno','POST', array('class'=>'form-horizontal')) }}
 							<fieldset>
 								<div class="control-group">
 									<label class="control-label"  for="nombre">Nombre</label>
@@ -55,7 +55,7 @@
 								<div class="control-group">
 									<label class="control-label"  for="escuela">Escuela</label>
 									<div class="controls">
-										{{ Form::select('size', array('SI' => 'EAP Ing. de Sistemas', 'SW' => 'EAP Ing. de Software'), array('SI', 'SW')) }}
+										{{ Form::select('escuela', array('SI' => 'EAP Ing. de Sistemas', 'SW' => 'EAP Ing. de Software'), array('SI', 'SW')) }}
 									</div>
 								</div>
 								<div class="control-group">
@@ -64,11 +64,16 @@
 										{{ Form::submit('Guardar', array('class' => 'btn btn-info')) }}
 									</div>
 								</div>
+								<div class="control-group">
+									<div class="controls" id="error">
+										
+									</div>
+								</div>
 							</fieldset>
 							{{ Form::close() }}
 				    	</div>
 				    	<div class="tab-pane" id="tab2">
-				      		{{ Form::open_for_files('','POST', array('class'=>'form-horizontal')) }}
+				      		{{ Form::open_for_files('administrador/registrarProfesor','POST', array('class'=>'form-horizontal')) }}
 							<fieldset>
 								<div class="control-group">
 									<label class="control-label"  for="nombre">Nombre</label>
@@ -112,7 +117,7 @@
 		    <h4>Registrar Curso</h4>
 		</div>
 		<div class="modal-body">	
-			{{ Form::open_for_files('','POST', array('class'=>'form-horizontal')) }}
+			{{ Form::open_for_files('administrador/registrarCurso','POST', array('class'=>'form-horizontal')) }}
 			<fieldset>
 				<div class="control-group">
 					<label class="control-label"  for="escuela">Escuela</label>
@@ -150,7 +155,7 @@
 		    <h4>Asignar Curso</h4>
 		</div>
 		<div class="modal-body">	
-			{{ Form::open_for_files('','POST', array('class'=>'form-horizontal')) }}
+			{{ Form::open_for_files('administrador/asignarCurso','POST', array('class'=>'form-horizontal')) }}
 			<fieldset>
 				<div class="control-group">
 					<label class="control-label"  for="escuela">Escuela</label>
@@ -187,6 +192,8 @@
 			{{ Form::close() }}
 		</div>
 	</div>
+
+	<div></div>
 
 </div>
 @endsection

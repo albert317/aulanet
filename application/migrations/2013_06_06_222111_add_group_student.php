@@ -55,6 +55,12 @@ class Add_Group_Student {
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
+		DB::table('group_student')->insert(array(
+			'classgroup_id'=>'3',
+			'student_id' => '6',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
 		//
 	}
 

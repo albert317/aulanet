@@ -39,6 +39,12 @@ class Add_Student_Team {
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
+		DB::table('student_team')->insert(array(
+			'student_id'=>'6',
+			'team_id' => '4',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
 		//
 	}
 

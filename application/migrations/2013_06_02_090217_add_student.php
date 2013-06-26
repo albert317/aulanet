@@ -38,6 +38,12 @@ class Add_Student {
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
+
+		DB::table('student')->insert(array(
+			'user_id'=>'9',			
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
 		//
 	}
 
@@ -53,6 +59,7 @@ class Add_Student {
 		DB::table('student')->where('student_id', '=', 3)->delete();
 		DB::table('student')->where('student_id', '=', 4)->delete();
 		DB::table('student')->where('student_id', '=', 5)->delete();
+		DB::table('student')->where('student_id', '=', 6)->delete();
 		DB::query('ALTER TABLE student AUTO_INCREMENT = 1');
 
 

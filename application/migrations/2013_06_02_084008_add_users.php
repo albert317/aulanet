@@ -102,6 +102,18 @@ class Add_Users {
 			'created_at'=>date('Y-m-d H:m:s'),
 			'updated_at'=>date('Y-m-d H:m:s')
 		));
+
+		DB::table('user')->insert(array(
+			'username'=>'09200163',
+			'password'=>Hash::make('890'),
+			'type'=>'S',
+			'names' => 'KATHERINE',
+			'last_name1'=>'VELASQUEZ',
+			'last_name2'=>'HINOSTROZA',
+			'email'=>'09200163@unmsm.edu.pe',
+			'created_at'=>date('Y-m-d H:m:s'),
+			'updated_at'=>date('Y-m-d H:m:s')
+		));
 		//
 	}
 
@@ -120,6 +132,7 @@ class Add_Users {
 		DB::table('user')->where('user_id', '=', 6)->delete();
 		DB::table('user')->where('user_id', '=', 7)->delete();
 		DB::table('user')->where('user_id', '=', 8)->delete();
+		DB::table('user')->where('user_id', '=', 9)->delete();
 		DB::query('ALTER TABLE user AUTO_INCREMENT = 1');
 		//
 	}
