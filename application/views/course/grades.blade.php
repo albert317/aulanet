@@ -69,7 +69,7 @@
 			    <h4>Agregar Nota</h4>
 			</div>
 			<div class="modal-body">	
-				{{ Form::open('','POST', array('class'=>'form-horizontal')) }}
+				{{ Form::open('cursos/'.$group_id.'/notas/actualizar','POST', array('class'=>'form-horizontal')) }}
 				<fieldset>
 					<div class="modal-header">
 					    <div class="control-group">
@@ -99,7 +99,7 @@
 								{{$s['student']->last_name1}} {{$s['student']->last_name2}} {{$s['student']->names }}
 							</label>
 							<div class="controls1">
-								{{ Form::text('','', array('class'=>'input-mini')) }}
+								{{ Form::text($s['student']->student_id,'', array('class'=>'input-mini')) }}
 							</div>
 						</div>
 						<div class="linea"></div>
