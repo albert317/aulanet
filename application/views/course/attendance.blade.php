@@ -75,7 +75,7 @@
 			    <h4>Agregar Asistencia</h4>
 			</div>
 			<div class="modal-body">	
-				{{ Form::open('','POST', array('class'=>'form-horizontal')) }}
+				{{ Form::open('cursos/'.$group_id.'/asistencia/actualizar','POST', array('class'=>'form-horizontal')) }}
 				<fieldset>
 					<div class="head-relacion">
 						<label class="nombres-alumnos">
@@ -92,7 +92,7 @@
 							{{$s['student']->last_name1}} {{$s['student']->last_name2}} {{$s['student']->names }}
 						</label>
 						<div class="controls1">
-							{{ Form::text('','F', array('class'=>'input-mini','onclick'=>'AgregarAsistencia(id);','id'=>$s['student']->student_id,'readonly')) }}
+							{{ Form::text($s['student']->student_id,'F', array('class'=>'input-mini','onclick'=>'AgregarAsistencia(id);','id'=>$s['student']->student_id,'readonly')) }}
 						</div>
 					</div>
 					<div class="linea"></div>
