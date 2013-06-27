@@ -25,7 +25,7 @@
 		@if(Auth::user()->type=='T')	
 		<a class="btn" style="float:right;" href="#AgregarNotas" data-toggle="modal">Agregar nota</a>
 		@endif
-		<br><br>
+		
 		<table class="table table-bordered">
 			<thead>
 				<tr>

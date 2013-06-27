@@ -64,10 +64,7 @@
 			 	@endif
 			</tbody>
 		</table>
-		<br>
-		@if(Auth::user()->type=='T')
-		<a href="" class="btn btn-info">Guardar Cambios</a>
-		@endif
+		
 		<!-- Modal Agregar Asistencia-->
 		<div id="AgregarAsistencias" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-header">
