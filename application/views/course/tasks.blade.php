@@ -34,11 +34,7 @@
 
 			@forelse($assignments as $a)
 				<li class="tarea">
-					@if(Auth::user()->type == 'T')
-					<a href="#"><h4>{{ $a->name }}</h4></a>
-					@else
 					<a href={{ URL::base().'/cursos/'.$a->classgroup_id.'/tareas/'.$a->assignment_id }}><h4>{{ $a->name }}</h4></a>
-					@endif
 					<div class="detalle">
 						{{ $a->description }}
 					</div>
