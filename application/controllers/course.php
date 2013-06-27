@@ -84,6 +84,31 @@ class Course_Controller extends Base_Controller {
 		return View::make('course.tasks', $data);	
 	}
 
+	/**
+	 * Muestra el listado de tareas pertenecientes al curso
+	 */
+	public function action_groupactivityes($group_id)
+	{
+
+		$groupactivity = Groupactivity::where('classgroup_id','=',$group_id)->get();
+		$assignments = Assignment::where('classgroup_id','=',$group_id)->get();
+		//var_export($assignments);
+		//exit();
+		$nombre = Classgroup::find($group_id)->course()->first()->name;
+		
+		$data		 = array(
+							'groupactivity'	=> $groupactivity,
+							'assignments'=>$assignments,
+							'nombre' => $nombre,
+							'group_id'=> $group_id
+						);
+		//var_dump($data);
+		//return View::make('course.tasks', $data);	
+		return View::make('course.agenda',$data);
+	}
+
+
+
 
 	/**
 	 * Muestra el foro del curso
