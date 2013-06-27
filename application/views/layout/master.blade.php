@@ -17,7 +17,7 @@
 <body>
 	
 		<header>
-			<h1>AulaNet</h1>
+			<h1><a href={{ URL::base()}}>AulaNet</a></h1>
 			@yield('logout')
 		</header>
 
