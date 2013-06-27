@@ -504,11 +504,11 @@ class Course_Controller extends Base_Controller {
 			where u.user_id=s.user_id and s.student_id=st.student_id and st.classgroup_id='.$group_id);
 		$grades=DB::query('SELECT st.id,g.field,g.value from user u,student s,group_student st,grade g
 			where u.user_id=s.user_id and s.student_id=st.student_id and g.group_student_id=st.id and st.classgroup_id='.$group_id);
-		$grade_name=Input::('nombre');
-		$grade_weigth=Input::('peso');
+		$grade_name=Input::get('nombre');
+		$grade_weigth=Input::get('peso');
 		$arr=array();
 		foreach ($students as $s) {
-			$s
+			$arr[$s->student_id]=Input::get($s->student_id);
 		}
 		echo "FALTA";
 		exit();
