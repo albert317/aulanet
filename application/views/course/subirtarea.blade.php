@@ -13,48 +13,117 @@
 <div id="contenido">
 	<ul class="nav nav-pills">
 		<li class="active"><a href={{ URL::base().'/cursos/'.$group_id.'/tareas' }}>Tareas</a></li>
-		<li><a href={{ URL::base().'/agenda'}}>Agenda</a></li>
+		<li><a href={{ URL::base().'/cursos/'.$group_id.'/agenda'}}>Agenda</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/asistencia'}}>Asistencia</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/notas'}}>Notas</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/foro'}}>Foro</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/silabus'}}>Silabus</a></li>
 	</ul>
 	<h4>{{ $nombre }}</h4>
-	@if($teamfile!=null)
-		<h4>Archivos Subidos</h4>
-		<dl class="dl-horizontal">
-		@forelse($teamfile as $file)
-			<dt>Archivo:</dt> 
-			<dd>{{$file->title}}</dd>
-		@empty
-			<h5>Vacio</h5>
-	 	@endforelse
- 	</dl>
- 	@else
-	<h4>Subir tarea</h4>
-	<br>
-	{{ Form::open_for_files('cursos/'.$assignments->classgroup_id.'/tareas/'.$assignments->assignment_id.'/upload','POST', array('class'=>'form-horizontal')) }}
-		<fieldset>
-			<div class="control-group">
-				<label class="control-label" for="descripcion">Descripción</label>
-				<div class="controls">
-					{{ Form::textarea('descripcion','', array('class'=>'input-xlarge','rows'=>'3')) }}
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label" for="fecha">Archivo</label>
-				<div class="controls">
-					{{ Form::file('file', array('class'=>'input-xlarge','id'=>'file')) }}
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="controls">
-					<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-					{{ Form::submit('Enviar', array('class' => 'btn btn-info')) }}
-				</div>
-			</div>
-		</fieldset>
-	{{ Form::close() }}
-	@endif
+	<div>
+		<div>
+			<h4>
+				<dl class="dl-horizontal">
+					<dt>Tarea:</dt>
+					<dd>{{$assignments->name}}</dd>
+				</dl>
+			</h4>
+			<h5>
+
+				<dl class="dl-horizontal">
+					<dt>Descripción:</dt>
+					<dd>{{$assignments->description}}</dd>
+				</dl>
+			</h5>
+			<h5>
+
+				<dl class="dl-horizontal">
+					<dt>Presentación:</dt>
+					<dd>{{$assignments->end_date}}</dd>
+				</dl>
+			</h5>
+
+			<h5>
+				<dl class="dl-horizontal">
+					<dt>Archivo:</dt> 
+					@forelse($assignment_file as $file)
+						<dd><a href={{$file->url}} >{{$file->title}}</a></dd>
+					@empty
+						<dd>Aún no hay archivos</dd>
+				 	@endforelse
+			 	</dl>
+			</h5>
+		</div>
+
+		<div>
+			@if(Auth::user()->type == 'S')
+				@if($teamfile!=null)
+					<h4>Archivos Subidos</h4>
+					<dl class="dl-horizontal">
+						<dt>Archivo:</dt> 
+					@forelse($teamfile as $file)
+						<dd><a href={{$file->url}} >{{$file->title}}</a></dd>
+					@empty
+						<h5>Aún no hay archivos</h5>
+				 	@endforelse
+			 	</dl>
+			 	@endif
+				<h4>Subir archivo</h4>
+				<br>
+				{{ Form::open_for_files('cursos/'.$assignments->classgroup_id.'/tareas/'.$assignment_id.'/upload','POST', array('class'=>'form-horizontal')) }}
+					<fieldset>
+						<div class="control-group">
+							<label class="control-label" for="descripcion">Descripción</label>
+							<div class="controls">
+								{{ Form::textarea('descripcion','', array('class'=>'input-xlarge','rows'=>'3')) }}
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="fecha">Archivo</label>
+							<div class="controls">
+								{{ Form::file('file', array('class'=>'input-xlarge','id'=>'file')) }}
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+								{{ Form::submit('Enviar', array('class' => 'btn btn-info')) }}
+							</div>
+						</div>
+					</fieldset>
+				{{ Form::close() }}
+			@else
+				@if($assignments->type=='S')
+					<table class="table table-bordered">
+						@foreach($single as $s)
+							<tr>
+								<td>{{$s['student']->names.' '.$s['student']->last_name1.' '.$s['student']->last_name2}}</td>
+								<td>
+								@forelse($s['files'] as $sf)
+									<p><a href={{$sf->url}}>{{$sf->title}}</a> - {{$sf->created_at}}</p>
+								@empty
+									<p>No ha subido archivos</p>
+								@endforelse
+								</td>
+							</tr>
+						@endforeach
+					</table>
+					@if($teamfile!=null)
+					<h4>Archivos Subidos</h4>
+					<dl class="dl-horizontal">
+						<dt>Archivo:</dt> 
+					@forelse($teamfile as $file)
+						<dd><a href={{$file->url}} >{{$file->title}}</a></dd>
+					@empty
+						<h5>Aún no hay archivos</h5>
+				 	@endforelse
+			 	</dl>
+			 	@endif
+				@else
+					Grupal
+				@endif
+			@endif
+		</div>
+	</div>
 </div>
 @endsection

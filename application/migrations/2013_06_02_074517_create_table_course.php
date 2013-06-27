@@ -13,6 +13,7 @@ class Create_Table_Course {
 			$table->engine = 'InnoDB';
 			$table->increments('course_id');
 			$table->string('name',45);
+			$table->string('term',2);
 			$table->enum('eap',array('SI','SW'));
 			$table->string('syllabus',200)->nullable();
 			$table->timestamps();
