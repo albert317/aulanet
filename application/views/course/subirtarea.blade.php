@@ -109,16 +109,16 @@
 						@endforeach
 					</table>
 					@if($teamfile!=null)
-					<h4>Archivos Subidos</h4>
-					<dl class="dl-horizontal">
+						<h4>Archivos Subidos</h4>
+						<dl class="dl-horizontal">
 						<dt>Archivo:</dt> 
-					@forelse($teamfile as $file)
-						<dd><a href={{$file->url}} >{{$file->title}}</a></dd>
-					@empty
-						<h5>Aún no hay archivos</h5>
-				 	@endforelse
-			 	</dl>
-			 	@endif
+						@forelse($teamfile as $file)
+							<dd><a href={{$file->url}} >{{$file->title}}</a></dd>
+						@empty
+							<h5>Aún no hay archivos</h5>
+					 	@endforelse
+			 			</dl>
+			 		@endif
 				@else
 					Grupal
 				@endif
