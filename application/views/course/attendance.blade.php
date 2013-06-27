@@ -23,10 +23,10 @@
 	<div class="asistencia">
 		<h4>Lista de Asistencia</h4>	
 		@if(Auth::user()->type=='T')
-			<a class="btn" style="float:right;"onclick="agregarcolumna();" id="btnAgregarColumna">Agregar asistencia</a>
+			<a class="btn" style="float:right;" href="#AgregarAsistencias" data-toggle="modal">Agregar asistencia</a>
 		@endif
 		<br><br>
-		<table id="tblTabla" class="table table-bordered">
+		<table class="table table-bordered">
 			<thead>
 				<tr>
 					<th>Alumnos</th>
@@ -68,6 +68,47 @@
 		@if(Auth::user()->type=='T')
 		<a href="" class="btn btn-info">Guardar Cambios</a>
 		@endif
+		<!-- Modal Agregar Asistencia-->
+		<div id="AgregarAsistencias" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			    <h4>Agregar Asistencia</h4>
+			</div>
+			<div class="modal-body">	
+				{{ Form::open('','POST', array('class'=>'form-horizontal')) }}
+				<fieldset>
+					<div class="head-relacion">
+						<label class="nombres-alumnos">
+							<h4>Alumnos</h4>
+						</label>
+						<div class="notas-alumnos">
+							<h4>Notas</h4>
+						</div>
+					</div>
+					<div class="linea"></div>
+					@foreach($students as $s)
+					<div class="relacion-alumnos">
+						<label class="control-label1" for="descripcion">
+							{{$s['student']->last_name1}} {{$s['student']->last_name2}} {{$s['student']->names }}
+						</label>
+						<div class="controls1">
+							{{ Form::text('','F', array('class'=>'input-mini','onclick'=>'AgregarAsistencia(id);','id'=>$s['student']->student_id,'readonly')) }}
+						</div>
+					</div>
+					<div class="linea"></div>
+					@endforeach
+				</fieldset>
+			</div>
+			<div class="modal-footer">
+				<div class="control-group">
+					<div class="controls">
+						<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+						{{ Form::submit('Guardar', array('class' => 'btn btn-info')) }}
+					</div>
+				</div>
+			</div>
+			{{ Form::close() }}
+		</div>
 	</div>
 </div>
 @endsection

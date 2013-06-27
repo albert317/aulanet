@@ -27,6 +27,10 @@ h1
 	display: inline-block;
 	vertical-align: top;
 }
+h1 a,h1 a:hover{
+	text-decoration: none;
+	color: white;
+}
 h3 
 {
 	font-family: "fuente3";
@@ -258,6 +262,25 @@ h4
 .alumnos li:hover{
 	background-color: #00BFFF;
 	font-weight: bold;
+}
+/*NOTAS*/
+.relacion-alumnos
+{
+	margin: 3px 0;
+}
+.linea
+{
+  border-top: 1px solid lightgray;
+}
+.nombres-alumnos
+{
+	width: 80%;
+	display: inline-block;
+}
+.notas-alumnos
+{
+	width: 19%;
+	display: inline-block;
 }
 
 
