@@ -150,9 +150,17 @@ class Course_Controller extends Base_Controller {
 		*/
 
 		//$teamid=DB::query('SELECT * FROM team t,assignment a,student_team st	WHERE t.team_id=st.team_id AND t.assignment_id=a.assignment_id AND st.student_id='.$student_id);
-		$teamid=Student::find($student_id)->team()->where('assignment_id','=',$assignment_id)->first()->team_id;//->assignment()->first()->assignment_id;
-			
-		
+		$teams=DB::query('SELECT * from team t,student s, student_team st
+					where t.team_id=st.team_id and s.student_id=st.student_id and t.assignment_id='.$assignment_id.' and s.student_id='.$student_id);
+
+				//echo"<pre>	";
+				//print_r($teams);
+				//echo"</pre>";
+				//exit();
+		$teamid=null;
+		foreach ($teams as $t) {
+			$teamid=$t->team_id;
+		}
 		$assignments = Assignment::find($assignment_id)->first();
 		$assignmentfile=new Teamfile;
 		$assignmentfile->description=Input::get('descripcion');
@@ -189,39 +197,87 @@ class Course_Controller extends Base_Controller {
 					);
 		return View::make('course.versilabus',$data);
 	}
+
 	public function action_taskdetail($group_id,$assignments_id)
 	{
-		if(Auth::user()->type=='T'){
-			$all=DB::query('SELECT * from user u,student s,student_team st,team t, assignment a
-			where u.user_id=s.user_id and s.student_id=st.student_id and t.team_id=st.team_id and a.assignment_id=t.assignment_id and a.assignment_id='.$assignments_id);
-			echo "<pre>";
-			print_r($all);
-			echo "</pre>";
-			exit();
+		$assignmentsquery = DB::query('SELECT * from assignment a
+			where a.assignment_id='.$assignments_id);
+		//Assignment::find($assignments_id)->first();
+		$assignments=null;
+		foreach ($assignmentsquery as $aq) {
+			$assignments=$aq;
+		}
+		$assignmentfilequery= DB::query('SELECT * from assignmentfile af 
+			where af.assignment_id='.$assignments_id);
+		$assignmentfile=[];
+		$i=0;
+		foreach ($assignmentfilequery as $asq) {
+			$assignmentfile[$i]=$asq;
+			$i++;
+
 		}
 
-		$val=$this->validate_group($group_id);
-		if($val!=null){
-			return $val;
+		echo"<pre>	";
+		print_r($assignmentfile);
+		echo"</pre>";
+
+		$teamfile=null;
+		$students=null;
+		$single=null;
+		$group=null;
+		$single_files=[];
+		if(Auth::user()->type=='S'){
+			$student_id=Auth::user()->student()->first()->student_id;
+			$teamid=Student::find($student_id)->team()->where('assignment_id','=',$assignments_id)->first()->team_id;
+			$teamfile=Teamfile::where('team_id','=',$teamid)->get();
 		}
-		$assignments = Assignment::find($assignments_id)->where('classgroup_id','=',$group_id)->first();
-		
-		$student_id=Auth::user()->student()->first()->student_id;
-		
-		//$teamfile = DB::query("SELECT * FROM teamfile as tf,team as t where t.assignment_id = 1 and tf.team_id = t.team_id");
-		//DB::table("teamfile")->get()->where('team_id','=',1)->first();
-		$teamid=Student::find($student_id)->team()->where('assignment_id','=',$assignments_id)->first()->team_id;//->assignment()->first()->assignment_id;
-		
-		$teamfile=Teamfile::where('team_id','=',$teamid)->get();
-		$assignments = Assignment::where('assignment_id','=',$assignments_id)->first();	
+		elseif(Auth::user()->type=='T'){
+			$professor_id=Auth::user()->professor()->first()->professor_id;
+			if($assignments->type=='S'){
+				$single_student=DB::query('SELECT * from team t,student s,student_team st, user u
+					where u.user_id=s.user_id and t.team_id=st.team_id and s.student_id=st.student_id and t.assignment_id='.$assignments_id);
+				$single_files=DB::query('SELECT s.student_id,tf.created_at,tf.updated_at,tf.url,tf.title,tf.description
+					from team t,teamfile tf,student s,student_team st
+					where t.team_id=st.team_id and s.student_id=st.student_id and t.team_id=tf.team_id and t.assignment_id='.$assignments_id);
+				$i=0;
+				foreach ($single_student as $s) {
+					$arr=[];
+					$arr['student']=$s;
+					$arrays=[];
+					$j=0;
+					foreach ($single_files as $sf) 
+					{
+						if($s->student_id==$sf->student_id)
+						{
+							$arrays[$j]=$sf;
+							$j++;
+						}
+					}
+					$arr['files']=$arrays;
+					$single[$i]=$arr;
+					$i++;
+				}
+				echo"<pre>	";
+				print_r($assignments);
+				echo"</pre>";
+			}
+			else{
+
+			}
+		}
 		$nombre=Classgroup::find($group_id)->course()->first()->name;
-		$data		 = array(
-							'assignments'	=> $assignments,
-							'teamfile'=>$teamfile,
-							'group_id'=>$group_id,
-							'assignment_id'=>$assignments_id,
-							'nombre'=>$nombre
-						);
+
+		$data = array(
+						'assignments'	=> $assignments,
+						'teamfile'=>$teamfile,
+						'group_id'=>$group_id,
+						'assignment_file'=>$assignmentfile,
+						'assignment_id'=>$assignments_id,
+						'nombre'=>$nombre,
+						'single'=>$single,
+						'group'=>$group
+
+			);
 		return View::make('course.subirtarea', $data);
 		
 	}
@@ -258,6 +314,7 @@ class Course_Controller extends Base_Controller {
 		$assignmentfile=new Assignmentfile;
 		$assignmentfile->assignment_id=$assignment_id;
 		$assignmentfile->url=URL::base().'/uploads/assignmentfile/'.$assignment_id.'/'.Input::file('file.name');
+		$assignmentfile->title=Input::file('file.name');
 		$assignmentfile->save();
 
 		$filename = Input::file('file.name');
@@ -472,6 +529,10 @@ class Course_Controller extends Base_Controller {
 		return View::make('course.attendance',$data);
 		
 	}
+
+
+
+
 
 
 
