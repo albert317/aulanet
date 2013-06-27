@@ -13,7 +13,7 @@
 <div id="contenido">
 	<ul class="nav nav-pills">
 		<li class="active"><a href={{ URL::base().'/cursos/'.$group_id.'/tareas' }}>Tareas</a></li>
-		<li><a href={{ URL::base().'/agenda'}}>Agenda</a></li>
+		<li><a href={{ URL::base().'/cursos/'.$group_id.'/agenda'}}>Agenda</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/asistencia'}}>Asistencia</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/notas'}}>Notas</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/foro'}}>Foro</a></li>
@@ -34,11 +34,7 @@
 
 			@forelse($assignments as $a)
 				<li class="tarea">
-					@if(Auth::user()->type == 'T')
-					<a href="#"><h4>{{ $a->name }}</h4></a>
-					@else
 					<a href={{ URL::base().'/cursos/'.$a->classgroup_id.'/tareas/'.$a->assignment_id }}><h4>{{ $a->name }}</h4></a>
-					@endif
 					<div class="detalle">
 						{{ $a->description }}
 					</div>
