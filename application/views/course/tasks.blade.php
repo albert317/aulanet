@@ -80,7 +80,7 @@
 				<div class="control-group">
 					<label class="control-label" for="fecha">Fecha de presentación</label>
 					<div class="controls">
-						{{ Form::date('fecha','', array('class'=>'input-xlarge')) }}
+						{{ Form::text('fecha','', array('class'=>'input-xlarge')) }}
 					</div>
 				</div>
 				<div class="control-group">
