@@ -192,9 +192,6 @@ class Course_Controller extends Base_Controller {
 
 		}
 
-		echo"<pre>	";
-		print_r($assignmentfile);
-		echo"</pre>";
 
 		$teamfile=null;
 		$students=null;
@@ -232,12 +229,40 @@ class Course_Controller extends Base_Controller {
 					$single[$i]=$arr;
 					$i++;
 				}
-				echo"<pre>	";
-				print_r($assignments);
-				echo"</pre>";
 			}
 			else{
+				$group_teams=DB::query('SELECT * from team t
+					where t.assignment_id='.$assignments_id);
+				$group_students=DB::query('SELECT * from team t,student s,student_team st, user u
+					where u.user_id=s.user_id and t.team_id=st.team_id and s.student_id=st.student_id and t.assignment_id='.$assignments_id);
+				$single_files=DB::query('SELECT t.team_id,tf.created_at,tf.updated_at,tf.url,tf.title,tf.description
+					from team t,teamfile tf
+					where t.team_id=tf.team_id and t.assignment_id='.$assignments_id);
+				$i=0;
+				echo"<pre>	";
+				print_r($group_students);
+				echo"</pre>";
+				exit();
+				foreach ($group_teams as $gt) {
 
+					foreach ($group_students as $s) {
+						$arr=[];
+						$arr['student']=$s;
+						$arrays=[];
+						$j=0;
+						foreach ($single_files as $sf) 
+						{
+							if($s->student_id==$sf->student_id)
+							{
+								$arrays[$j]=$sf;
+								$j++;
+							}
+						}
+						$arr['files']=$arrays;
+						$single[$i]=$arr;
+						$i++;
+					}
+				}
 			}
 		}
 		$nombre=Classgroup::find($group_id)->course()->first()->name;
