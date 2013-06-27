@@ -13,7 +13,7 @@
 <div id="contenido">
 	<ul class="nav nav-pills">
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/tareas' }}>Tareas</a></li>
-		<li><a href={{ URL::base().'/agenda'}}>Agenda</a></li>
+		<li><a href={{ URL::base().'/cursos/'.$group_id.'/agenda'}}>Agenda</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/asistencia'}}>Asistencia</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/notas'}}>Notas</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/foro'}}>Foro</a></li>

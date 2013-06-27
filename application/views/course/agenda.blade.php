@@ -13,15 +13,29 @@
 <div id="contenido">
 	<ul class="nav nav-pills">
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/tareas' }}>Tareas</a></li>
-		<li class="active"><a href={{ URL::base().'/agenda'}}>Agenda</a></li>
+		<li class="active"><a href={{ URL::base().'/cursos/'.$group_id.'/agenda'}}>Agenda</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/asistencia'}}>Asistencia</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/notas'}}>Notas</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/foro'}}>Foro</a></li>
 		<li><a href={{ URL::base().'/cursos/'.$group_id.'/silabus'}}>Silabus</a></li>
 	</ul>
-	
-	<div class="agenda">
-		
+	<h4> HOLA</h4>
+	<div>
+		<h4>Lista de Actividades de este grupo</h4>
+
+		@forelse($groupactivity as $a)
+		<tr><td>{{$a->title}}</td></tr>
+		@empty
+		@endforelse
+
+
+		@forelse($assignments as $b)
+		<tr><td>{{$b->name}}</td></tr>
+		<br>
+		@empty
+		@endforelse
+
+
 	</div>
 </div>
 @endsection
