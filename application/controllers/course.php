@@ -283,19 +283,20 @@ class Course_Controller extends Base_Controller {
 					$arrays=array();
 					foreach ($single_files as $sf) 
 					{
-						if($s->student_id==$sf->student_id)
+							
+						if($gt->team_id==$sf->team_id)
 						{
 							$arrays[$j]=$sf;
 						}
 						$j++;
 					}
 					$arr['files']=$arrays;
-					$single_files[$i]=$arr;
+					$single[$i]=$arr;
 					$i++;
 				}
 
 				echo"<pre>	";
-				print_r($group_students);
+				print_r($single);
 				echo"</pre>";
 				exit();
 			}
