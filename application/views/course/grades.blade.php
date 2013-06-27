@@ -30,6 +30,13 @@
 			<thead>
 				<tr>
 					<th>Alumnos</th>
+					@forelse($grades_name as $gn)
+					 	<th>
+					 		<p>{{$gn['field']}}</p>
+					 		<p>{{$gn['weight']}}</p>
+					 	</th>
+					 	@empty
+					 @endforelse
 				</tr>
 			</thead>
 			<tbody>

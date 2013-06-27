@@ -54,6 +54,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::any('cursos/(:num)/tareas'						, 'course@tasks');
 
 	Route::any('cursos/(:num)/asistencia'					, 'course@attendance');
+	Route::any('cursos/(:num)/asistencia/actualizar'		, 'course@updateattendance');
 	Route::any('cursos/(:num)/notas'						, 'course@grades');
 
 	Route::any('cursos/(:num)/tareas/creartarea/(:num)/creargrupo'	 , 'course@creategroup');
