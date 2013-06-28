@@ -17,8 +17,8 @@ class Create_Table_Classgroup {
 			$table->string('name',50);
 			$table->enum('type',array('T','P','L'))->nullable();
 			$table->timestamps();
-			$table->foreign('course_id')->references('course_id')->on('course');
-			$table->foreign('professor_id')->references('professor_id')->on('professor');
+			$table->foreign('course_id')->references('course_id')->on('course')->on_delete('cascade');
+			$table->foreign('professor_id')->references('professor_id')->on('professor')->on_delete('cascade');
 		});
 		//
 	}

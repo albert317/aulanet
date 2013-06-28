@@ -16,8 +16,8 @@ class Create_Table_Score {
 			$table->integer('classgroup_id')->unsigned();
 			$table->integer('value')->nullable();
 			$table->timestamps();
-			$table->foreign('classgroup_id')->references('classgroup_id')->on('classgroup');
-			$table->foreign('student_id')->references('student_id')->on('student');
+			$table->foreign('classgroup_id')->references('classgroup_id')->on('classgroup')->on_delete('cascade');
+			$table->foreign('student_id')->references('student_id')->on('student')->on_delete('cascade');
 		});
 		//
 	}

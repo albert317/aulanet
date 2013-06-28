@@ -18,7 +18,7 @@ class Create_Table_Student_Activity {
 			$table->timestamp('start_time')->nullable;
 			$table->timestamp('end_time')->nullable;
 			$table->timestamps();
-			$table->foreign('student_id')->references('student_id')->on('student');
+			$table->foreign('student_id')->references('student_id')->on('student')->on_delete('cascade');
 		});
 		//
 	}

@@ -18,7 +18,7 @@ class Create_Table_Team_Activity {
 			$table->timestamp('start_time')->nullable;
 			$table->timestamp('end_time')->nullable;
 			$table->timestamps();
-			$table->foreign('team_id')->references('team_id')->on('team');
+			$table->foreign('team_id')->references('team_id')->on('team')->on_delete('cascade');
 		});
 		//
 	}

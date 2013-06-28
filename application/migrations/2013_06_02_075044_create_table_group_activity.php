@@ -19,7 +19,7 @@ class Create_Table_Group_Activity {
 			$table->timestamp('end_time')->nullable();
 			$table->enum('type',array('private','public'))->nullable();
 			$table->timestamps();
-			$table->foreign('classgroup_id')->references('classgroup_id')->on('classgroup');
+			$table->foreign('classgroup_id')->references('classgroup_id')->on('classgroup')->on_delete('cascade');
 		});
 		//
 	}
