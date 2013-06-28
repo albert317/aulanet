@@ -1,6 +1,5 @@
 @layout('layout.master')
 
-
 @section('logout')
 	<ul class="user nav nav-pills">
         <li class="dropdown">
@@ -13,16 +12,8 @@
 @endsection
 @section('content')
 <div id="contenido">
-	<h4>Agenda de Curso</h4>
-	<ul class="nav nav-pills">
-		<li><a href={{ URL::base().'/cursos/'.$group_id.'/tareas' }}>Tareas</a></li>
-		<li class="active"><a href={{ URL::base().'/cursos/'.$group_id.'/agenda'}}>Agenda</a></li>
-		<li><a href={{ URL::base().'/cursos/'.$group_id.'/asistencia'}}>Asistencia</a></li>
-		<li><a href={{ URL::base().'/cursos/'.$group_id.'/notas'}}>Notas</a></li>
-		<li><a href={{ URL::base().'/cursos/'.$group_id.'/foro'}}>Foro</a></li>
-		<li><a href={{ URL::base().'/cursos/'.$group_id.'/silabus'}}>Silabus</a></li>
-	</ul>
-
+	
+	<h4>AGENDA GLOBAL</h4>
 	<script>
 
 	$(document).ready(function(){

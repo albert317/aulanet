@@ -59,7 +59,7 @@ Route::group(array('before' => 'auth'), function()
 
 	Route::any('cursos/(:num)/tareas/creartarea/(:num)/creargrupo'	 , 'course@creategroup');
 	Route::any('cursos/(:num)/foro'							, 'course@forum');
-	Route::any('agenda'										, 'agenda@index');
+	Route::any('agenda'										, 'agenda@groupactivityes');
 	Route::any('cursos/(:num)/tareas/(:num)'				, 'course@taskdetail');
 	Route::any('cursos/(:num)/tareas/(:num)/upload'			, 'course@upload');
 	Route::any('administrador'								, 'administrador@index');

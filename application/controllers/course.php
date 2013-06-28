@@ -85,7 +85,7 @@ class Course_Controller extends Base_Controller {
 	}
 
 	/**
-	 * Muestra el listado de tareas pertenecientes al curso
+	 * Muestra el listado de actividaes grupales y tareas pertenecientes a un curso
 	 */
 	public function action_groupactivityes($group_id)
 	{
@@ -117,11 +117,11 @@ class Course_Controller extends Base_Controller {
 				));
 		}
 		$data= array(
-							'groupactivity'	=> $groupactivity,
-							'assignments'=>$assignments,
-							'nombre' => $nombre,
-							'group_id'=> $group_id,
-						);
+			'groupactivity'	=> $groupactivity,
+			'assignments'=>$assignments,
+			'nombre' => $nombre,
+			'group_id'=> $group_id,
+		);
 		
 		//var_dump($arr);
 		//return View::make('course.tasks', $data);	
