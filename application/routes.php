@@ -69,11 +69,16 @@ Route::group(array('before' => 'auth'), function()
 	Route::any('cursos/(:num)/silabus'						, 'course@viewsilabus');
 	Route::any('cursos/(:num)/notas/actualizar'				, 'course@updategrades');
 	Route::any('cursos/(:num)/agenda'		 		        , 'course@groupactivityes');
+
+
+	/*Administrador*/
 	/*Agrego*/
+
 	Route::any('administrador/registrarAlumno'				, 'administrador@createS'); 
 	Route::any('administrador/registrarProfesor'				, 'administrador@createT'); 
 	Route::any('administrador/registrarCurso'				, 'administrador@createCourse'); 
 	Route::any('administrador/asignarCurso'				, 'administrador@assignCourse'); 
+	Route::any('administrador/obtenerCurso'				,'administrador@getCourse');
 
 });
 
