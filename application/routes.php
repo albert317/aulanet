@@ -54,6 +54,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::any('cursos/(:num)/tareas'						, 'course@tasks');
 
 	Route::any('cursos/(:num)/asistencia'					, 'course@attendance');
+	Route::any('cursos/(:num)/asistencia/actualizar'		, 'course@updateattendance');
 	Route::any('cursos/(:num)/notas'						, 'course@grades');
 
 	Route::any('cursos/(:num)/tareas/creartarea/(:num)/creargrupo'	 , 'course@creategroup');
@@ -66,8 +67,12 @@ Route::group(array('before' => 'auth'), function()
 	Route::any('cursos/(:num)/tareas/creartarea/(:num)'		, 'course@newgroup');
 	Route::any('cursos/(:num)/silabus'						, 'course@viewsilabus');
 	Route::any('cursos/(:num)/notas/actualizar'				, 'course@updategrades');
+	Route::any('cursos/(:num)/agenda'		 		        , 'course@groupactivityes');
+
 
 	/*Administrador*/
+	/*Agrego*/
+
 	Route::any('administrador/registrarAlumno'				, 'administrador@createS'); 
 	Route::any('administrador/registrarProfesor'				, 'administrador@createT'); 
 	Route::any('administrador/registrarCurso'				, 'administrador@createCourse'); 

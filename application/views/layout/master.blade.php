@@ -10,10 +10,19 @@
 	<link rel="stylesheet" type="text/css" href={{URL::to('css/bootstrap.css')}}>
 	<link rel="stylesheet" href={{URL::to('css/style.css')}}>
 	<script type="text/javascript" src={{URL::to('js/bootstrap.js')}}></script>
+	<script type="text/javascript" src={{URL::to('js/prefixfree.js')}}></script>
+	<script src={{URL::to('js/modernizr.js')}}></script>
 	<script src={{URL::to('js/metodos.js')}}></script>
 	<script src={{URL::to('js/script.js')}}></script>
 	<script src={{URL::to('js/tablas.js')}}></script>
+
 	<script src={{URL::to('js/administrador.js')}}></script>
+
+	
+	<link rel="stylesheet"  type="text/css" media='print' href={{URL::to('css/fullcalendar/fullcalendar.print.css')}}>
+	<link rel="stylesheet"  type="text/css" href={{URL::to('css/fullcalendar/fullcalendar.css')}}>
+	<script src={{URL::to('js/fullcalendar/fullcalendar.js')}}></script>
+
 </head>
 <body>
 	

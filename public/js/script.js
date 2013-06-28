@@ -22,7 +22,21 @@ function NuevaAsistencia()
 	$("#tabla tbody").appendTo("<td></td>");
 }
 */
+//Agregar Asistencia clickeable
+function AgregarAsistencia(id)
+{
+    console.log("id:"+id);
+    var id1="#"+id;
+    var valor=$(id1).val();
+    if(valor=="F"){
+        $(id1).val('A');
+    }
+    else{
+        $(id1).val('F');
+    }
+}
 
+/*Guardar grupos*/
 var grupo_alumnos=new Array();
 var cant=1;
 function guardargrupos()
