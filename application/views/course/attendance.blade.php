@@ -79,7 +79,7 @@
 							<h4>Alumnos</h4>
 						</label>
 						<div class="notas-alumnos">
-							<h4>Notas</h4>
+							<h4>Asistencia</h4>
 						</div>
 					</div>
 					<div class="linea"></div>
