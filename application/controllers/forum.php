@@ -105,4 +105,11 @@ class Forum_Controller extends Base_Controller {
 		return Redirect::to('forum/topic/'.$newpost->answer_to);
 	}
 
+	public function get_json()
+	{
+		$json = file_get_contents('http://127.0.0.1:9000/servicio/coordenadas');
+		$data = json_decode($json);
+		var_export($json);
+	}
+
 }
