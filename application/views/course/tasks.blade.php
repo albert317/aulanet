@@ -95,8 +95,20 @@
 									{{ Form::close() }}
 								</div>
 							</div>
+							
+						<!-- Modal Eliminar-->
+							<div id="{{'Eliminar'.$a->assignment_id}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-body">
+									<p>¿Esta seguro de eliminar?</p>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+									<a href={{ URL::base().'/cursos/'.$a->classgroup_id.'/tareas/'.$a->assignment_id.'/delete' }} >
+									<button class="btn btn-info" >Confirmar</button></a>
+								</div>
+							</div>
 							<a href="{{'#Editar'.$a->assignment_id}}" data-toggle="modal"><img src={{URL::to('img/edit.png')}} alt=""></a>
-							<a href="#Eliminar" data-toggle="modal" id={{ $a->assignment_id }}><img src={{URL::to('img/delete.png')}} alt=""></a>
+							<a href="{{'#Eliminar'.$a->assignment_id}}" data-toggle="modal" id={{ $a->assignment_id }}><img src={{URL::to('img/delete.png')}} alt=""></a>
 						@endif
 					</div>
 				</li>
@@ -107,16 +119,7 @@
 	</div>
 	
 	
-	<!-- Modal Eliminar-->
-	<div id="Eliminar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-body">
-			<p>¿Esta seguro de eliminar?</p>
-		</div>
-		<div class="modal-footer">
-			<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-			<button class="btn btn-info" >Confirmar</button>
-		</div>
-	</div>
+	
 
 	<!-- Nueva tarea-->
 	<div id="newtask">

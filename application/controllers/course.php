@@ -404,11 +404,27 @@ class Course_Controller extends Base_Controller {
 		}
 	}
 
+	public function action_taskdelete($group_id,$assignment_id){
+		$assignment= Assignment::where('assignment_id','=',$assignment_id)->first();
+/*$teams=Team::where('assignment_id','=',$assignment_id)->get();
+
+		foreach ($teams as $t) {
+			$teamfiles=Teamfile::where('team_id','=',$t->team_id)->get();
+			foreach ($teamfiles as $tf) {
+				$tf->delete();
+			}
+			$t->student()->delete();
+		}
+		$assignment->assignmentfile()->delete();*/
+		$assignment->delete();
+		return Redirect::to('cursos/'.$group_id.'/tareas/');
+	}
+
 	public function action_taskedit($group_id,$assignment_id)
 	{
 
 		$assignment= Assignment::where('assignment_id','=',$assignment_id)->first();
-
+		
 		date_default_timezone_set('UTC');
 		$assignment->name=Input::get("enunciado");
 		$assignment->description=Input::get("descripcion");

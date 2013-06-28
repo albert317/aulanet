@@ -16,7 +16,7 @@ class Create_Table_Team {
 			$table->string('name',45)->nullable();
 			$table->string('description',250)->nullable();
 			$table->timestamps();
-			$table->foreign('assignment_id')->references('assignment_id')->on('assignment');
+			$table->foreign('assignment_id')->references('assignment_id')->on('assignment')->on_delete('cascade');
 			
 		});
 		//
