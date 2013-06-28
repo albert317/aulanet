@@ -48,7 +48,7 @@
 								    <h4>Editar Tarea</h4>
 								</div>
 								<div class="modal-body">	
-									{{ Form::open_for_files('','POST', array('class'=>'form-horizontal')) }}
+									{{ Form::open_for_files('cursos/'.$group_id.'/tareas/'.$a->assignment_id.'/editar','POST', array('class'=>'form-horizontal')) }}
 									<fieldset>
 										<div class="control-group">
 											<label class="control-label"  for="enunciado">Enunciado</label>
@@ -66,6 +66,17 @@
 											<label class="control-label" for="fecha">Fecha de presentación</label>
 											<div class="controls">
 												{{ Form::text('fecha',$a->date, array('class'=>'input-xlarge')) }}
+											</div>
+										</div>				
+										
+										<div class="control-group">
+											<label class="control-label" for="fecha">Archivos</label>
+											<div class="controls">
+												@forelse($assignmentfile[$a->assignment_id] as $file)
+													<dd><a href={{$file->url}} >{{$file->title}}</a></dd>
+												@empty
+													<dd>Aún no hay archivos</dd>
+											 	@endforelse
 											</div>
 										</div>
 										<div class="control-group">

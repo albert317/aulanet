@@ -50,6 +50,7 @@ Route::any(array('/'), function(){
 Route::group(array('before' => 'auth'), function()
 {
 
+	Route::any('cursos/(:num)/tareas/(:num)/editar'				, 'course@taskedit');
 	Route::any('cursos'										, 'course@index');
 	Route::any('cursos/(:num)/tareas'						, 'course@tasks');
 

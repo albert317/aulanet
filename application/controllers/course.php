@@ -73,12 +73,35 @@ class Course_Controller extends Base_Controller {
 		$assignments = Assignment::where('classgroup_id','=',$group_id)->get();//Classgroup::find($group_id)->get();//;->first();->assignment()->get();
 		//var_export($assignments);
 		//exit();
+		/*
+		$assignmentsquery = DB::query('SELECT * from assignment a
+			where a.assignment_id='.$assignments_id);
+		//Assignment::find($assignments_id)->first();
+		$assignments=null;
+		foreach ($assignmentsquery as $aq) {
+			$assignments=$aq;
+		}
+		$assignmentfilequery= DB::query('SELECT * from assignmentfile af 
+			where af.assignment_id='.$assignments_id);
+		$assignmentfile=array();
+		$i=0;
+		foreach ($assignmentfilequery as $asq) {
+			$assignmentfile[$i]=$asq;
+			$i++;
+
+		}
+		*/
+		$arr=array();
+		foreach ($assignments as $a) {
+			$arr[$a->assignment_id]=Assignmentfile::where('assignment_id','=',$a->assignment_id)->get();
+		}
 		$nombre = Classgroup::find($group_id)->course()->first()->name;
 		$data		 = array(
 
 							'assignments'	=> $assignments,
 							'nombre' => $nombre,
-							'group_id'=> $group_id
+							'group_id'=> $group_id,
+							'assignmentfile'=>$arr
 						);
 		//var_dump($data);
 		return View::make('course.tasks', $data);	
@@ -341,19 +364,6 @@ class Course_Controller extends Base_Controller {
 
 	public function action_newtask($group_id)
 	{
-		//$this->validate_group($group_id);
-		//$student_id=Auth::user()->student()->first()->student_id;
-
-		/*$teamid=
-		DB::table('team')
-			->join('assignment','team.assignment_id', '=','assignment.assignment_id')
-			->join('student_team','team.team_id', '=', 'student_team.team_id')
-			->where('student_team.student_id','=',Auth::user()->student()->first()->student_id)->first()	;
-		*/
-
-		//$teamid=DB::query('SELECT * FROM team t,assignment a,student_team st	WHERE t.team_id=st.team_id AND t.assignment_id=a.assignment_id AND st.student_id='.$student_id);
-		//$teamid=Student::find($student_id)->team()->where('assignment_id','=',$assignment_id)->first()->team_id;//->assignment()->first()->assignment_id;
-		//$professor=Auth::user()->professor()->first();
 		date_default_timezone_set('UTC');
 		$assignment=new Assignment;
 		$assignment->classgroup_id=$group_id;
@@ -368,28 +378,15 @@ class Course_Controller extends Base_Controller {
 		$assignment->start_date=date("Y-m-d");
 		$assignment->save();
 		$assignment_id=$assignment->get_key();
-		$assignmentfile=new Assignmentfile;
-		$assignmentfile->assignment_id=$assignment_id;
-		$assignmentfile->url=URL::base().'/uploads/assignmentfile/'.$assignment_id.'/'.Input::file('file.name');
-		$assignmentfile->title=Input::file('file.name');
-		$assignmentfile->save();
+		if(Input::file('file.name')!=null){
+			$assignmentfile=new Assignmentfile;
+			$assignmentfile->assignment_id=$assignment_id;
+			$assignmentfile->url=URL::base().'/uploads/assignmentfile/'.$assignment_id.'/'.Input::file('file.name');
+			$assignmentfile->title=Input::file('file.name');
+			$assignmentfile->save();
+			Input::upload('file', 'public/uploads/assignmentfile/'.$assignment_id.'/', $assignmentfile->url);
+		}
 
-		$filename = Input::file('file.name');
-
-		Input::upload('file', 'public/uploads/assignmentfile/'.$assignment_id.'/', $filename);
-
-
-		
-		//$assignments_option = Classgroup::find($group_id)->first()->assignment()->get();
-		//$data = array(
-		//					'assignments'	=> $assignments_option
-		//				);
-		/*$enunciado 	= Input::get("enunciado"); 
-		$descripcion= Input::get("descripcion"); 
-		$fecha		= Input::get("fecha"); 
-		$tipo 	 	= Input::get("tipo"); 
-		$file 		= Input::get("file");*/
-		//return Redirect::to('cursos');
 		if($assignment->type=="S")
 		{
 			$students=Groupstudent::where('classgroup_id','=',$group_id)->get();
@@ -400,13 +397,33 @@ class Course_Controller extends Base_Controller {
 				$team_id=$team->save();
 				$team->student()->attach($s->student_id);
 			}
-			return Redirect::to('cursos/'.$group_id.'/tareas');
+			return Redirect::to('cursos/'.$group_id.'/tareas/'.$assignment->assignment_id);
 		}
 		else{
 			return Redirect::to('cursos/'.$group_id.'/tareas/creartarea/'.$assignment_id);
 		}
+	}
 
-		//return View::make('course.creategroup');
+	public function action_taskedit($group_id,$assignment_id)
+	{
+
+		$assignment= Assignment::where('assignment_id','=',$assignment_id)->first();
+
+		date_default_timezone_set('UTC');
+		$assignment->name=Input::get("enunciado");
+		$assignment->description=Input::get("descripcion");
+		$assignment->end_date=Input::get("fecha");
+		$assignment->save();
+		$assignment_id=$assignment->assignment_id;
+		if(Input::file('file.name')!=null){
+			$assignmentfile=new Assignmentfile;
+			$assignmentfile->assignment_id=$assignment_id;
+			$assignmentfile->url=URL::base().'/uploads/assignmentfile/'.$assignment_id.'/'.Input::file('file.name');
+			$assignmentfile->title=Input::file('file.name');
+			$assignmentfile->save();
+			Input::upload('file', 'public/uploads/assignmentfile/'.$assignment_id.'/', $assignmentfile->url);
+		}
+		return Redirect::to('cursos/'.$group_id.'/tareas/');
 	}
 
 	public function action_newgroup($group_id,$assignment_id)
@@ -601,14 +618,5 @@ class Course_Controller extends Base_Controller {
 		return View::make('course.attendance',$data);
 		
 	}
-
-
-
-
-
-
-
-
-
 
 }
