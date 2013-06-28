@@ -19,7 +19,10 @@
 		<li><a href="#">Foro</a></li>
 		<li><a href="#">Silabus</a></li>
 	</ul>
-	
+
+	<a href="#nuevotema" class="btn">Nuevo tema</a>
+
+
 	<div id="tareas">		
 		@forelse($topics as $t)	
 			<ul class="breadcrumb">
@@ -45,13 +48,34 @@
 		<h4>El foro esta vacio</h4>
 		@endforelse
 
-		Nuevo tema:
-		{{ Form::open('forum/newtopic', 'POST') }}
-		Titulo:{{ Form::text('title') }}
-		Contenido:{{ Form::text('text') }}
-		Tipo:{{ Form::select('type', array('POST' => 'POST', 'PREGUNTA' => 'PREGUNTA', 'ENLACE' => 'ENLACE'), 'POST') }}
-		{{ Form::submit('Crear') }}
-		{{ Form::close() }}		
+		<a name="nuevotema">Nuevo tema:</a>
+		{{ Form::open('forum/newtopic', 'POST', array('class'=>'form-horizontal')) }}
+		<div class="control-group">
+			{{ Form::label('titulo','Titulo', array('class'=>'control-label')) }}
+			<div class="controls">
+				{{ Form::text('title') }}
+			</div>
+		</div>
+		<div class="control-group">
+			{{ Form::label('contenido','Contenido', array('class'=>'control-label')) }}
+			<div class="controls">
+				<textarea rows="5" name="text"></textarea>
+			</div>
+		</div>
+		<div class="control-group">
+			{{ Form::label('tipo','Tipo', array('class'=>'control-label')) }}
+			<div class="controls">
+				{{ Form::select('type', array('POST' => 'POST', 'PREGUNTA' => 'PREGUNTA', 'ENLACE' => 'ENLACE'), 'POST') }}
+				
+			</div>
+			<div class="controls">
+			{{ Form::submit('Crear', array('class'=>'btn')) }}</div>
+		</div>		
+		{{ Form::close() }}
+
+
+
+
 	</div>
 	
 	

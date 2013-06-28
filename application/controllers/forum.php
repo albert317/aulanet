@@ -105,6 +105,53 @@ class Forum_Controller extends Base_Controller {
 		return Redirect::to('forum/topic/'.$newpost->answer_to);
 	}
 
+	public function post_vote($post_id)
+	{
+		$u = Classgroup::find(1)->first();//ELiminar esto cuando las
+		Session::put('current_group', $u);//sesiones esten bien implementadas
+		$current_group	=	Session::get('current_group');
+		$post = Post::where('post_id', '=', $post_id)->first();
+		$vote = Input::get('vote');
+		$student = $post->student()->first();
+		$add = 0;
+		if($post->checked == '0')
+		{
+			if($vote == 'yes')
+			{
+				$post->checked = '1';
+				$add = 1;
+			}
+			elseif ($vote == 'no')
+			{
+				$post->checked = '2';
+				$add = -1;
+			}
+		}
+		elseif ($post->checked == '1') 
+		{
+			if($vote == 'no')
+			{
+				$post->checked = '2';
+				$add = -2;
+			}
+		}
+		elseif ($post->checked == '2') 
+		{
+			if($vote == 'yes')
+			{
+				$post->checked = '1';
+				$add = +2;
+			}
+		}
+		$post->save();
+		$score = Score::where('classgroup_id', '=', $current_group->classgroup_id)
+						->where('student_id', '=', $student->student_id)
+						->first();
+
+		$score->value = $score->value + $add;
+		$score->save();
+	}
+
 	public function get_json()
 	{
 		$json = file_get_contents('http://127.0.0.1:9000/servicio/coordenadas');
