@@ -36,5 +36,9 @@
 return array(
 
 	'docs' => array('handles' => 'docs'),
+	
+	'laravel-phpexcel'    => array(
+		'auto'        => true
+	)
 
 );

@@ -13,6 +13,7 @@
 	<script src={{URL::to('js/metodos.js')}}></script>
 	<script src={{URL::to('js/script.js')}}></script>
 	<script src={{URL::to('js/tablas.js')}}></script>
+	<script src={{URL::to('js/administrador.js')}}></script>
 </head>
 <body>
 	
