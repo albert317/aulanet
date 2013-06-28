@@ -230,7 +230,7 @@ class Course_Controller extends Base_Controller {
 		}
 		$assignmentfilequery= DB::query('SELECT * from assignmentfile af 
 			where af.assignment_id='.$assignments_id);
-		$assignmentfile=[];
+		$assignmentfile=array();
 		$i=0;
 		foreach ($assignmentfilequery as $asq) {
 			$assignmentfile[$i]=$asq;
@@ -238,15 +238,12 @@ class Course_Controller extends Base_Controller {
 
 		}
 
-		echo"<pre>	";
-		print_r($assignmentfile);
-		echo"</pre>";
 
 		$teamfile=null;
 		$students=null;
 		$single=null;
 		$group=null;
-		$single_files=[];
+		$single_files=array();
 		if(Auth::user()->type=='S'){
 			$student_id=Auth::user()->student()->first()->student_id;
 			$teamid=Student::find($student_id)->team()->where('assignment_id','=',$assignments_id)->first()->team_id;
@@ -262,9 +259,9 @@ class Course_Controller extends Base_Controller {
 					where t.team_id=st.team_id and s.student_id=st.student_id and t.team_id=tf.team_id and t.assignment_id='.$assignments_id);
 				$i=0;
 				foreach ($single_student as $s) {
-					$arr=[];
+					$arr=array();
 					$arr['student']=$s;
-					$arrays=[];
+					$arrays=array();
 					$j=0;
 					foreach ($single_files as $sf) 
 					{
@@ -278,12 +275,51 @@ class Course_Controller extends Base_Controller {
 					$single[$i]=$arr;
 					$i++;
 				}
-				echo"<pre>	";
-				print_r($assignments);
-				echo"</pre>";
 			}
 			else{
+				$group_teams=DB::query('SELECT * from team t
+					where t.assignment_id='.$assignments_id);
+				$group_students=DB::query('SELECT * from team t,student s,student_team st, user u
+					where u.user_id=s.user_id and t.team_id=st.team_id and s.student_id=st.student_id and t.assignment_id='.$assignments_id);
+				$single_files=DB::query('SELECT t.team_id,tf.created_at,tf.updated_at,tf.url,tf.title,tf.description
+					from team t,teamfile tf
+					where t.team_id=tf.team_id and t.assignment_id='.$assignments_id);
+				$i=0;
+				foreach ($group_teams as $gt) {
 
+					$arr=array();
+					$arr['group']=$gt;
+					$j=0;
+					$arrays=array();
+					foreach ($group_students as $s) {
+						if($s->team_id==$gt->team_id)
+						{
+							$arrays[$j]=$s;
+						}					
+						$j++;
+					}
+
+					$arr['student']=$arrays;
+					$j=0;
+					$arrays=array();
+					foreach ($single_files as $sf) 
+					{
+							
+						if($gt->team_id==$sf->team_id)
+						{
+							$arrays[$j]=$sf;
+						}
+						$j++;
+					}
+					$arr['files']=$arrays;
+					$single[$i]=$arr;
+					$i++;
+				}
+
+				//echo"<pre>	";
+				//print_r($single);
+				//echo"</pre>";
+				//exit();
 			}
 		}
 		$nombre=Classgroup::find($group_id)->course()->first()->name;
@@ -414,13 +450,12 @@ class Course_Controller extends Base_Controller {
 
 	}
 
-
 	public function action_grades($group_id)
 	{
 		$nombre=Classgroup::find($group_id)->course()->first()->name;
 		$students=DB::query('SELECT * from user u,student s,group_student st
 			where u.user_id=s.user_id and s.student_id=st.student_id and st.classgroup_id='.$group_id);
-		$grades=DB::query('SELECT st.id,g.field,g.value from user u,student s,group_student st,grade g
+		$grades=DB::query('SELECT st.id,g.field,g.value,g.weight from user u,student s,group_student st,grade g
 			where u.user_id=s.user_id and s.student_id=st.student_id and g.group_student_id=st.id and st.classgroup_id='.$group_id);
 		
 		$grades_name=array();
@@ -428,12 +463,14 @@ class Course_Controller extends Base_Controller {
 		foreach ($grades as $g) {
 			$value=false;
 			foreach ($grades_name as $gm) {
-				if($g->field==$gm){
+				if($g->field==$gm['field']){
 					$value=true;
 				}
 			}
 			if($value==false){
-				$grades_name[$i]=$g->field;
+				$arr['field']=$g->field;
+				$arr['weight']=$g->weight;
+				$grades_name[$i]=$arr; 
 				$i++;
 			}
 		}
@@ -451,7 +488,7 @@ class Course_Controller extends Base_Controller {
 				if($s->id==$g->id)
 				{
 					for ($k=0;$k<count($grades_name);$k++) {
-						if($grades_name[$k]==$g->field){
+						if($grades_name[$k]['field']==$g->field){
 							$grades_array[$k]=$g;
 							$j++;
 						}
@@ -473,21 +510,35 @@ class Course_Controller extends Base_Controller {
 					);
 		return View::make('course.grades',$data);
 	}
+	public function action_updateattendance($group_id){
+		$students=DB::query('SELECT * from user u,student s,group_student st
+			where u.user_id=s.user_id and s.student_id=st.student_id and st.classgroup_id='.$group_id);
+		date_default_timezone_set('UTC');
+		foreach ($students as $s) {
+			$attendance=new Attendance;
+			$attendance->group_student_id=$s->id;
+			$attendance->type=Input::get($s->student_id);
+			$attendance->date=date("Y-m-d H:m:s");
+			$attendance->save();
+		}
+		return Redirect::to('cursos/'.$group_id.'/asistencia');
+	}
 
 	public function action_updategrades($group_id)
 	{
-		$nombre=Classgroup::find($group_id)->course()->first()->name;
-		$students=DB::query('SELECT * from user u,student s,group_student st 
+		$students=DB::query('SELECT * from user u,student s,group_student st
 			where u.user_id=s.user_id and s.student_id=st.student_id and st.classgroup_id='.$group_id);
-
-
-
-		$data= array(
-						'group_id'=> $group_id,
-						'nombre'=>$nombre,
-						'students'=>$students
-					);
-		return View::make('course.grades',$data);
+		$grade_name=Input::get('nombre');
+		$grade_weight=Input::get('peso');
+		foreach ($students as $s) {
+			$grade=new Grade;
+			$grade->group_student_id=$s->id;
+			$grade->value=Input::get($s->student_id);
+			$grade->weight=$grade_weight;
+			$grade->field=$grade_name;
+			$grade->save();
+		}
+		return Redirect::to('cursos/'.$group_id.'/notas');
 	}
 
 
