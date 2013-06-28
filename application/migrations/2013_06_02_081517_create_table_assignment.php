@@ -19,7 +19,7 @@ class Create_Table_Assignment {
 			$table->text('description')->nullable();
 			$table->enum('type',array('G','S'))->nullable();
 			$table->timestamps();
-			$table->foreign('classgroup_id')->references('classgroup_id')->on('classgroup');
+			$table->foreign('classgroup_id')->references('classgroup_id')->on('classgroup')->on_delete('cascade');
 			
 		});
 		//

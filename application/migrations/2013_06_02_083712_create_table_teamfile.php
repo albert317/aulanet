@@ -17,7 +17,7 @@ class Create_Table_Teamfile {
 			$table->string('title',45)->nullable();
 			$table->string('description',200)->nullable();
 			$table->timestamps();
-			$table->foreign('team_id')->references('team_id')->on('team');
+			$table->foreign('team_id')->references('team_id')->on('team')->on_delete('cascade');
 			
 		});
 		//

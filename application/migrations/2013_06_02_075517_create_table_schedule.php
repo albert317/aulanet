@@ -17,7 +17,7 @@ class Create_Table_Schedule {
 			$table->timestamp('end_time')->nullable();
 			$table->enum('day',array('LUNES','MARTES','MIÉRCOLES','JUEVES','VIERNES','SABADO','DOMINGO'))->nullable();
 			$table->timestamps();
-			$table->foreign('classgroup_id')->references('classgroup_id')->on('classgroup');
+			$table->foreign('classgroup_id')->references('classgroup_id')->on('classgroup')->on_delete('cascade');
 		});
 		//
 	}

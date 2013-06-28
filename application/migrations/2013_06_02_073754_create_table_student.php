@@ -14,7 +14,7 @@ class Create_Table_Student {
 			$table->increments('student_id');
 			$table->integer('user_id')->unsigned();
 			$table->timestamps();
-			$table->foreign('user_id')->references('user_id')->on('user');
+			$table->foreign('user_id')->references('user_id')->on('user')->on_delete('cascade');
 		});
 		//
 	}

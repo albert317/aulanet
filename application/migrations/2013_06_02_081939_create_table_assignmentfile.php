@@ -17,7 +17,7 @@ class Create_Table_Assignmentfile {
 			$table->string('title',45)->nullable();
 			$table->string('description',200)->nullable();
 			$table->timestamps();
-			$table->foreign('assignment_id')->references('assignment_id')->on('assignment');
+			$table->foreign('assignment_id')->references('assignment_id')->on('assignment')->on_delete('cascade');
 			
 		});
 		//

@@ -122,13 +122,13 @@
 				<div class="control-group">
 					<label class="control-label"  for="escuela">Escuela</label>
 					<div class="controls">
-						{{ Form::select('size', array('SI' => 'EAP Ing. de Sistemas', 'SW' => 'EAP Ing. de Software'), array('SI', 'SW')) }}
+						{{ Form::select('escuela', array('SI' => 'EAP Ing. de Sistemas', 'SW' => 'EAP Ing. de Software'), array('SI', 'SW')) }}
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="ciclo">Ciclo</label>
 					<div class="controls">
-						{{ Form::select('size', array('II' => 'II', 'I' => 'I'), array('I', 'II')) }}
+						{{ Form::select('ciclo', array('1' => 'I', '2' => 'II', '3' => 'III', '4' => 'IV', '5' => 'V', '6' => 'VI', '7' => 'VII', '8' => 'VIII', '9' => 'IX', '10' => 'X', '0' => 'Electivo'), array('I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'Electivo')) }}
 					</div>
 				</div>
 				<div class="control-group">
@@ -160,31 +160,51 @@
 				<div class="control-group">
 					<label class="control-label"  for="escuela">Escuela</label>
 					<div class="controls">
-						{{ Form::select('size', array('SI' => 'EAP Ing. de Sistemas', 'SW' => 'EAP Ing. de Software'), array('SI', 'SW')) }}
+						{{ Form::select('escuela', array('SI' => 'EAP Ing. de Sistemas', 'SW' => 'EAP Ing. de Software'), array('SI', 'SW')) }}
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="ciclo">Ciclo</label>
 					<div class="controls">
-						{{ Form::select('size', array('II' => 'II', 'I' => 'I'), array('I', 'II')) }}
+						<select name="ciclos" id="ciclos" onchange="mostrar_curso()">
+							<option value="1">I</option>
+							<option value="2">II</option>
+							<option value="3">III</option>
+							<option value="4">IV</option>
+							<option value="5">V</option>
+							<option value="6">VI</option>
+							<option value="7">VII</option>
+							<option value="8">VIII</option>
+							<option value="9">IX</option>
+							<option value="10">X</option>
+							<option value="0">Electivo</option>
+						</select>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="curso">Curso</label>
-					<div class="controls">
-						{{ Form::select('size', array('MB' => 'Matematica Basica', 'PI' => 'Programacion I'), array('MB', 'PI')) }}
+					<div class="controls" id="cursosCiclo">
+						<select></select>
 					</div>
+
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputGrupo">Grupo</label>
+				    <div class="controls">
+				    	{{ Form::text('grupo', '', array('class'=>'input-xlarge')) }}
+				    </div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="fecha">Archivo</label>
-					<div class="controls">
-						{{ Form::file('file', array('class'=>'input-xlarge')) }}
-					</div>
+				    <div class="controls">
+				    	{{ Form::file('file', array('class'=>'input-xlarge','id'=>'file')) }}
+				    </div>
 				</div>
 				<div class="control-group">
 					<div class="controls">
 						<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Cancelar</button>
 						<button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Cargar Curso</button>
+						<!--<button class="btn btn-info" data-dismiss="modal" aria-hidden="true" onclick="asignar_curso()">Guardar</button>-->
 						{{ Form::submit('Guardar', array('class' => 'btn btn-info')) }}
 					</div>
 				</div>

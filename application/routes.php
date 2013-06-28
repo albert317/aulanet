@@ -50,6 +50,7 @@ Route::any(array('/'), function(){
 Route::group(array('before' => 'auth'), function()
 {
 
+	Route::any('cursos/(:num)/tareas/(:num)/editar'				, 'course@taskedit');
 	Route::any('cursos'										, 'course@index');
 	Route::any('cursos/(:num)/tareas'						, 'course@tasks');
 
@@ -61,6 +62,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::any('cursos/(:num)/foro'							, 'course@forum');
 	Route::any('agenda'										, 'agenda@groupactivityes');
 	Route::any('cursos/(:num)/tareas/(:num)'				, 'course@taskdetail');
+	Route::any('cursos/(:num)/tareas/(:num)/delete'				, 'course@taskdelete');
 	Route::any('cursos/(:num)/tareas/(:num)/upload'			, 'course@upload');
 	Route::any('administrador'								, 'administrador@index');
 	Route::any('cursos/(:num)/tareas/creartarea'			, 'course@newtask');
@@ -68,11 +70,16 @@ Route::group(array('before' => 'auth'), function()
 	Route::any('cursos/(:num)/silabus'						, 'course@viewsilabus');
 	Route::any('cursos/(:num)/notas/actualizar'				, 'course@updategrades');
 	Route::any('cursos/(:num)/agenda'		 		        , 'course@groupactivityes');
+
+
+	/*Administrador*/
 	/*Agrego*/
+
 	Route::any('administrador/registrarAlumno'				, 'administrador@createS'); 
 	Route::any('administrador/registrarProfesor'				, 'administrador@createT'); 
 	Route::any('administrador/registrarCurso'				, 'administrador@createCourse'); 
 	Route::any('administrador/asignarCurso'				, 'administrador@assignCourse'); 
+	Route::any('administrador/obtenerCurso'				,'administrador@getCourse');
 
 });
 

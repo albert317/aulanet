@@ -21,10 +21,10 @@ class Create_Table_Post {
 			$table->enum('type',array('POST','ENLACE','PREGUNTA'))->nullable();
 			$table->integer('checked')->nullable();
 			$table->timestamps();
-			$table->foreign('classgroup_id')->references('classgroup_id')->on('classgroup');
-			$table->foreign('student_id')->references('student_id')->on('student');
-			$table->foreign('professor_id')->references('professor_id')->on('professor');
-			$table->foreign('answer_to')->references('post_id')->on('post');
+			$table->foreign('classgroup_id')->references('classgroup_id')->on('classgroup')->on_delete('cascade');
+			$table->foreign('student_id')->references('student_id')->on('student')->on_delete('cascade');
+			$table->foreign('professor_id')->references('professor_id')->on('professor')->on_delete('cascade');
+			$table->foreign('answer_to')->references('post_id')->on('post')->on_delete('cascade');
 		});
 		//
 	}

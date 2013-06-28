@@ -16,8 +16,8 @@ class Create_Table_Student_Team {
 			$table->integer('team_id')->unsigned();
 			$table->timestamps();
 			//$table->primary(array('student_id','team_id'));
-			$table->foreign('team_id')->references('team_id')->on('team');
-			$table->foreign('student_id')->references('student_id')->on('student');
+			$table->foreign('team_id')->references('team_id')->on('team')->on_delete('cascade');
+			$table->foreign('student_id')->references('student_id')->on('student')->on_delete('cascade');
 			
 		});
 		//
