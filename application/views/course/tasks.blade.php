@@ -41,7 +41,50 @@
 					<div class="edicion">
 						<span>{{ $a->end_date }}</span>
 						@if(Auth::user()->type == 'T')
-							<a href="#Editar" data-toggle="modal"><img src={{URL::to('img/edit.png')}} alt=""></a>
+							<!-- Modal Editar-->
+							<div id="{{'Editar'.$a->assignment_id}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-header">
+								    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+								    <h4>Editar Tarea</h4>
+								</div>
+								<div class="modal-body">	
+									{{ Form::open_for_files('','POST', array('class'=>'form-horizontal')) }}
+									<fieldset>
+										<div class="control-group">
+											<label class="control-label"  for="enunciado">Enunciado</label>
+											<div class="controls">
+												{{ Form::text('enunciado', $a->name, array('class'=>'input-xlarge')) }}
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="descripcion">Descripción</label>
+											<div class="controls">
+												{{ Form::textarea('descripcion',$a->description, array('class'=>'input-xlarge','rows'=>'3')) }}
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="fecha">Fecha de presentación</label>
+											<div class="controls">
+												{{ Form::text('fecha',$a->date, array('class'=>'input-xlarge')) }}
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="fecha">Archivo</label>
+											<div class="controls">
+												{{ Form::file('file', array('class'=>'input-xlarge','id'=>'file')) }}
+											</div>
+										</div>
+										<div class="control-group">
+											<div class="controls">
+												<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+												{{ Form::submit('Guardar', array('class' => 'btn btn-info')) }}
+											</div>
+										</div>
+									</fieldset>
+									{{ Form::close() }}
+								</div>
+							</div>
+							<a href="{{'#Editar'.$a->assignment_id}}" data-toggle="modal"><img src={{URL::to('img/edit.png')}} alt=""></a>
 							<a href="#Eliminar" data-toggle="modal" id={{ $a->assignment_id }}><img src={{URL::to('img/delete.png')}} alt=""></a>
 						@endif
 					</div>
@@ -52,49 +95,7 @@
 		</ul>
 	</div>
 	
-	<!-- Modal Editar-->
-	<div id="Editar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-header">
-		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		    <h4>Editar Tarea</h4>
-		</div>
-		<div class="modal-body">	
-			{{ Form::open_for_files('','POST', array('class'=>'form-horizontal')) }}
-			<fieldset>
-				<div class="control-group">
-					<label class="control-label"  for="enunciado">Enunciado</label>
-					<div class="controls">
-						{{ Form::text('enunciado', '', array('class'=>'input-xlarge')) }}
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="descripcion">Descripción</label>
-					<div class="controls">
-						{{ Form::textarea('descripcion','', array('class'=>'input-xlarge','rows'=>'3')) }}
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="fecha">Fecha de presentación</label>
-					<div class="controls">
-						{{ Form::text('fecha','', array('class'=>'input-xlarge')) }}
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="fecha">Archivo</label>
-					<div class="controls">
-						{{ Form::file('file', array('class'=>'input-xlarge','id'=>'file')) }}
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-						<button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-						{{ Form::submit('Guardar', array('class' => 'btn btn-info')) }}
-					</div>
-				</div>
-			</fieldset>
-			{{ Form::close() }}
-		</div>
-	</div>
+	
 	<!-- Modal Eliminar-->
 	<div id="Eliminar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-body">
