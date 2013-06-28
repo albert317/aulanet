@@ -21,6 +21,7 @@
 	</ul>
 	
 	<div id="tareas">	
+		<a href="#nuevarespuesta" class="btn">Responder</a>
 <ul class="breadcrumb">
 	<li>
 		<h4>
@@ -28,7 +29,7 @@
 			{{ $topic->title }}
 		</a>
 	</h4>
-	{{ $topic->text }}
+	{{ $topic->text }}	
 	<br>Por: 	
 	@if($topic->student_id != null)
 		<a href="#">{{ $topic->student()->first()->user()->first()->names }}</a>
@@ -40,12 +41,13 @@
 </span>
 </li>
 </ul>
-<ul>
+
 @forelse($answers as $a)
+<ul class="breadcrumb">
 <li>
-	<h4>
+	<h5>
 		{{ $a->title }}
-	</h4>
+	</h5>
 	{{ $a->text }}
 	<br>Por:
 	@if($a->student_id != null)
@@ -56,22 +58,46 @@
 	<span class="label">
 		{{ $a->created_at }}
 	</span>
-	<hr>
+	<!--<a href="#" class="btn"><i class="icon-thumbs-up"></i></a>-->
+	@if(Auth::user()->type == 'T')
+		<form method="post" action={{ "http://aulanet.dev/forum/vote/".$a->post_id }}>
+			<input type="submit" name="vote" value="yes">
+		</form>
+		<form method="post" action={{ "http://aulanet.dev/forum/vote/".$a->post_id }}>
+			<input type="submit" name="vote" value="no">
+		</form>
+	@endif
 <li>
+	</ul>
 @empty
 	<h4>No hay respuestas</h4>
 @endforelse	
-</ul>
 
 
 
 
-Nueva respuesta:
-{{ Form::open('forum/newanswer', 'POST') }}
-	Titulo:{{ Form::text('title') }}
-	Contenido:{{ Form::text('text') }}
-	{{ Form::button('Responder', array('type'=>'submit', 'name'=>'topic_id', 'value'=>$topic->post_id)) }}
-{{ Form::close() }}
+
+
+<a name="nuevarespuesta">Nueva respuesta:</a>
+		{{ Form::open('forum/newanswer', 'POST', array('class'=>'form-horizontal')) }}
+		<div class="control-group">
+			{{ Form::label('titulo','Titulo', array('class'=>'control-label')) }}
+			<div class="controls">
+				{{ Form::text('title') }}
+			</div>
+		</div>
+		<div class="control-group">
+			{{ Form::label('contenido','Contenido', array('class'=>'control-label')) }}
+			<div class="controls">
+				<textarea rows="5" name="text"></textarea>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+			{{ Form::button('Responder', array('class'=>'btn', 'type'=>'submit', 'value'=>$topic->post_id, 'name'=>'topic_id')) }}
+			</div>
+		</div>		
+		{{ Form::close() }}
 
 	</div>
 	
