@@ -96,15 +96,36 @@ class Course_Controller extends Base_Controller {
 		//exit();
 		$nombre = Classgroup::find($group_id)->course()->first()->name;
 		
-		$data		 = array(
+		$arr=array();
+		$i=0;
+		$year = date('Y');
+		$month = date('m');
+		foreach($groupactivity as $g)
+		{
+			array_push($arr, array(
+				'id'=> $g->group_activity_id,
+				'title'=> $g->title,
+				'start'=> $g->end_time
+				));
+		}
+		foreach($assignments as $g)
+		{
+			array_push($arr, array(
+				'id'=> $g->assignment_id,
+				'title'=> $g->name,
+				'start'=> $g->end_date,
+				));
+		}
+		$data= array(
 							'groupactivity'	=> $groupactivity,
 							'assignments'=>$assignments,
 							'nombre' => $nombre,
-							'group_id'=> $group_id
+							'group_id'=> $group_id,
 						);
-		//var_dump($data);
+		
+		//var_dump($arr);
 		//return View::make('course.tasks', $data);	
-		return View::make('course.agenda',$data);
+		return View::make('course.agenda',$data)->with('js_config', $arr);
 	}
 
 
