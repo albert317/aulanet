@@ -120,7 +120,7 @@
 	
 	
 	
-
+	@if(Auth::user()->type == 'T')
 	<!-- Nueva tarea-->
 	<div id="newtask">
 		{{ Form::open_for_files('cursos/'.$assignments[0]->classgroup_id.'/tareas/creartarea','POST', array('class'=>'form-horizontal')) }}
@@ -174,5 +174,6 @@
 		</fieldset>
 		{{ Form::close() }}
 	</div>
+	@endif
 </div>
 @endsection
